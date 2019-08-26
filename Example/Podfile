@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'MoeNetwork_Example' do
+  pod 'MoeNetwork', :path => '../'
+
+  target 'MoeNetwork_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
