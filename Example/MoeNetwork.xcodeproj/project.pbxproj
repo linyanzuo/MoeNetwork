@@ -14,6 +14,11 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		95B9A3472313EB8300D7DE15 /* PersoalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A3462313EB8300D7DE15 /* PersoalAPI.swift */; };
+		95B9A3492313EBE500D7DE15 /* PSBetOrderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A3482313EBE500D7DE15 /* PSBetOrderAPI.swift */; };
+		95B9A34B2313EBF000D7DE15 /* PSBetOrderDetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A34A2313EBF000D7DE15 /* PSBetOrderDetailAPI.swift */; };
+		95B9A34E2314DC6000D7DE15 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */; };
+		95B9A3502314E25600D7DE15 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A34F2314E25600D7DE15 /* BaseResponse.swift */; };
 		B92C9959E7657AEA64FCDD95 /* Pods_MoeNetwork_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188EBEDAF7C0B409AA6DCF4B /* Pods_MoeNetwork_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +35,7 @@
 /* Begin PBXFileReference section */
 		0A9ADE120747625B727CB83E /* Pods-MoeNetwork_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoeNetwork_Example.release.xcconfig"; path = "Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example.release.xcconfig"; sourceTree = "<group>"; };
 		188EBEDAF7C0B409AA6DCF4B /* Pods_MoeNetwork_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoeNetwork_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		209162CE1D5F8CD1B4D26991 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		209162CE1D5F8CD1B4D26991 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		2208895C069B23FDB458594B /* Pods-MoeNetwork_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoeNetwork_Tests.debug.xcconfig"; path = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* MoeNetwork_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoeNetwork_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,9 +47,14 @@
 		607FACE51AFB9204008FA782 /* MoeNetwork_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoeNetwork_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		7ACCC3B5F7F0B0F9EBF1F67E /* MoeNetwork.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = MoeNetwork.podspec; path = ../MoeNetwork.podspec; sourceTree = "<group>"; };
+		7ACCC3B5F7F0B0F9EBF1F67E /* MoeNetwork.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MoeNetwork.podspec; path = ../MoeNetwork.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		95B9A3462313EB8300D7DE15 /* PersoalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersoalAPI.swift; sourceTree = "<group>"; };
+		95B9A3482313EBE500D7DE15 /* PSBetOrderAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSBetOrderAPI.swift; sourceTree = "<group>"; };
+		95B9A34A2313EBF000D7DE15 /* PSBetOrderDetailAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSBetOrderDetailAPI.swift; sourceTree = "<group>"; };
+		95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
+		95B9A34F2314E25600D7DE15 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		B445E53BEC154046FAB22ADE /* Pods-MoeNetwork_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoeNetwork_Tests.release.xcconfig"; path = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		BF515DB351EEBD6AD3B1A8C0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		BF515DB351EEBD6AD3B1A8C0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F14023566EA8F666E994EF9C /* Pods-MoeNetwork_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoeNetwork_Example.debug.xcconfig"; path = "Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		FCC9799AAC11DF0B68086015 /* Pods_MoeNetwork_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoeNetwork_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -93,6 +103,7 @@
 		607FACD21AFB9204008FA782 /* Example for MoeNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				95B9A34C2314DC5300D7DE15 /* Network */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -148,6 +159,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		95B9A3452313EB6A00D7DE15 /* PersonalAPI */ = {
+			isa = PBXGroup;
+			children = (
+				95B9A3462313EB8300D7DE15 /* PersoalAPI.swift */,
+				95B9A3482313EBE500D7DE15 /* PSBetOrderAPI.swift */,
+				95B9A34A2313EBF000D7DE15 /* PSBetOrderDetailAPI.swift */,
+			);
+			name = PersonalAPI;
+			sourceTree = "<group>";
+		};
+		95B9A34C2314DC5300D7DE15 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				95B9A3452313EB6A00D7DE15 /* PersonalAPI */,
+				95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */,
+				95B9A34F2314E25600D7DE15 /* BaseResponse.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 		C81D2D0A4DCC8A2B2EBBC9A0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +187,6 @@
 				2208895C069B23FDB458594B /* Pods-MoeNetwork_Tests.debug.xcconfig */,
 				B445E53BEC154046FAB22ADE /* Pods-MoeNetwork_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -213,10 +243,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = JPZD4Y72K9;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = JPZD4Y72K9;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -227,6 +259,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -269,11 +302,17 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/MoeNetwork/MoeNetwork.framework",
+				"${BUILT_PRODUCTS_DIR}/MoeUI/MoeUI.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoeNetwork.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoeUI.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -332,7 +371,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				95B9A34E2314DC6000D7DE15 /* BaseRequest.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				95B9A3492313EBE500D7DE15 /* PSBetOrderAPI.swift in Sources */,
+				95B9A3502314E25600D7DE15 /* BaseResponse.swift in Sources */,
+				95B9A3472313EB8300D7DE15 /* PersoalAPI.swift in Sources */,
+				95B9A34B2313EBF000D7DE15 /* PSBetOrderDetailAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,6 +522,7 @@
 			baseConfigurationReference = F14023566EA8F666E994EF9C /* Pods-MoeNetwork_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = JPZD4Y72K9;
 				INFOPLIST_FILE = MoeNetwork/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -493,6 +538,7 @@
 			baseConfigurationReference = 0A9ADE120747625B727CB83E /* Pods-MoeNetwork_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = JPZD4Y72K9;
 				INFOPLIST_FILE = MoeNetwork/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -507,6 +553,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2208895C069B23FDB458594B /* Pods-MoeNetwork_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = JPZD4Y72K9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -529,6 +576,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B445E53BEC154046FAB22ADE /* Pods-MoeNetwork_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = JPZD4Y72K9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

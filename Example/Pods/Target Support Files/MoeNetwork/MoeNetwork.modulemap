@@ -1,0 +1,6 @@
+framework module MoeNetwork {
+  umbrella header "MoeNetwork-umbrella.h"
+
+  export *
+  module * { export * }
+}

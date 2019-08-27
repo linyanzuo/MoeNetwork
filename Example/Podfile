@@ -2,6 +2,9 @@ use_frameworks!
 
 target 'MoeNetwork_Example' do
   pod 'MoeNetwork', :path => '../'
+  pod 'HandyJSON', '~> 5.0.0'
+  pod 'Alamofire', '~> 4.8.2'
+  pod 'MoeUI/Common', '~> 1.1.0'
 
   target 'MoeNetwork_Tests' do
     inherit! :search_paths
