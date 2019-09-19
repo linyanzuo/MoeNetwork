@@ -15,4 +15,4 @@ public struct HomeAPI {
 
     /// 查询所有热门玩法
     static let hotGames = HMHotGamesRequest()
-}
+} 

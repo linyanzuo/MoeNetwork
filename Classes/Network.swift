@@ -33,11 +33,13 @@ class Network: NSObject {
         }
         req.httpBody = body.data(using: .utf8, allowLossyConversion: false)
 
+        request.requestWillSend()
         Alamofire.request(req).responseJSON { (response) in
             let isSuccessful = responseHandle(response: response,
                                               responseType: request.responseType(),
                                               success: success,
                                               fail: fail)
+            request.requestDidFinish(isSuccess: isSuccessful)
             completion?(isSuccessful)
         }
     }
@@ -52,12 +54,13 @@ class Network: NSObject {
         let header = self.header(request: request)
         let method = self.method(request: request)
 
+        request.requestWillSend()
         Alamofire.request(request.url, method: method, parameters: parameters, encoding: encoding, headers: header).responseJSON { (response) in
-
             let isSuccessful = responseHandle(response: response,
                                               responseType: request.responseType(),
                                               success: success,
                                               fail: fail)
+            request.requestDidFinish(isSuccess: isSuccessful)
             completion?(isSuccessful)
         }
     }
@@ -79,11 +82,13 @@ class Network: NSObject {
             }
         }
 
+        request.requestWillSend()
         Alamofire.request(url, method: method, parameters: nil, encoding: encoding, headers: header).responseJSON { (response) in
             let isSuccessful = responseHandle(response: response,
                                               responseType: request.responseType(),
                                               success: success,
                                               fail: fail)
+            request.requestDidFinish(isSuccess: isSuccessful)
             completion?(isSuccessful)
         }
     }
@@ -99,32 +104,32 @@ class Network: NSObject {
 
         // -- Network connection check
         guard result.isSuccess == true else {
-            let errMsg = "ERROR: Request fail, please check network connection"
-            MLog(errMsg)
-            NotificationCenter.default.post(name: Notification.Name.ConnectionState.NoNetwork,
-                                            object: self,
-                                            userInfo: [Notification.Key.HintMessage: errMsg])
+            let errMsg = AssetHelper.localizedString(key: "check_connection")
+            NetworkHelper.shared.alertDebugError(errMsg)
             return false
         }
         // -- Response data format check
         guard let dict = result.value as? [String: Any] else {
-            globalAlert("ERROR: Response data parse fail, it's not json data. Please contact to server")
+            let errMsg = AssetHelper.localizedString(key: "response_format")
+            NetworkHelper.shared.alertDebugError(errMsg)
             return false
         }
         // -- Response Data Deserialize
         guard let response = responseType.deserialize(from: dict) as? Response else {
-            globalAlert("Request Success, but deserialize json data fail. Please check is the `responseType` of request right or if the properties of response match")
+            let errMsg = AssetHelper.localizedString(key: "deserialize_json")
+            NetworkHelper.shared.alertDebugError(errMsg)
             return false
         }
         // -- Error Code Check
         let errorCode = response.statusCode()
         guard errorCode == 0 else {
-            MLog("Request Success, but get `Error Status Code`")
+            let errMsg = AssetHelper.localizedString(key: "get_error_code")
+            MLog(errMsg)
             let errorMessage = response.statusMessage()
             #if DEBUG
-            if httpErrorCodeHandler(errorCode: errorCode, errorMessage: errorMessage) { return false }
+            if NetworkHelper.shared.checkHttpErrorCode(errorCode: errorCode, errorMessage: errorMessage) { return false }
             #endif
-            if statusCodeHandler(errorCode: errorCode, errorMessage: errorMessage) { return false }
+            if NetworkHelper.shared.checkServerErrorCode(errorCode: errorCode, errorMessage: errorMessage) { return false }
 
             fail?(Error(code: errorCode, message: errorMessage))
             return false
@@ -168,62 +173,5 @@ extension Network {
         case .delete:
             return HTTPMethod.delete
         }
-    }
-}
-
-
-// MARK: Error Code Handle
-extension Network {
-    private static func httpErrorCodeHandler(errorCode: Int, errorMessage: String) -> Bool {
-        let bundle = Bundle(for: self.classForCoder())
-        guard let url = bundle.url(forResource: "Http_Error_Code", withExtension: "plist") else {
-            globalAlert("Load Http_Error_Code fail, please check the url or `Http_Error_Code.plst`")
-            return false
-        }
-        guard let httpErrorCodeTable = NSDictionary(contentsOf: url) else {
-            globalAlert("File format error, Http_Error_Code.plist should be Dictionary")
-            return false
-        }
-        guard let httpErrorCodes = httpErrorCodeTable.allKeys as? [String] else {
-            globalAlert("There is no http error code in Http_Error_Code table")
-            return false
-        }
-
-        for httpErrorCode in httpErrorCodes {
-            if Int(httpErrorCode) == errorCode, let errMsg = httpErrorCodeTable.value(forKey: httpErrorCode) as? String {
-                globalAlert(errMsg)
-                return true
-            }
-        }
-        return false
-    }
-
-    private static func statusCodeHandler(errorCode: Int, errorMessage: String) -> Bool {
-        var name: Notification.Name? = nil
-        switch errorCode {
-        case 41001:
-            name = Notification.Name.Network.TokenMissing
-        case 41002:
-            name = Notification.Name.Network.TokenInvalidate
-        case 41003:
-            name = Notification.Name.Network.PermissionDenied
-        default:
-            MLog("Unhandle Status Code: \(errorCode);\n\(errorMessage)")
-        }
-
-        guard name != nil else { return false }
-        NotificationCenter.default.post(name: name!,
-                                        object: self,
-                                        userInfo: [Notification.Key.HintMessage: errorMessage])
-        return true
-    }
-}
-
-
-// Mark: Message Alert
-extension Network {
-    private static func globalAlert(_ message: String) {
-        MLog(message)
-//        MoeUI.alertError(with: message)
     }
 }

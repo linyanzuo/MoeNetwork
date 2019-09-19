@@ -5,3 +5,9 @@
   Created by Zed on 2019/9/17.
   
 */
+
+"check_connection" = "Request fail, please check network connection";
+"response_format" = "Response data parse fail, it's not json data. Please contact to server";
+"deserialize_json" = "Request Success, but deserialize json data fail. Please check is the `responseType` of request right or if the properties of response match";
+"get_error_code" = "Request Success, but get `Error Status Code`";
+

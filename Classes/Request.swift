@@ -64,6 +64,16 @@ open class Request: NSObject {
     open func responseType() -> Response.Type {
         return Response.self
     }
+
+    /// Notifies that request is about to be send
+    /// Subclass can override this method to do something like show loading view
+    open func requestWillSend(){
+    }
+
+    /// Notifies that request is about to be send
+    /// Subclass can override this method to do something like hide loading view
+    open func requestDidFinish(isSuccess: Bool) {
+    }
 }
 
 

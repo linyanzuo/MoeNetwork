@@ -5,3 +5,8 @@
   Created by Zed on 2019/9/17.
   
 */
+
+"check_connection" = "请求失败，请检查网络连接";
+"response_format" = "响应数据（非JSON数据）解析失败。请联系服务器管理人员";
+"deserialize_json" = "请求成功, 但JSON数据反序列化失败。请检查`Request`中`responseType`的属性与响应数据是否匹配";
+"get_error_code" = "请求成功, 但服务器返回了错误码";

@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   Http_Error_Code.plist
-   Pods
-
-   Created by Zed on 2019/8/26.
-   Copyright (c) 2019 MoeNetwork. All rights reserved.
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-        <key>404</key>
-        <string>ERROR: 404, File Not Found. Please check returned value of `path()` in `Request`.</string>
-        <key>405</key>
-        <string>ERROR: 405, Request Method does not supported. Please check returned value of `method()` in `Request`</string>
-        <key>500</key>
-        <string>ERROR: 500, Internal Server Error. Please contact to server</string>
-    </dict>
+<dict>
+	<key>404</key>
+	<string>错误 404，找不到文件。请检查`Request`类中`path()`方法的返回值是否正确</string>
+	<key>405</key>
+	<string>错误 405，不支持的请求方式. 请检查`Request`类中`method()` 方法的返回值是否正确</string>
+	<key>500</key>
+	<string>错误 500，服务器内部错误。 请联系服务器管理人员</string>
+</dict>
 </plist>
