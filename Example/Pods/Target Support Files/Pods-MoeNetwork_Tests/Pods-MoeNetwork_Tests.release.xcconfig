@@ -1,7 +1,7 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON" "${PODS_CONFIGURATION_BUILD_DIR}/MoeNetwork" "${PODS_CONFIGURATION_BUILD_DIR}/MoeUI"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON" "${PODS_CONFIGURATION_BUILD_DIR}/MoeNetwork"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON/HandyJSON.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/MoeNetwork/MoeNetwork.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/MoeUI/MoeUI.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "Alamofire" -framework "HandyJSON" -framework "MoeNetwork" -framework "MoeUI" -framework "UIKit"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/HandyJSON/HandyJSON.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/MoeNetwork/MoeNetwork.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "Alamofire" -framework "HandyJSON" -framework "MoeNetwork"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

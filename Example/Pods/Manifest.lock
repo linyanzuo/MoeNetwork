@@ -4,20 +4,16 @@ PODS:
   - MoeNetwork (1.0.0):
     - Alamofire (~> 4.8.2)
     - HandyJSON (~> 5.0.0)
-    - MoeUI/Common (= 1.1.0)
-  - MoeUI/Common (1.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.8.2)
   - HandyJSON (~> 5.0.0)
   - MoeNetwork (from `../`)
-  - MoeUI/Common (~> 1.1.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - HandyJSON
-    - MoeUI
 
 EXTERNAL SOURCES:
   MoeNetwork:
@@ -26,9 +22,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
-  MoeNetwork: 1e3d2a48cb1b6ef7c4927727243279f6dda2ebb3
-  MoeUI: b1f1991a6eb0b083814bfc668f799171c0117d24
+  MoeNetwork: f2d865dec9a7cb58f3840e5b824061b88fc3272f
 
-PODFILE CHECKSUM: 044b24178b5dae898457062ecb7f17bdf3ce4449
+PODFILE CHECKSUM: e6ba5945217b0e1d7e670221a499ebe8e85d9eef
 
 COCOAPODS: 1.7.4

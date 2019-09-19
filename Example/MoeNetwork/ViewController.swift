@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MoeUI
+//import MoeUI
 
 
 class ViewController: UIViewController {
@@ -21,16 +21,16 @@ class ViewController: UIViewController {
         ]
         HMBannerRequest().send(parameters: params, success: { (data) in
             let response = data as? HMBannerResponse
-            MLog(response)
+//            MLog(response)
         }) { (error) in
-            MLog(error)
+//            MLog(error)
         }
 
         HomeAPI.hotGames.send(parameters: nil, success: { (data) in
             let response = data as? HMHotGamesResponse
-            MLog(response)
+//            MLog(response) 
         }) { (error) in
-            MLog(error)
+//            MLog(error)
         }
     }
 

@@ -8,7 +8,6 @@
 import UIKit
 import Alamofire
 import HandyJSON
-import MoeUI
 
 
 public typealias SuccessClosure = (_ data: Response) -> Void
