@@ -7,15 +7,34 @@
 //
 
 import UIKit
+import MoeNetwork
+import MoeUI
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    @objc func test(noti: Notification) {
+        guard let state = noti.userInfo?["ConnectionState"] as? NetworkHelper.ConnectionState
+            else { return }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        switch state {
+        case .wifi:
+            MLog("Wifi网络")
+        case .mobile:
+            MLog("移动网络")
+        case .unKnow, .noNetwork:
+            MLog("无网络连接")
+        }
+    }
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: Notification.Name.Network.ConnectionState, object: nil)
+        NetworkHelper.shared.startListening()
+
         return true
     }
 

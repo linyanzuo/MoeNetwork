@@ -4,12 +4,11 @@
 //
 //  Created by Zed on 2019/7/23.
 //
-//  扩展 - 字符串处理
+//  extension - string manipulation
 
 import Foundation
 
 
-extension String: NamespaceWrappable {}
 extension TypeWrapperProtocol where WrappedType == String {
     /// 将NSRange转换成RangeExperssion
     ///
@@ -38,4 +37,3 @@ extension TypeWrapperProtocol where WrappedType == String {
         return String(wrappedValue[st ..< en])
     }
 }
-

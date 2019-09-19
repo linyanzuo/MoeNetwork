@@ -4,8 +4,8 @@
 //
 //  Created by Zed on 2019/8/2.
 //
-//  基本类型, 结构体等, 使用`==`
-//  对象类型使用`:`,
+//  Base type, struct an so on, use `==`
+//  Object type , use `:`
 
 public protocol NamespaceWrappable {
     associatedtype WrapperType

@@ -14,11 +14,11 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		95B9A3472313EB8300D7DE15 /* PersoalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A3462313EB8300D7DE15 /* PersoalAPI.swift */; };
-		95B9A3492313EBE500D7DE15 /* PSBetOrderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A3482313EBE500D7DE15 /* PSBetOrderAPI.swift */; };
-		95B9A34B2313EBF000D7DE15 /* PSBetOrderDetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A34A2313EBF000D7DE15 /* PSBetOrderDetailAPI.swift */; };
 		95B9A34E2314DC6000D7DE15 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */; };
 		95B9A3502314E25600D7DE15 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A34F2314E25600D7DE15 /* BaseResponse.swift */; };
+		95B9A38823152E8300D7DE15 /* HMHotGamesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A38523152E8300D7DE15 /* HMHotGamesAPI.swift */; };
+		95B9A38923152E8300D7DE15 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A38623152E8300D7DE15 /* HomeAPI.swift */; };
+		95B9A38A23152E8300D7DE15 /* HMBannerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A38723152E8300D7DE15 /* HMBannerAPI.swift */; };
 		B92C9959E7657AEA64FCDD95 /* Pods_MoeNetwork_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188EBEDAF7C0B409AA6DCF4B /* Pods_MoeNetwork_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,11 +48,11 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7ACCC3B5F7F0B0F9EBF1F67E /* MoeNetwork.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MoeNetwork.podspec; path = ../MoeNetwork.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		95B9A3462313EB8300D7DE15 /* PersoalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersoalAPI.swift; sourceTree = "<group>"; };
-		95B9A3482313EBE500D7DE15 /* PSBetOrderAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSBetOrderAPI.swift; sourceTree = "<group>"; };
-		95B9A34A2313EBF000D7DE15 /* PSBetOrderDetailAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSBetOrderDetailAPI.swift; sourceTree = "<group>"; };
 		95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		95B9A34F2314E25600D7DE15 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		95B9A38523152E8300D7DE15 /* HMHotGamesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMHotGamesAPI.swift; sourceTree = "<group>"; };
+		95B9A38623152E8300D7DE15 /* HomeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
+		95B9A38723152E8300D7DE15 /* HMBannerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMBannerAPI.swift; sourceTree = "<group>"; };
 		B445E53BEC154046FAB22ADE /* Pods-MoeNetwork_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoeNetwork_Tests.release.xcconfig"; path = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BF515DB351EEBD6AD3B1A8C0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F14023566EA8F666E994EF9C /* Pods-MoeNetwork_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoeNetwork_Example.debug.xcconfig"; path = "Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -159,20 +159,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		95B9A3452313EB6A00D7DE15 /* PersonalAPI */ = {
+		95B9A3452313EB6A00D7DE15 /* HomeAPI */ = {
 			isa = PBXGroup;
 			children = (
-				95B9A3462313EB8300D7DE15 /* PersoalAPI.swift */,
-				95B9A3482313EBE500D7DE15 /* PSBetOrderAPI.swift */,
-				95B9A34A2313EBF000D7DE15 /* PSBetOrderDetailAPI.swift */,
+				95B9A38723152E8300D7DE15 /* HMBannerAPI.swift */,
+				95B9A38523152E8300D7DE15 /* HMHotGamesAPI.swift */,
+				95B9A38623152E8300D7DE15 /* HomeAPI.swift */,
 			);
-			name = PersonalAPI;
+			name = HomeAPI;
 			sourceTree = "<group>";
 		};
 		95B9A34C2314DC5300D7DE15 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				95B9A3452313EB6A00D7DE15 /* PersonalAPI */,
+				95B9A3452313EB6A00D7DE15 /* HomeAPI */,
 				95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */,
 				95B9A34F2314E25600D7DE15 /* BaseResponse.swift */,
 			);
@@ -371,12 +371,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				95B9A38923152E8300D7DE15 /* HomeAPI.swift in Sources */,
 				95B9A34E2314DC6000D7DE15 /* BaseRequest.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				95B9A3492313EBE500D7DE15 /* PSBetOrderAPI.swift in Sources */,
+				95B9A38823152E8300D7DE15 /* HMHotGamesAPI.swift in Sources */,
 				95B9A3502314E25600D7DE15 /* BaseResponse.swift in Sources */,
-				95B9A3472313EB8300D7DE15 /* PersoalAPI.swift in Sources */,
-				95B9A34B2313EBF000D7DE15 /* PSBetOrderDetailAPI.swift in Sources */,
+				95B9A38A23152E8300D7DE15 /* HMBannerAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +463,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -509,7 +509,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -529,7 +529,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -545,7 +545,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		00BB34E1DF678A2D8D9085E6708AD7E8 /* URLTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CD9D0E5ADE204D051A13A0A1E5F93F /* URLTransform.swift */; };
 		0168D039E775816B7A52ED863D080A95 /* CustomDateFormatTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD803B75134BA776DDFCEB34957B828 /* CustomDateFormatTransform.swift */; };
+		08EE7FCE51DD3D38A49AA84EF9FEF781 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC6AE41CA4E5383D942E5723A7F64F /* Foundation.framework */; };
 		0C5E11DE24DAA737704B355F5F2F3426 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF591FE23721863C50C436722582E9E /* ParameterEncoding.swift */; };
 		1148E5E2ED224A55ADDE8A5CE69BCCD0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC6AE41CA4E5383D942E5723A7F64F /* Foundation.framework */; };
 		115F2EDF6E7AF98E8813AB1E108386DE /* FieldDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E2605168CDAA8112CB72194D8BB51A /* FieldDescriptor.swift */; };
@@ -17,21 +18,28 @@
 		1945CD5D63A1C164AEAAA9A33E85571E /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FA80BC7F6B2355DDFEFACC53DCEE0C9 /* Alamofire-dummy.m */; };
 		1986B50C74F1697EA43F68335C93CEB3 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D772D8876014E2FEC21BFA3189DAB28D /* MultipartFormData.swift */; };
 		1A820E3753A58F90E41466C32436FDEE /* Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DC9791F9CB548DB3C77CF0F0FDE456 /* Export.swift */; };
+		1B1862EF40090F80463077700DB647CC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45622452239FF07A9C08EA805094C871 /* UIKit.framework */; };
 		2341E58CFAA59B30886D0552A6B89888 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2AF13B125375611BB0A99F35B885C5 /* Metadata.swift */; };
+		25400421F4DC07A5EC13075D41066637 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17A780F0D29B81673CF39965D90AE7E /* Network.swift */; };
+		25AF3E3549EEB4001487BD29430FFE35 /* MoeUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6983F27B49481C4B49CF363547543FE /* MoeUI.framework */; };
 		26168D21F6738B82078DED20B281F26C /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1E287BC83038A3781FB53DE742CCC /* Properties.swift */; };
+		26746E1074482D99F7274700CEF00ECA /* MoeUI-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DFA353136057D1DABF5EAB010D105E05 /* MoeUI-dummy.m */; };
+		2782469E075DBF2300ABFF39636964AF /* Extension+Moe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678D074C876B84F526ADD3BCB5D7CEB6 /* Extension+Moe.swift */; };
+		28346D54FB8C4EDE6CFFE5DD1F8EC9F6 /* MoeUI-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 938316A967A28DA4C41B00EC26D331E7 /* MoeUI-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2C61B040BA6A9A7AE66C4D9BA26D5520 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BDF2B2396841B79B8011FBA5A1B2FC /* SessionDelegate.swift */; };
+		3207A1602E2CC9A12F216744AC2D6F00 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AB2BFE93F62EACBDC05AC840B58FFF /* Notifications.swift */; };
 		3571F958A3907B3A806E62D50C2550D4 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A5240F3C47BE6B93AB9B0FF2FCC913 /* NetworkReachabilityManager.swift */; };
 		35FACA839E3E45530D4D925DA94ABA3A /* DataTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88920165D8E066C51855A26F1AE76F50 /* DataTransform.swift */; };
 		3BF67E5AEF5378F19F9E1B569EF7376B /* MangledName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67126E93B2DC74E50D52A917110A083C /* MangledName.swift */; };
 		3D7A617F66B55F11C328344CA0CF804E /* ISO8601DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917B6701ABC25AC7044EFC4B01194FC7 /* ISO8601DateTransform.swift */; };
-		3DF703476CA4885C5C27E22548845FCD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45622452239FF07A9C08EA805094C871 /* UIKit.framework */; };
-		454DF2195C5F257E2B8A2B278AD22046 /* MoeUI-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C00B11F5446098149ED4AD9658EA1BC5 /* MoeUI-dummy.m */; };
+		3EB5A6D0C21FE016753F06EDA85E425F /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF39A047F575ED40765D4556AD2C1E5 /* Error.swift */; };
+		3F541F46F7A4E06A77724D1093CBFB19 /* HandyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3467E840A196A825BCEAF5D2A4B146B1 /* HandyJSON.framework */; };
 		4665274B82A1477F9A675E58C93E5814 /* ExtendCustomBasicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A2F07C5391B9465E0B9B776B84593E /* ExtendCustomBasicType.swift */; };
 		4E2B14200047E6C7E715CC9310236951 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F222486094C8523DEAECBCB99CD27A8 /* Logger.swift */; };
-		4F256A42F7C9E02B1083B367DD327687 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF804398CA32ACBFC33AA0D61EBEF55 /* UIConstants.swift */; };
-		50E0365A897A4967E14A353CACF64EC0 /* ProjectConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884007ABA4163F8CD8E98F2FAF371A3F /* ProjectConstants.swift */; };
+		4EA52EC440C16D02C4BA8038367A298C /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8341B22876B39A27EBE065A4A808B9EB /* Request.swift */; };
 		521E330943F0873C4A7233989DC674DD /* EnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABBBE4BFB101F79C965696507A3969 /* EnumType.swift */; };
 		53791F5E5F07400F92CFDFC89A432305 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB94D6AC38DCB14E0774748FDE4D2B8 /* Validation.swift */; };
+		55A57A3BFAB9CADC8826B92148DF4F75 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0890B2C0C8B7D55AB0906E435192C5 /* UIConstants.swift */; };
 		56774E8C3B597F067CF122FFBDE35B0A /* Pods-MoeNetwork_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C2952F9DC84768E8269F3D9A991DB674 /* Pods-MoeNetwork_Tests-dummy.m */; };
 		5826306A022502284CA4FAD4CF4E83B8 /* DateFormatterTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A467F7172E22A22B82EDFE16B20AB7 /* DateFormatterTransform.swift */; };
 		585077EE240C6F9B76AC3FAF49D5A1E8 /* OtherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C0574D5EB004631F75408874C149ED /* OtherExtension.swift */; };
@@ -39,59 +47,56 @@
 		59FD688C7950092F80E0918C3F0C3D6C /* Pods-MoeNetwork_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 23FA1259629ABBB4EE9872C0057B3508 /* Pods-MoeNetwork_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5BD58F6E21A2D61F24B27E0E58E28977 /* HelpingMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0807F19F6526CCF7384EE51C2FAD306 /* HelpingMapper.swift */; };
 		5E8BC3A2D193391B517523A1295C7826 /* TransformType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D446EDD5D2953C2191F1535A5D8FD282 /* TransformType.swift */; };
+		5FB964B9F0CDF8B2745DECA3B1698D02 /* MoeNetwork-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3307F7EC0C57A1AD1DAFDB9E92C7F246 /* MoeNetwork-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		617AD57FBC0E1AE4D467C28B8002878F /* EnumTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CF0E8DE4201D6C2F8EBD3EA3F1116F /* EnumTransform.swift */; };
+		62C6B0D5E6996CE4735FF4BB2E14A41A /* zh-Hans.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A3D902506E67EEA6DE4D1FD198332 /* zh-Hans.lproj */; };
 		64744C911253C3E01461FAD7C935C8D7 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DEBEBA4F17A49614392E3642F5B187 /* Result.swift */; };
 		6B448E235BB70E364170BE907EB2B038 /* Transformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409C9EB6A9FADE57D60BDA0F542B3236 /* Transformable.swift */; };
 		6BDA137322229F674A8C692A989A9A34 /* Deserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2CC21C00670A0529315A7243D0EFD /* Deserializer.swift */; };
 		6D7A437591E3BFF39D5085B8BC81EEFD /* Measuable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501B7F527255EF24CA11AA1513BC5327 /* Measuable.swift */; };
-		6E9F27EC2D3AF3F1696749F9753AD8FF /* SwiftyNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658A7D6818ED60B534AC06C03E747DB /* SwiftyNamespace.swift */; };
 		7664FD4F59A0C00866CBAE60B0A3AD64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC6AE41CA4E5383D942E5723A7F64F /* Foundation.framework */; };
+		77BD9D34396AC30ED76A2860C2FCEC43 /* MoeNetwork.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E0D14A6736AFE515AF081D3995277643 /* MoeNetwork.bundle */; };
 		78B971DF19387A49198D087D9822856B /* HandyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6241DFC06C7CED0C957965D155BC5282 /* HandyJSON-dummy.m */; };
-		7E7427737D52807C10DFDE6AD08B9983 /* String+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D360D04716A3434B5A9A3482D09A30 /* String+Character.swift */; };
+		7FFA43D74C6996D9FECBEB83984FE939 /* Extension+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33050464F9A82ADBFCBBFEE6D698AFA4 /* Extension+Alert.swift */; };
 		82B7E937F357B41B13F80315E8B772D6 /* ReflectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62392F19C30018D93FFD8EC5E82DB4E /* ReflectionHelper.swift */; };
 		83956E20859CDBBE7BC38ABADE0170FB /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EDF6096B32168267BF1B374B694AFA /* AFError.swift */; };
 		8B49EB70C7582D19B91937B88BAE9C94 /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905875CD711D91735B3F1F3B1B1FEEEE /* Serializer.swift */; };
 		8EB0F9C27035374ED192C179578FD5BD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC6AE41CA4E5383D942E5723A7F64F /* Foundation.framework */; };
-		92F0A98A02E8E74EFDE6B66F0D8FF2DB /* MoeNetwork-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA7800D3AE006658F681B65C499012B /* MoeNetwork-dummy.m */; };
+		8F3EC4DD86FD5D886840AF2BAAC86713 /* UIColor+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1ABE5D17F8767FE14F11CD24804E61 /* UIColor+Color.swift */; };
+		9038DB773405F2C323FC71339DBB9AA5 /* MoeNetwork-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9188A7F91C2ECC6094DCF7B94D4A039F /* MoeNetwork-dummy.m */; };
 		931BBB8230A25161D5C37528A8F9FECF /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018AA02F5565D8799018328F9824508A /* SessionManager.swift */; };
 		933FDA5970AA525D6CB92BFEBA2BAB4A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003EC4D7EF3CE89831160F549864228D /* Timeline.swift */; };
-		95B9A37F2315100500D7DE15 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A35423150F4C00D7DE15 /* Error.swift */; };
-		95B9A3802315100500D7DE15 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A35523150F4C00D7DE15 /* Network.swift */; };
-		95B9A3812315100500D7DE15 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A35623150F4C00D7DE15 /* Notifications.swift */; };
-		95B9A3822315100500D7DE15 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A35723150F4C00D7DE15 /* Response.swift */; };
-		95B9A3832315100500D7DE15 /* Http_Error_Code.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95B9A35823150F4C00D7DE15 /* Http_Error_Code.plist */; };
-		95B9A3842315100500D7DE15 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A35923150F4C00D7DE15 /* Request.swift */; };
+		9884F4E65A564B338BAE43B3B8DADE89 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC6AE41CA4E5383D942E5723A7F64F /* Foundation.framework */; };
 		98A929C8E9012AB167672714FFD2113C /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80716DDC5B544CB5043BB53103FFE3B /* Request.swift */; };
 		9B3BF4A7E894608357A81D63E3F4C716 /* Pods-MoeNetwork_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 892DE8AE3EDB93D5AC32A70D2618C7AE /* Pods-MoeNetwork_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A307C88FE8D8326307F22FB68EDE874B /* AnyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C214686856B0D650808F8C19DDA85E8 /* AnyExtensions.swift */; };
 		A6C997F7043C462E8EDB08A4DF60F3DD /* HandyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 933A163096104E82ACD236C25388D1A6 /* HandyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A813E94752821BA47271393F0F139A6C /* UI+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1710C8129272A50C91C288065B4E6FD3 /* UI+Color.swift */; };
-		A957DB5E80DCCF1B58B96773EC31ED60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC6AE41CA4E5383D942E5723A7F64F /* Foundation.framework */; };
 		AFC64B1097F7355FF423D6A73E9C7210 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898CC0CE092BB0D72CCE992100AC6898 /* TaskDelegate.swift */; };
 		B096160387C3181FF7C2EFE6C9122747 /* NSDecimalNumberTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25528CA74FDDC0142E27CC0527C75EE /* NSDecimalNumberTransform.swift */; };
 		B2C0640106A1F10082D987E12DCFCDD0 /* BuiltInBasicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77092C998DDF05DC243CE879CAFF780 /* BuiltInBasicType.swift */; };
 		B2CA0F46D59BC260D1C6050460ECDEFE /* HandyJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D530C5D42184B4F537F21E3AFA1A237 /* HandyJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B637F0E3DE3239120050FB302C4DDA1A /* SwiftyNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FDFBAC3326AD13CC9EB0558390DF06 /* SwiftyNamespace.swift */; };
+		B81C4BABC152B2E53DED7F121FDEB4BF /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AFC33BBA8BD35C646C321769BF4332 /* Response.swift */; };
 		BBD3DA9C3535A0BB8792229A9EA013DE /* CBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D3213B7FEF7F869CD2E776E7975F66 /* CBridge.swift */; };
 		BEE6B677416CA71C981D1D3F60B18C96 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3DA880CB2357779B017023B0192C5A /* Alamofire.swift */; };
 		BFC47D2934D9A6DE48259BF182994755 /* Pods-MoeNetwork_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B53600ABDE91A4DAD6C7A774AF640 /* Pods-MoeNetwork_Example-dummy.m */; };
-		C36D442D068B2EA94FFD366BDB9796F3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC6AE41CA4E5383D942E5723A7F64F /* Foundation.framework */; };
 		C4D7AE18C56CE7BF154EC720ACDE064B /* ExtendCustomModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111EB9EF93D243DF41AA6A3DFACC4F0D /* ExtendCustomModelType.swift */; };
-		CD3C2B86525A47754952522F7A046F51 /* MoeUI-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EDAE065816917E50A753D39AACEB913 /* MoeUI-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D1D7DC9BECC3809A1629CC6B2A0120DC /* MoeUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6983F27B49481C4B49CF363547543FE /* MoeUI.framework */; };
 		D3D8C379C6E4FB487E5ABD6800AD7B7E /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6135E67DE0A04827854540332A871ABB /* DispatchQueue+Alamofire.swift */; };
 		D65C254F5ABF2CB5ECEE50FE8F8E1A80 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CAD01EAD0200FCB850B6F6233D13AD1 /* Response.swift */; };
 		DE85C1B0871507870DC305D09E72B561 /* BuiltInBridgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E2A296AE41236693737DC37636274C /* BuiltInBridgeType.swift */; };
 		DEA9FE818E91E6E857CEAF1704BAA902 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C028267B5301F84EA08FAF03B33055 /* Configuration.swift */; };
 		DFB3F75B56C66C100882B15B09522C35 /* ContextDescriptorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD766FCAB967DF2811D94F4CDE55BAB /* ContextDescriptorType.swift */; };
 		E0EE06871F64D1F431E5020309B3709E /* HexColorTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26E55DF51D294AA1B17EF529D84D173 /* HexColorTransform.swift */; };
+		E138F71DFBA1EEF6185E2761759BDC6E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A323486179D2874AC487014D970F492 /* Alamofire.framework */; };
 		E35C15396D7054BF6F0A944F9B29DC76 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BC6AE41CA4E5383D942E5723A7F64F /* Foundation.framework */; };
 		E3747EC31FCCA97D75A81FC700CF7E24 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598DCE3E64323A38F84F4F2CC476F2FA /* ResponseSerialization.swift */; };
+		E412E54556472E73506B2ABAF5E482E3 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AD1B6D04DEFB05357271FA06335FA8 /* NetworkHelper.swift */; };
+		EB2B9508EDA6B1AD73DA74C9AFA5A35E /* String+Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6E8591BAB8C79FAAD16C6281A3F17D /* String+Character.swift */; };
+		EC3CEE6ACC49B7A7A21B0C8FE8F6CC39 /* ProjectConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9042D7F2F84E0415FBC39972F6BE48 /* ProjectConstants.swift */; };
 		F13F2AA7F2E6D95A181CAB99B900D531 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06598965F514E5651461CDC3AF78E26B /* ServerTrustPolicy.swift */; };
+		F5EFDE0D398B1BF0317413EC64614487 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 247177961653DE9A16D1C9E23D0FE07B /* en.lproj */; };
 		F7B74645E07C39771156A1FA413B98D4 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FA7723518AC7BBB987ABFF8FA6F1A93C /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FADE9785901B1E69A8A87188E46FD997 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A323486179D2874AC487014D970F492 /* Alamofire.framework */; };
-		FBDF3710AD59F07B28E6F3B0E378C1CC /* HandyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3467E840A196A825BCEAF5D2A4B146B1 /* HandyJSON.framework */; };
 		FD6999544C0BCDCCDB70EC87B9B58D94 /* PropertyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0C8DC21898E4D0E950967985FB0B33 /* PropertyInfo.swift */; };
-		FEF48FF717FA257B634803090E79C960 /* MoeNetwork-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 74F1FDA45CDE7FFF573C41D56E651318 /* MoeNetwork-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFF397F861D02EBC1DC39F1A43654703 /* DateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC09A1B5BDEE07CA4020109CDE67061 /* DateTransform.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,12 +108,26 @@
 			remoteGlobalIDString = E30CC33BBFCCCF45413B85B62CF4A879;
 			remoteInfo = "Pods-MoeNetwork_Example";
 		};
+		24440C58F304AD9C15EA6717C4A1E21F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAAA1AD3A8A1B59AB91319EE40752C6D;
+			remoteInfo = Alamofire;
+		};
 		3FE4C9FE0D0502EDB5CF3FA5BF6A05D6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 10D88C24864319FF583AD6D156896F32;
 			remoteInfo = HandyJSON;
+		};
+		494A45B6D94365C93A089023E60D84C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 406081DF67A031157EA4769CAE51379E;
+			remoteInfo = MoeUI;
 		};
 		4A1E1C2E4F73DA97CCD7770E2927EBFC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -124,26 +143,19 @@
 			remoteGlobalIDString = EAAA1AD3A8A1B59AB91319EE40752C6D;
 			remoteInfo = Alamofire;
 		};
-		8274D357F2A869AF6F23329F2B8EEA98 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EAAA1AD3A8A1B59AB91319EE40752C6D;
-			remoteInfo = Alamofire;
-		};
-		AC6AB7BF9B74FFBF309F10DE829EC4DB /* PBXContainerItemProxy */ = {
+		98A043447D5B60E9833549A4B721B4E4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 10D88C24864319FF583AD6D156896F32;
 			remoteInfo = HandyJSON;
 		};
-		D5877D744FDDA4B1E1A886B29A0143B1 /* PBXContainerItemProxy */ = {
+		D945B31C9C88AA31EAED8C8D5C1A2256 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 406081DF67A031157EA4769CAE51379E;
-			remoteInfo = MoeUI;
+			remoteGlobalIDString = 8F1783FDE63757CB9EB6F8198C509994;
+			remoteInfo = "MoeNetwork-MoeNetwork";
 		};
 		E8D2C14F2B0E0C6D70BBFC42F2E3523B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -157,124 +169,130 @@
 /* Begin PBXFileReference section */
 		003EC4D7EF3CE89831160F549864228D /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
 		018AA02F5565D8799018328F9824508A /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
+		05761F7053E8C8A82EDC45D2FE90CCE3 /* ResourceBundle-MoeNetwork-MoeNetwork-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-MoeNetwork-MoeNetwork-Info.plist"; sourceTree = "<group>"; };
 		06598965F514E5651461CDC3AF78E26B /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		0AD766FCAB967DF2811D94F4CDE55BAB /* ContextDescriptorType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContextDescriptorType.swift; path = Source/ContextDescriptorType.swift; sourceTree = "<group>"; };
+		0AF39A047F575ED40765D4556AD2C1E5 /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Classes/Error.swift; sourceTree = "<group>"; };
 		0E2F628CA2C5AC7CAF5F2FF108BA5EDF /* Pods-MoeNetwork_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MoeNetwork_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0F4013B06FAD09B46AE33C4D8438B4BE /* MoeNetwork.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = MoeNetwork.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		11165331DAE989F2C07C50B5E44964D9 /* MoeUI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MoeUI.modulemap; sourceTree = "<group>"; };
 		111EB9EF93D243DF41AA6A3DFACC4F0D /* ExtendCustomModelType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExtendCustomModelType.swift; path = Source/ExtendCustomModelType.swift; sourceTree = "<group>"; };
 		12D3213B7FEF7F869CD2E776E7975F66 /* CBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CBridge.swift; path = Source/CBridge.swift; sourceTree = "<group>"; };
 		12FA391DFF4CB6497D8D9EDC45110E9C /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
-		1710C8129272A50C91C288065B4E6FD3 /* UI+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UI+Color.swift"; path = "Classes/Common/Extension/UI+Color.swift"; sourceTree = "<group>"; };
 		191238A62783A0661C05A6CDD43457EB /* Pods-MoeNetwork_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MoeNetwork_Tests-Info.plist"; sourceTree = "<group>"; };
-		1A73DDDC054B8DB9146E706233C4331A /* MoeNetwork.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MoeNetwork.xcconfig; sourceTree = "<group>"; };
 		1AF591FE23721863C50C436722582E9E /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
+		1C1ABE5D17F8767FE14F11CD24804E61 /* UIColor+Color.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIColor+Color.swift"; path = "Classes/Common/Extension/UIColor+Color.swift"; sourceTree = "<group>"; };
 		23FA1259629ABBB4EE9872C0057B3508 /* Pods-MoeNetwork_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MoeNetwork_Example-umbrella.h"; sourceTree = "<group>"; };
+		247177961653DE9A16D1C9E23D0FE07B /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = en.lproj; path = Assets/en.lproj; sourceTree = "<group>"; };
 		28D1E287BC83038A3781FB53DE742CCC /* Properties.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Properties.swift; path = Source/Properties.swift; sourceTree = "<group>"; };
 		29C028267B5301F84EA08FAF03B33055 /* Configuration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = Source/Configuration.swift; sourceTree = "<group>"; };
 		29CD9D0E5ADE204D051A13A0A1E5F93F /* URLTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLTransform.swift; path = Source/URLTransform.swift; sourceTree = "<group>"; };
-		2A1B4171B699FD27B7C4B6FECA43292C /* MoeNetwork.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MoeNetwork.modulemap; sourceTree = "<group>"; };
 		2D530C5D42184B4F537F21E3AFA1A237 /* HandyJSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HandyJSON.h; path = Source/HandyJSON.h; sourceTree = "<group>"; };
+		2E8A3D902506E67EEA6DE4D1FD198332 /* zh-Hans.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = "zh-Hans.lproj"; path = "Assets/zh-Hans.lproj"; sourceTree = "<group>"; };
 		2F222486094C8523DEAECBCB99CD27A8 /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Source/Logger.swift; sourceTree = "<group>"; };
 		2F6D08CDF3E5845008E9CA3D2BE5C51A /* HandyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = HandyJSON.modulemap; sourceTree = "<group>"; };
 		32F6042BA00F18408EA03A9465D4F2B2 /* TransformOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformOf.swift; path = Source/TransformOf.swift; sourceTree = "<group>"; };
+		33050464F9A82ADBFCBBFEE6D698AFA4 /* Extension+Alert.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Extension+Alert.swift"; path = "Classes/Common/Extension/Extension+Alert.swift"; sourceTree = "<group>"; };
+		3307F7EC0C57A1AD1DAFDB9E92C7F246 /* MoeNetwork-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MoeNetwork-umbrella.h"; sourceTree = "<group>"; };
 		3467E840A196A825BCEAF5D2A4B146B1 /* HandyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38C23B2DB95B5F3089CD7FD5EA88AF69 /* HandyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HandyJSON.xcconfig; sourceTree = "<group>"; };
 		3CAD01EAD0200FCB850B6F6233D13AD1 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
 		409C9EB6A9FADE57D60BDA0F542B3236 /* Transformable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transformable.swift; path = Source/Transformable.swift; sourceTree = "<group>"; };
 		40DEBEBA4F17A49614392E3642F5B187 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
 		45622452239FF07A9C08EA805094C871 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		4AE9294B8405DF57E0BDE64B171B3C35 /* MoeUI.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MoeUI.xcconfig; sourceTree = "<group>"; };
+		4BEA5B973593F1CDCAD25A580552FC09 /* MoeNetwork-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MoeNetwork-Info.plist"; sourceTree = "<group>"; };
 		4DD803B75134BA776DDFCEB34957B828 /* CustomDateFormatTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CustomDateFormatTransform.swift; path = Source/CustomDateFormatTransform.swift; sourceTree = "<group>"; };
-		4EDAE065816917E50A753D39AACEB913 /* MoeUI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MoeUI-umbrella.h"; sourceTree = "<group>"; };
-		4FA7800D3AE006658F681B65C499012B /* MoeNetwork-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MoeNetwork-dummy.m"; sourceTree = "<group>"; };
 		501B7F527255EF24CA11AA1513BC5327 /* Measuable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Measuable.swift; path = Source/Measuable.swift; sourceTree = "<group>"; };
-		5716DD01F3E8A9C37A59CFE8B9D5275D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		57B72F7D1F2A74838E3250EEBC29EDFE /* MoeNetwork-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MoeNetwork-prefix.pch"; sourceTree = "<group>"; };
+		521EA47776026FC7B5F4A31F2A8C317E /* MoeUI-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MoeUI-prefix.pch"; sourceTree = "<group>"; };
 		57E2605168CDAA8112CB72194D8BB51A /* FieldDescriptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FieldDescriptor.swift; path = Source/FieldDescriptor.swift; sourceTree = "<group>"; };
 		598DCE3E64323A38F84F4F2CC476F2FA /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
 		59EDF6096B32168267BF1B374B694AFA /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
 		5B1BB36BC2CEF80EF181A4E5C1955CA1 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
-		5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC09A1B5BDEE07CA4020109CDE67061 /* DateTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DateTransform.swift; path = Source/DateTransform.swift; sourceTree = "<group>"; };
 		6135E67DE0A04827854540332A871ABB /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
 		6241DFC06C7CED0C957965D155BC5282 /* HandyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HandyJSON-dummy.m"; sourceTree = "<group>"; };
-		64D410256924506E23AB048D5CD12A2B /* MoeUI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MoeUI.modulemap; sourceTree = "<group>"; };
 		67126E93B2DC74E50D52A917110A083C /* MangledName.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MangledName.swift; path = Source/MangledName.swift; sourceTree = "<group>"; };
+		678D074C876B84F526ADD3BCB5D7CEB6 /* Extension+Moe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Extension+Moe.swift"; path = "Classes/Common/Extension/Extension+Moe.swift"; sourceTree = "<group>"; };
+		6839A20004FB5B1D67931247CDA0B4DD /* MoeNetwork.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MoeNetwork.modulemap; sourceTree = "<group>"; };
 		68A2F07C5391B9465E0B9B776B84593E /* ExtendCustomBasicType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExtendCustomBasicType.swift; path = Source/ExtendCustomBasicType.swift; sourceTree = "<group>"; };
 		69F2CC21C00670A0529315A7243D0EFD /* Deserializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Deserializer.swift; path = Source/Deserializer.swift; sourceTree = "<group>"; };
 		72091705C73C179D9870BFC3234D1525 /* Pods-MoeNetwork_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MoeNetwork_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		72182EA673926F58799239AF159C2E56 /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
+		732292E69AB432288CF48D33FD50A139 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		743B53600ABDE91A4DAD6C7A774AF640 /* Pods-MoeNetwork_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MoeNetwork_Example-dummy.m"; sourceTree = "<group>"; };
-		74F1FDA45CDE7FFF573C41D56E651318 /* MoeNetwork-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MoeNetwork-umbrella.h"; sourceTree = "<group>"; };
 		7A323486179D2874AC487014D970F492 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C214686856B0D650808F8C19DDA85E8 /* AnyExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyExtensions.swift; path = Source/AnyExtensions.swift; sourceTree = "<group>"; };
 		7FA80BC7F6B2355DDFEFACC53DCEE0C9 /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
-		82D5FF5E27EA518499D562FC105515B3 /* Pods_MoeNetwork_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoeNetwork_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		82D5FF5E27EA518499D562FC105515B3 /* Pods_MoeNetwork_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MoeNetwork_Example.framework; path = "Pods-MoeNetwork_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8341B22876B39A27EBE065A4A808B9EB /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Classes/Request.swift; sourceTree = "<group>"; };
 		85819366EEC8E95183813E5018C6FE60 /* Pods-MoeNetwork_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MoeNetwork_Example-Info.plist"; sourceTree = "<group>"; };
-		8658A7D6818ED60B534AC06C03E747DB /* SwiftyNamespace.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyNamespace.swift; path = Classes/Common/Extension/SwiftyNamespace.swift; sourceTree = "<group>"; };
+		86AD1B6D04DEFB05357271FA06335FA8 /* NetworkHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkHelper.swift; path = Classes/NetworkHelper.swift; sourceTree = "<group>"; };
 		86FB4FE9EBD3FECE5FE400011F6628AF /* Pods-MoeNetwork_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MoeNetwork_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		884007ABA4163F8CD8E98F2FAF371A3F /* ProjectConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProjectConstants.swift; path = Classes/Common/Constant/ProjectConstants.swift; sourceTree = "<group>"; };
 		88920165D8E066C51855A26F1AE76F50 /* DataTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataTransform.swift; path = Source/DataTransform.swift; sourceTree = "<group>"; };
 		892DE8AE3EDB93D5AC32A70D2618C7AE /* Pods-MoeNetwork_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MoeNetwork_Tests-umbrella.h"; sourceTree = "<group>"; };
 		898CC0CE092BB0D72CCE992100AC6898 /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
-		89D8BA02818CB32FAEE451CFC2C9410F /* MoeUI-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MoeUI-prefix.pch"; sourceTree = "<group>"; };
+		89EDFD3CCCC658A5B9B57E6C450F7814 /* MoeNetwork-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MoeNetwork-prefix.pch"; sourceTree = "<group>"; };
 		8B21FE5832A03829BC5E7C5F51276EB4 /* Pods-MoeNetwork_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MoeNetwork_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8D5E2B193B4B3EFE10C6A732AF4E11CB /* Pods-MoeNetwork_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MoeNetwork_Example-frameworks.sh"; sourceTree = "<group>"; };
-		8E0874BED59B2AA4A03B1697D2679537 /* Pods_MoeNetwork_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoeNetwork_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E0874BED59B2AA4A03B1697D2679537 /* Pods_MoeNetwork_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MoeNetwork_Tests.framework; path = "Pods-MoeNetwork_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		905875CD711D91735B3F1F3B1B1FEEEE /* Serializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Serializer.swift; path = Source/Serializer.swift; sourceTree = "<group>"; };
+		90AB2BFE93F62EACBDC05AC840B58FFF /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Classes/Notifications.swift; sourceTree = "<group>"; };
 		917B6701ABC25AC7044EFC4B01194FC7 /* ISO8601DateTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ISO8601DateTransform.swift; path = Source/ISO8601DateTransform.swift; sourceTree = "<group>"; };
+		9188A7F91C2ECC6094DCF7B94D4A039F /* MoeNetwork-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MoeNetwork-dummy.m"; sourceTree = "<group>"; };
 		933A163096104E82ACD236C25388D1A6 /* HandyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HandyJSON-umbrella.h"; sourceTree = "<group>"; };
-		936E884F3F3C8EE14FA1C3DB2B8EEFD1 /* MoeNetwork-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MoeNetwork-Info.plist"; sourceTree = "<group>"; };
-		93DC78FB3E069A8FAD5571108C09C961 /* MoeUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoeUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		938316A967A28DA4C41B00EC26D331E7 /* MoeUI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MoeUI-umbrella.h"; sourceTree = "<group>"; };
+		93DC78FB3E069A8FAD5571108C09C961 /* MoeUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MoeUI.framework; path = MoeUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9469F689232A741F6595B8D32D317EF9 /* HandyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HandyJSON-prefix.pch"; sourceTree = "<group>"; };
-		94FA8976C0B7AAB558F3365FB81C6FD1 /* MoeUI.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MoeUI.xcconfig; sourceTree = "<group>"; };
-		95B9A35423150F4C00D7DE15 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
-		95B9A35523150F4C00D7DE15 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		95B9A35623150F4C00D7DE15 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
-		95B9A35723150F4C00D7DE15 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		95B9A35823150F4C00D7DE15 /* Http_Error_Code.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Http_Error_Code.plist; sourceTree = "<group>"; };
-		95B9A35923150F4C00D7DE15 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		95FA9033EDB279BCED3C99B037403E6C /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
 		98A467F7172E22A22B82EDFE16B20AB7 /* DateFormatterTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DateFormatterTransform.swift; path = Source/DateFormatterTransform.swift; sourceTree = "<group>"; };
 		99BC6AE41CA4E5383D942E5723A7F64F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		99D360D04716A3434B5A9A3482D09A30 /* String+Character.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Character.swift"; path = "Classes/Common/Extension/String+Character.swift"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9EAAFB5DAADD860072DB542D598FEEF8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		9EABF2FD59F74938669CF21FEBE4B633 /* Pods-MoeNetwork_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MoeNetwork_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		A0BDF2B2396841B79B8011FBA5A1B2FC /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
-		A33F81C77DF8E9FB67A92114618D5DA6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A17A780F0D29B81673CF39965D90AE7E /* Network.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Network.swift; path = Classes/Network.swift; sourceTree = "<group>"; };
 		A62392F19C30018D93FFD8EC5E82DB4E /* ReflectionHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReflectionHelper.swift; path = Source/ReflectionHelper.swift; sourceTree = "<group>"; };
-		A769DCD21A959C6B5F98D2A599E6DD70 /* MoeNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoeNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A769DCD21A959C6B5F98D2A599E6DD70 /* MoeNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MoeNetwork.framework; path = MoeNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA05C0469C6CB84B7DF3982D6D3060A6 /* PointerType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PointerType.swift; path = Source/PointerType.swift; sourceTree = "<group>"; };
 		AB3DA880CB2357779B017023B0192C5A /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		ABB94D6AC38DCB14E0774748FDE4D2B8 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
 		B05DCEB881818776C9721EBBF69C34F7 /* Pods-MoeNetwork_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-MoeNetwork_Example.modulemap"; sourceTree = "<group>"; };
 		B3CEE8479FE024B9B80E61D1A603343C /* HandyJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "HandyJSON-Info.plist"; sourceTree = "<group>"; };
+		B42C0D4A9503B411E8EAB96C52D270C8 /* MoeUI-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MoeUI-Info.plist"; sourceTree = "<group>"; };
+		B4FDFBAC3326AD13CC9EB0558390DF06 /* SwiftyNamespace.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyNamespace.swift; path = Classes/Common/Extension/SwiftyNamespace.swift; sourceTree = "<group>"; };
 		B6983F27B49481C4B49CF363547543FE /* MoeUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoeUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B97F5D20B972E9F59BE5A779081DCC18 /* Pods-MoeNetwork_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MoeNetwork_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		B9C898F91364CA925D09AC2AEEFFCCC3 /* Pods-MoeNetwork_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MoeNetwork_Example.release.xcconfig"; sourceTree = "<group>"; };
-		BBF804398CA32ACBFC33AA0D61EBEF55 /* UIConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIConstants.swift; path = Classes/Common/Constant/UIConstants.swift; sourceTree = "<group>"; };
-		C00B11F5446098149ED4AD9658EA1BC5 /* MoeUI-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MoeUI-dummy.m"; sourceTree = "<group>"; };
+		BA6E8591BAB8C79FAAD16C6281A3F17D /* String+Character.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Character.swift"; path = "Classes/Common/Extension/String+Character.swift"; sourceTree = "<group>"; };
 		C1B1C37CBFE8BAB176ADE49959E212B3 /* Pods-MoeNetwork_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MoeNetwork_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C26E55DF51D294AA1B17EF529D84D173 /* HexColorTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HexColorTransform.swift; path = Source/HexColorTransform.swift; sourceTree = "<group>"; };
 		C2952F9DC84768E8269F3D9A991DB674 /* Pods-MoeNetwork_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MoeNetwork_Tests-dummy.m"; sourceTree = "<group>"; };
 		C77092C998DDF05DC243CE879CAFF780 /* BuiltInBasicType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BuiltInBasicType.swift; path = Source/BuiltInBasicType.swift; sourceTree = "<group>"; };
 		C7CF0E8DE4201D6C2F8EBD3EA3F1116F /* EnumTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EnumTransform.swift; path = Source/EnumTransform.swift; sourceTree = "<group>"; };
 		C80716DDC5B544CB5043BB53103FFE3B /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
-		CD54121DDA84872534168702B5F92950 /* HandyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD54121DDA84872534168702B5F92950 /* HandyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HandyJSON.framework; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD9042D7F2F84E0415FBC39972F6BE48 /* ProjectConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ProjectConstants.swift; path = Classes/Common/Constants/ProjectConstants.swift; sourceTree = "<group>"; };
 		D0807F19F6526CCF7384EE51C2FAD306 /* HelpingMapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HelpingMapper.swift; path = Source/HelpingMapper.swift; sourceTree = "<group>"; };
 		D0ABBBE4BFB101F79C965696507A3969 /* EnumType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EnumType.swift; path = Source/EnumType.swift; sourceTree = "<group>"; };
+		D1AFC33BBA8BD35C646C321769BF4332 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Classes/Response.swift; sourceTree = "<group>"; };
 		D25528CA74FDDC0142E27CC0527C75EE /* NSDecimalNumberTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSDecimalNumberTransform.swift; path = Source/NSDecimalNumberTransform.swift; sourceTree = "<group>"; };
 		D2DC9791F9CB548DB3C77CF0F0FDE456 /* Export.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Export.swift; path = Source/Export.swift; sourceTree = "<group>"; };
 		D2FCD22EE70442010BE0078BEA7C5687 /* Alamofire-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Alamofire-Info.plist"; sourceTree = "<group>"; };
 		D446EDD5D2953C2191F1535A5D8FD282 /* TransformType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformType.swift; path = Source/TransformType.swift; sourceTree = "<group>"; };
 		D69C99FB06648069C01A28E8FF455887 /* Pods-MoeNetwork_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-MoeNetwork_Tests.modulemap"; sourceTree = "<group>"; };
 		D772D8876014E2FEC21BFA3189DAB28D /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
+		DA0CD760FA5202A146CB292CD77BECA5 /* MoeNetwork.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MoeNetwork.xcconfig; sourceTree = "<group>"; };
 		DF0C8DC21898E4D0E950967985FB0B33 /* PropertyInfo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PropertyInfo.swift; path = Source/PropertyInfo.swift; sourceTree = "<group>"; };
+		DFA353136057D1DABF5EAB010D105E05 /* MoeUI-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MoeUI-dummy.m"; sourceTree = "<group>"; };
+		E0D14A6736AFE515AF081D3995277643 /* MoeNetwork.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MoeNetwork.bundle; path = "MoeNetwork-MoeNetwork.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4A5240F3C47BE6B93AB9B0FF2FCC913 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		ED2AF13B125375611BB0A99F35B885C5 /* Metadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Metadata.swift; path = Source/Metadata.swift; sourceTree = "<group>"; };
-		F0E328176EE9B0646F6DD902CF756730 /* MoeUI-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MoeUI-Info.plist"; sourceTree = "<group>"; };
 		F3E2A296AE41236693737DC37636274C /* BuiltInBridgeType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BuiltInBridgeType.swift; path = Source/BuiltInBridgeType.swift; sourceTree = "<group>"; };
 		F7C0574D5EB004631F75408874C149ED /* OtherExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OtherExtension.swift; path = Source/OtherExtension.swift; sourceTree = "<group>"; };
 		FA7723518AC7BBB987ABFF8FA6F1A93C /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
-		FF1C543F9D1155F628A1F2530CCA979F /* MoeNetwork.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = MoeNetwork.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		FC0890B2C0C8B7D55AB0906E435192C5 /* UIConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIConstants.swift; path = Classes/Common/Constants/UIConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,11 +312,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0AF325C58DCFBBFE4294289AC7C1A5D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E138F71DFBA1EEF6185E2761759BDC6E /* Alamofire.framework in Frameworks */,
+				9884F4E65A564B338BAE43B3B8DADE89 /* Foundation.framework in Frameworks */,
+				3F541F46F7A4E06A77724D1093CBFB19 /* HandyJSON.framework in Frameworks */,
+				25AF3E3549EEB4001487BD29430FFE35 /* MoeUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		711C8133D19A24A596D0D84860079A70 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1148E5E2ED224A55ADDE8A5CE69BCCD0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AE8927795356A568A2E074DA65E4927 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,23 +346,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		93ADBDD848AC48A58B862DA9EFADAA40 /* Frameworks */ = {
+		D6908FB9601777180EC60BF8589CA9FB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A957DB5E80DCCF1B58B96773EC31ED60 /* Foundation.framework in Frameworks */,
-				3DF703476CA4885C5C27E22548845FCD /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DE1B03295FAC98595372F9BFB09CD2A8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FADE9785901B1E69A8A87188E46FD997 /* Alamofire.framework in Frameworks */,
-				C36D442D068B2EA94FFD366BDB9796F3 /* Foundation.framework in Frameworks */,
-				FBDF3710AD59F07B28E6F3B0E378C1CC /* HandyJSON.framework in Frameworks */,
-				D1D7DC9BECC3809A1629CC6B2A0120DC /* MoeUI.framework in Frameworks */,
+				08EE7FCE51DD3D38A49AA84EF9FEF781 /* Foundation.framework in Frameworks */,
+				1B1862EF40090F80463077700DB647CC /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,19 +410,8 @@
 				29CD9D0E5ADE204D051A13A0A1E5F93F /* URLTransform.swift */,
 				5FEE42884AFC1CECAEB6BE561D6EB726 /* Support Files */,
 			);
+			name = HandyJSON;
 			path = HandyJSON;
-			sourceTree = "<group>";
-		};
-		2676F90249B8D09428CA8154E177F5B9 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				884007ABA4163F8CD8E98F2FAF371A3F /* ProjectConstants.swift */,
-				99D360D04716A3434B5A9A3482D09A30 /* String+Character.swift */,
-				8658A7D6818ED60B534AC06C03E747DB /* SwiftyNamespace.swift */,
-				1710C8129272A50C91C288065B4E6FD3 /* UI+Color.swift */,
-				BBF804398CA32ACBFC33AA0D61EBEF55 /* UIConstants.swift */,
-			);
-			name = Common;
 			sourceTree = "<group>";
 		};
 		2BFC7ACD577E674C9926BBFE9F1AA178 /* Pods-MoeNetwork_Tests */ = {
@@ -414,6 +428,33 @@
 			);
 			name = "Pods-MoeNetwork_Tests";
 			path = "Target Support Files/Pods-MoeNetwork_Tests";
+			sourceTree = "<group>";
+		};
+		2E3DF4CDC0C16C0794DAC822F08E4D70 /* MoeNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				0AF39A047F575ED40765D4556AD2C1E5 /* Error.swift */,
+				A17A780F0D29B81673CF39965D90AE7E /* Network.swift */,
+				86AD1B6D04DEFB05357271FA06335FA8 /* NetworkHelper.swift */,
+				90AB2BFE93F62EACBDC05AC840B58FFF /* Notifications.swift */,
+				8341B22876B39A27EBE065A4A808B9EB /* Request.swift */,
+				D1AFC33BBA8BD35C646C321769BF4332 /* Response.swift */,
+				43E47A4AD9A7D9C01D0F57EAB83B6EA8 /* Pod */,
+				40235B95CE4B7A6455CBF415861C3D9A /* Resources */,
+				7BC561B67EEFDB69930C2061E85BBB2C /* Support Files */,
+			);
+			name = MoeNetwork;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		2E9329837A57F92251586E3370E112AC /* MoeUI */ = {
+			isa = PBXGroup;
+			children = (
+				E5779C608B925DA659F3F3D50FB04B9A /* Common */,
+				4E60106486B052D06E72FCD33983330E /* Support Files */,
+			);
+			name = MoeUI;
+			path = MoeUI;
 			sourceTree = "<group>";
 		};
 		310D4E817C343B6258DB368C0FD32F26 /* Alamofire */ = {
@@ -438,7 +479,41 @@
 				ABB94D6AC38DCB14E0774748FDE4D2B8 /* Validation.swift */,
 				9515344D1BAA4CC5334DB038A22D55B8 /* Support Files */,
 			);
+			name = Alamofire;
 			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		40235B95CE4B7A6455CBF415861C3D9A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				247177961653DE9A16D1C9E23D0FE07B /* en.lproj */,
+				2E8A3D902506E67EEA6DE4D1FD198332 /* zh-Hans.lproj */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		43E47A4AD9A7D9C01D0F57EAB83B6EA8 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				732292E69AB432288CF48D33FD50A139 /* LICENSE */,
+				0F4013B06FAD09B46AE33C4D8438B4BE /* MoeNetwork.podspec */,
+				9EAAFB5DAADD860072DB542D598FEEF8 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		4E60106486B052D06E72FCD33983330E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				11165331DAE989F2C07C50B5E44964D9 /* MoeUI.modulemap */,
+				4AE9294B8405DF57E0BDE64B171B3C35 /* MoeUI.xcconfig */,
+				DFA353136057D1DABF5EAB010D105E05 /* MoeUI-dummy.m */,
+				B42C0D4A9503B411E8EAB96C52D270C8 /* MoeUI-Info.plist */,
+				521EA47776026FC7B5F4A31F2A8C317E /* MoeUI-prefix.pch */,
+				938316A967A28DA4C41B00EC26D331E7 /* MoeUI-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MoeUI";
 			sourceTree = "<group>";
 		};
 		536D12327D406EA6A2C5C87B17FA007F /* iOS */ = {
@@ -473,18 +548,27 @@
 			path = "../Target Support Files/HandyJSON";
 			sourceTree = "<group>";
 		};
-		8B7A2733310307805F64AC983A1332C1 /* Support Files */ = {
+		7BC561B67EEFDB69930C2061E85BBB2C /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				64D410256924506E23AB048D5CD12A2B /* MoeUI.modulemap */,
-				94FA8976C0B7AAB558F3365FB81C6FD1 /* MoeUI.xcconfig */,
-				C00B11F5446098149ED4AD9658EA1BC5 /* MoeUI-dummy.m */,
-				F0E328176EE9B0646F6DD902CF756730 /* MoeUI-Info.plist */,
-				89D8BA02818CB32FAEE451CFC2C9410F /* MoeUI-prefix.pch */,
-				4EDAE065816917E50A753D39AACEB913 /* MoeUI-umbrella.h */,
+				6839A20004FB5B1D67931247CDA0B4DD /* MoeNetwork.modulemap */,
+				DA0CD760FA5202A146CB292CD77BECA5 /* MoeNetwork.xcconfig */,
+				9188A7F91C2ECC6094DCF7B94D4A039F /* MoeNetwork-dummy.m */,
+				4BEA5B973593F1CDCAD25A580552FC09 /* MoeNetwork-Info.plist */,
+				89EDFD3CCCC658A5B9B57E6C450F7814 /* MoeNetwork-prefix.pch */,
+				3307F7EC0C57A1AD1DAFDB9E92C7F246 /* MoeNetwork-umbrella.h */,
+				05761F7053E8C8A82EDC45D2FE90CCE3 /* ResourceBundle-MoeNetwork-MoeNetwork-Info.plist */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/MoeUI";
+			path = "Example/Pods/Target Support Files/MoeNetwork";
+			sourceTree = "<group>";
+		};
+		8ECB5BF0EFD4FEC38A23F98747BD2D7E /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2E3DF4CDC0C16C0794DAC822F08E4D70 /* MoeNetwork */,
+			);
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		9515344D1BAA4CC5334DB038A22D55B8 /* Support Files */ = {
@@ -501,83 +585,16 @@
 			path = "../Target Support Files/Alamofire";
 			sourceTree = "<group>";
 		};
-		95B9A35123150E7B00D7DE15 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				95B9A35823150F4C00D7DE15 /* Http_Error_Code.plist */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
-		95B9A35323150F4C00D7DE15 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				95B9A35423150F4C00D7DE15 /* Error.swift */,
-				95B9A35523150F4C00D7DE15 /* Network.swift */,
-				95B9A35623150F4C00D7DE15 /* Notifications.swift */,
-				95B9A35723150F4C00D7DE15 /* Response.swift */,
-				95B9A35923150F4C00D7DE15 /* Request.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		A2CFD91DC37E778D236FA140433194FB /* MoeNetwork */ = {
-			isa = PBXGroup;
-			children = (
-				95B9A35323150F4C00D7DE15 /* Classes */,
-				95B9A35123150E7B00D7DE15 /* Assets */,
-				EECFFD0594DECC353B99F3807A5AA8AE /* Pod */,
-				D9128CA6A97951F86B77C5A25995568C /* Support Files */,
-			);
-			name = MoeNetwork;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		A6C1257B9A52055D2B0A1463032F85D6 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A2CFD91DC37E778D236FA140433194FB /* MoeNetwork */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		BAC836D43970F674BD4811EF8C66D69A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */,
-				CD54121DDA84872534168702B5F92950 /* HandyJSON.framework */,
-				A769DCD21A959C6B5F98D2A599E6DD70 /* MoeNetwork.framework */,
-				93DC78FB3E069A8FAD5571108C09C961 /* MoeUI.framework */,
-				82D5FF5E27EA518499D562FC105515B3 /* Pods_MoeNetwork_Example.framework */,
-				8E0874BED59B2AA4A03B1697D2679537 /* Pods_MoeNetwork_Tests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				A6C1257B9A52055D2B0A1463032F85D6 /* Development Pods */,
+				8ECB5BF0EFD4FEC38A23F98747BD2D7E /* Development Pods */,
 				052F524537A620BAB3BE35A057532EC2 /* Frameworks */,
 				E27A049FDD6D8EBD01ED347DF6078C99 /* Pods */,
-				BAC836D43970F674BD4811EF8C66D69A /* Products */,
+				EFF78576464D2215EF4DD686EC10246C /* Products */,
 				59B5EECFB56872042EA6268AA28F0F69 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		D9128CA6A97951F86B77C5A25995568C /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				2A1B4171B699FD27B7C4B6FECA43292C /* MoeNetwork.modulemap */,
-				1A73DDDC054B8DB9146E706233C4331A /* MoeNetwork.xcconfig */,
-				4FA7800D3AE006658F681B65C499012B /* MoeNetwork-dummy.m */,
-				936E884F3F3C8EE14FA1C3DB2B8EEFD1 /* MoeNetwork-Info.plist */,
-				57B72F7D1F2A74838E3250EEBC29EDFE /* MoeNetwork-prefix.pch */,
-				74F1FDA45CDE7FFF573C41D56E651318 /* MoeNetwork-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/MoeNetwork";
 			sourceTree = "<group>";
 		};
 		E1EA88CC0C97AB92C51C95ED5D7115FB /* Pods-MoeNetwork_Example */ = {
@@ -602,28 +619,37 @@
 			children = (
 				310D4E817C343B6258DB368C0FD32F26 /* Alamofire */,
 				0956EF14DB3454AEDB03FB07CE26537D /* HandyJSON */,
-				EDFAE25FF03A1BB8BCD835BD20682A4E /* MoeUI */,
+				2E9329837A57F92251586E3370E112AC /* MoeUI */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		EDFAE25FF03A1BB8BCD835BD20682A4E /* MoeUI */ = {
+		E5779C608B925DA659F3F3D50FB04B9A /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2676F90249B8D09428CA8154E177F5B9 /* Common */,
-				8B7A2733310307805F64AC983A1332C1 /* Support Files */,
+				33050464F9A82ADBFCBBFEE6D698AFA4 /* Extension+Alert.swift */,
+				678D074C876B84F526ADD3BCB5D7CEB6 /* Extension+Moe.swift */,
+				CD9042D7F2F84E0415FBC39972F6BE48 /* ProjectConstants.swift */,
+				BA6E8591BAB8C79FAAD16C6281A3F17D /* String+Character.swift */,
+				B4FDFBAC3326AD13CC9EB0558390DF06 /* SwiftyNamespace.swift */,
+				1C1ABE5D17F8767FE14F11CD24804E61 /* UIColor+Color.swift */,
+				FC0890B2C0C8B7D55AB0906E435192C5 /* UIConstants.swift */,
 			);
-			path = MoeUI;
+			name = Common;
 			sourceTree = "<group>";
 		};
-		EECFFD0594DECC353B99F3807A5AA8AE /* Pod */ = {
+		EFF78576464D2215EF4DD686EC10246C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A33F81C77DF8E9FB67A92114618D5DA6 /* LICENSE */,
-				FF1C543F9D1155F628A1F2530CCA979F /* MoeNetwork.podspec */,
-				5716DD01F3E8A9C37A59CFE8B9D5275D /* README.md */,
+				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */,
+				CD54121DDA84872534168702B5F92950 /* HandyJSON.framework */,
+				E0D14A6736AFE515AF081D3995277643 /* MoeNetwork.bundle */,
+				A769DCD21A959C6B5F98D2A599E6DD70 /* MoeNetwork.framework */,
+				93DC78FB3E069A8FAD5571108C09C961 /* MoeUI.framework */,
+				82D5FF5E27EA518499D562FC105515B3 /* Pods_MoeNetwork_Example.framework */,
+				8E0874BED59B2AA4A03B1697D2679537 /* Pods_MoeNetwork_Tests.framework */,
 			);
-			name = Pod;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -645,11 +671,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		563A6FCEA4A56D40AFF7FF61EA4931AF /* Headers */ = {
+		27888C5EFB6FE96A514F90F72A4EACD7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEF48FF717FA257B634803090E79C960 /* MoeNetwork-umbrella.h in Headers */,
+				5FB964B9F0CDF8B2745DECA3B1698D02 /* MoeNetwork-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,11 +687,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8F2EC7BE70D4E830ABBA3B608FB2FBCA /* Headers */ = {
+		92717950F7EBE7D7197BD42BF65315B2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD3C2B86525A47754952522F7A046F51 /* MoeUI-umbrella.h in Headers */,
+				28346D54FB8C4EDE6CFFE5DD1F8EC9F6 /* MoeUI-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,19 +746,20 @@
 		};
 		22DE86978BC0E3759D85BF7C55E2816E /* MoeNetwork */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 612CEBE498EC769B468FD9EAECAD3B66 /* Build configuration list for PBXNativeTarget "MoeNetwork" */;
+			buildConfigurationList = 884491B750E9763B2CC8D7793B42D646 /* Build configuration list for PBXNativeTarget "MoeNetwork" */;
 			buildPhases = (
-				563A6FCEA4A56D40AFF7FF61EA4931AF /* Headers */,
-				9AB6C91C75F62270A1160DFE38DA9CD6 /* Sources */,
-				DE1B03295FAC98595372F9BFB09CD2A8 /* Frameworks */,
-				408FBBDEF8CA453FE987AD06C2F8838F /* Resources */,
+				27888C5EFB6FE96A514F90F72A4EACD7 /* Headers */,
+				E4DAEBD22160B15DEB44B27356ACC193 /* Sources */,
+				0AF325C58DCFBBFE4294289AC7C1A5D4 /* Frameworks */,
+				D4029B93FBA80EA3E19CE43E15221A80 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7B121C3F9E63B446DCF25E29718EF1AE /* PBXTargetDependency */,
-				3239C735125E8AF71002365BDA9A2DFC /* PBXTargetDependency */,
-				08DE6972924CCC82CCE4E177CB489A99 /* PBXTargetDependency */,
+				3AAA833CF5E4644B478CCF03C8ADC6C1 /* PBXTargetDependency */,
+				2B29F7B383E0D23F54E599915795DBBE /* PBXTargetDependency */,
+				7EBC5B006E609B1F68D82AA13F8D5EE2 /* PBXTargetDependency */,
+				6BD0D235CE0B1C6E662D0E32660342BC /* PBXTargetDependency */,
 			);
 			name = MoeNetwork;
 			productName = MoeNetwork;
@@ -741,12 +768,12 @@
 		};
 		406081DF67A031157EA4769CAE51379E /* MoeUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 60543161F827BE1BA64647BF96C46DAE /* Build configuration list for PBXNativeTarget "MoeUI" */;
+			buildConfigurationList = 36350D47C68917AFB3E7AD44246323F1 /* Build configuration list for PBXNativeTarget "MoeUI" */;
 			buildPhases = (
-				8F2EC7BE70D4E830ABBA3B608FB2FBCA /* Headers */,
-				65C7E222A821A096137DDF4CBF2776F9 /* Sources */,
-				93ADBDD848AC48A58B862DA9EFADAA40 /* Frameworks */,
-				BA2B4E1431A61D1677688D51D69F8578 /* Resources */,
+				92717950F7EBE7D7197BD42BF65315B2 /* Headers */,
+				367663019217B07DE7181436A3576BB2 /* Sources */,
+				D6908FB9601777180EC60BF8589CA9FB /* Frameworks */,
+				411AA76EFA2455CB6FAEBB906241A38C /* Resources */,
 			);
 			buildRules = (
 			);
@@ -756,6 +783,23 @@
 			productName = MoeUI;
 			productReference = 93DC78FB3E069A8FAD5571108C09C961 /* MoeUI.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		8F1783FDE63757CB9EB6F8198C509994 /* MoeNetwork-MoeNetwork */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7795698CC54FB58B7F4F288EBE12F2A2 /* Build configuration list for PBXNativeTarget "MoeNetwork-MoeNetwork" */;
+			buildPhases = (
+				B3C48CCD7AE51A4539EFD5E2FF9B6A5A /* Sources */,
+				8AE8927795356A568A2E074DA65E4927 /* Frameworks */,
+				16C5DCB1768FC63E7DE7FDE2D12EE99B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MoeNetwork-MoeNetwork";
+			productName = "MoeNetwork-MoeNetwork";
+			productReference = E0D14A6736AFE515AF081D3995277643 /* MoeNetwork.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 		E30CC33BBFCCCF45413B85B62CF4A879 /* Pods-MoeNetwork_Example */ = {
 			isa = PBXNativeTarget;
@@ -814,13 +858,14 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = BAC836D43970F674BD4811EF8C66D69A /* Products */;
+			productRefGroup = EFF78576464D2215EF4DD686EC10246C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */,
 				10D88C24864319FF583AD6D156896F32 /* HandyJSON */,
 				22DE86978BC0E3759D85BF7C55E2816E /* MoeNetwork */,
+				8F1783FDE63757CB9EB6F8198C509994 /* MoeNetwork-MoeNetwork */,
 				406081DF67A031157EA4769CAE51379E /* MoeUI */,
 				E30CC33BBFCCCF45413B85B62CF4A879 /* Pods-MoeNetwork_Example */,
 				15181EF1FE9D6537E3DD9FF78B65F5DC /* Pods-MoeNetwork_Tests */,
@@ -843,11 +888,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		408FBBDEF8CA453FE987AD06C2F8838F /* Resources */ = {
+		16C5DCB1768FC63E7DE7FDE2D12EE99B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95B9A3832315100500D7DE15 /* Http_Error_Code.plist in Resources */,
+				F5EFDE0D398B1BF0317413EC64614487 /* en.lproj in Resources */,
+				62C6B0D5E6996CE4735FF4BB2E14A41A /* zh-Hans.lproj in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		411AA76EFA2455CB6FAEBB906241A38C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,10 +918,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BA2B4E1431A61D1677688D51D69F8578 /* Resources */ = {
+		D4029B93FBA80EA3E19CE43E15221A80 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77BD9D34396AC30ED76A2860C2FCEC43 /* MoeNetwork.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,16 +962,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65C7E222A821A096137DDF4CBF2776F9 /* Sources */ = {
+		367663019217B07DE7181436A3576BB2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				454DF2195C5F257E2B8A2B278AD22046 /* MoeUI-dummy.m in Sources */,
-				50E0365A897A4967E14A353CACF64EC0 /* ProjectConstants.swift in Sources */,
-				7E7427737D52807C10DFDE6AD08B9983 /* String+Character.swift in Sources */,
-				6E9F27EC2D3AF3F1696749F9753AD8FF /* SwiftyNamespace.swift in Sources */,
-				A813E94752821BA47271393F0F139A6C /* UI+Color.swift in Sources */,
-				4F256A42F7C9E02B1083B367DD327687 /* UIConstants.swift in Sources */,
+				7FFA43D74C6996D9FECBEB83984FE939 /* Extension+Alert.swift in Sources */,
+				2782469E075DBF2300ABFF39636964AF /* Extension+Moe.swift in Sources */,
+				26746E1074482D99F7274700CEF00ECA /* MoeUI-dummy.m in Sources */,
+				EC3CEE6ACC49B7A7A21B0C8FE8F6CC39 /* ProjectConstants.swift in Sources */,
+				EB2B9508EDA6B1AD73DA74C9AFA5A35E /* String+Character.swift in Sources */,
+				B637F0E3DE3239120050FB302C4DDA1A /* SwiftyNamespace.swift in Sources */,
+				8F3EC4DD86FD5D886840AF2BAAC86713 /* UIColor+Color.swift in Sources */,
+				55A57A3BFAB9CADC8826B92148DF4F75 /* UIConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -929,16 +985,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9AB6C91C75F62270A1160DFE38DA9CD6 /* Sources */ = {
+		B3C48CCD7AE51A4539EFD5E2FF9B6A5A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95B9A3812315100500D7DE15 /* Notifications.swift in Sources */,
-				95B9A3842315100500D7DE15 /* Request.swift in Sources */,
-				95B9A37F2315100500D7DE15 /* Error.swift in Sources */,
-				92F0A98A02E8E74EFDE6B66F0D8FF2DB /* MoeNetwork-dummy.m in Sources */,
-				95B9A3802315100500D7DE15 /* Network.swift in Sources */,
-				95B9A3822315100500D7DE15 /* Response.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -985,20 +1035,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E4DAEBD22160B15DEB44B27356ACC193 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EB5A6D0C21FE016753F06EDA85E425F /* Error.swift in Sources */,
+				9038DB773405F2C323FC71339DBB9AA5 /* MoeNetwork-dummy.m in Sources */,
+				25400421F4DC07A5EC13075D41066637 /* Network.swift in Sources */,
+				E412E54556472E73506B2ABAF5E482E3 /* NetworkHelper.swift in Sources */,
+				3207A1602E2CC9A12F216744AC2D6F00 /* Notifications.swift in Sources */,
+				4EA52EC440C16D02C4BA8038367A298C /* Request.swift in Sources */,
+				B81C4BABC152B2E53DED7F121FDEB4BF /* Response.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		08DE6972924CCC82CCE4E177CB489A99 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MoeUI;
-			target = 406081DF67A031157EA4769CAE51379E /* MoeUI */;
-			targetProxy = D5877D744FDDA4B1E1A886B29A0143B1 /* PBXContainerItemProxy */;
-		};
-		3239C735125E8AF71002365BDA9A2DFC /* PBXTargetDependency */ = {
+		2B29F7B383E0D23F54E599915795DBBE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = HandyJSON;
 			target = 10D88C24864319FF583AD6D156896F32 /* HandyJSON */;
-			targetProxy = AC6AB7BF9B74FFBF309F10DE829EC4DB /* PBXContainerItemProxy */;
+			targetProxy = 98A043447D5B60E9833549A4B721B4E4 /* PBXContainerItemProxy */;
+		};
+		3AAA833CF5E4644B478CCF03C8ADC6C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */;
+			targetProxy = 24440C58F304AD9C15EA6717C4A1E21F /* PBXContainerItemProxy */;
 		};
 		57EB5143A4D163923477501A0E1058B8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1012,17 +1076,23 @@
 			target = E30CC33BBFCCCF45413B85B62CF4A879 /* Pods-MoeNetwork_Example */;
 			targetProxy = 18EFF314BD2E0C2AAD2C3B9457C8AD65 /* PBXContainerItemProxy */;
 		};
+		6BD0D235CE0B1C6E662D0E32660342BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MoeUI;
+			target = 406081DF67A031157EA4769CAE51379E /* MoeUI */;
+			targetProxy = 494A45B6D94365C93A089023E60D84C5 /* PBXContainerItemProxy */;
+		};
 		7353C0A5967C491FF0F1C8F68FD07FBA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = HandyJSON;
 			target = 10D88C24864319FF583AD6D156896F32 /* HandyJSON */;
 			targetProxy = 3FE4C9FE0D0502EDB5CF3FA5BF6A05D6 /* PBXContainerItemProxy */;
 		};
-		7B121C3F9E63B446DCF25E29718EF1AE /* PBXTargetDependency */ = {
+		7EBC5B006E609B1F68D82AA13F8D5EE2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = Alamofire;
-			target = EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */;
-			targetProxy = 8274D357F2A869AF6F23329F2B8EEA98 /* PBXContainerItemProxy */;
+			name = "MoeNetwork-MoeNetwork";
+			target = 8F1783FDE63757CB9EB6F8198C509994 /* MoeNetwork-MoeNetwork */;
+			targetProxy = D945B31C9C88AA31EAED8C8D5C1A2256 /* PBXContainerItemProxy */;
 		};
 		C4550063530AD5D9ADF40629087B8334 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1070,7 +1140,55 @@
 			};
 			name = Release;
 		};
-		141A11F3B1F5EE9BCF9378B5A11747E7 /* Release */ = {
+		151F80839395CD1408E131291B27BD87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA0CD760FA5202A146CB292CD77BECA5 /* MoeNetwork.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/MoeNetwork";
+				INFOPLIST_FILE = "Target Support Files/MoeNetwork/ResourceBundle-MoeNetwork-MoeNetwork-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = MoeNetwork;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		262449B2A2892D1A3A109C704FD49594 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA0CD760FA5202A146CB292CD77BECA5 /* MoeNetwork.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MoeNetwork/MoeNetwork-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MoeNetwork/MoeNetwork-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MoeNetwork/MoeNetwork.modulemap";
+				PRODUCT_MODULE_NAME = MoeNetwork;
+				PRODUCT_NAME = MoeNetwork;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		26E9A7B7CC36D753291E2D3570A8DB18 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 72182EA673926F58799239AF159C2E56 /* Alamofire.xcconfig */;
 			buildSettings = {
@@ -1094,7 +1212,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1102,40 +1220,9 @@
 			};
 			name = Release;
 		};
-		228581B992314A4F43370AACC89F088A /* Debug */ = {
+		30A5B9AA983CB36A5F595256CEA1E1DE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A73DDDC054B8DB9146E706233C4331A /* MoeNetwork.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/MoeNetwork/MoeNetwork-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MoeNetwork/MoeNetwork-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MoeNetwork/MoeNetwork.modulemap";
-				PRODUCT_MODULE_NAME = MoeNetwork;
-				PRODUCT_NAME = MoeNetwork;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		524F8623828DB40813B42472783C0949 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EABF2FD59F74938669CF21FEBE4B633 /* Pods-MoeNetwork_Example.debug.xcconfig */;
+			baseConfigurationReference = C1B1C37CBFE8BAB176ADE49959E212B3 /* Pods-MoeNetwork_Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1147,12 +1234,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -1166,9 +1253,93 @@
 			};
 			name = Debug;
 		};
-		54F3256874456677D72380E0ED2F5E3B /* Debug */ = {
+		32FCCC1E733DCC7C2B047DE13EC8517B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 94FA8976C0B7AAB558F3365FB81C6FD1 /* MoeUI.xcconfig */;
+			baseConfigurationReference = DA0CD760FA5202A146CB292CD77BECA5 /* MoeNetwork.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/MoeNetwork";
+				INFOPLIST_FILE = "Target Support Files/MoeNetwork/ResourceBundle-MoeNetwork-MoeNetwork-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = MoeNetwork;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		342F949812D4F0159D42F8972A8EA430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9C898F91364CA925D09AC2AEEFFCCC3 /* Pods-MoeNetwork_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		387271D78557FF5CEE6FE75DF4FE84BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86FB4FE9EBD3FECE5FE400011F6628AF /* Pods-MoeNetwork_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		554049B88B8996BE0507208C6DED44A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AE9294B8405DF57E0BDE64B171B3C35 /* MoeUI.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1192,46 +1363,15 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		5F2F0E81BB581C44E6A0E3C5B572EEFE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A73DDDC054B8DB9146E706233C4331A /* MoeNetwork.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/MoeNetwork/MoeNetwork-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MoeNetwork/MoeNetwork-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MoeNetwork/MoeNetwork.modulemap";
-				PRODUCT_MODULE_NAME = MoeNetwork;
-				PRODUCT_NAME = MoeNetwork;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		92D7CFF87E27628D534FCD64AED7AF98 /* Release */ = {
+		89B308048AA3B47E6019B89A004232E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9C898F91364CA925D09AC2AEEFFCCC3 /* Pods-MoeNetwork_Example.release.xcconfig */;
+			baseConfigurationReference = 9EABF2FD59F74938669CF21FEBE4B633 /* Pods-MoeNetwork_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1245,7 +1385,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example.modulemap";
@@ -1257,43 +1397,12 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		A748D97B916E35096965AD695B76F2A7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38C23B2DB95B5F3089CD7FD5EA88AF69 /* HandyJSON.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/HandyJSON/HandyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/HandyJSON/HandyJSON-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/HandyJSON/HandyJSON.modulemap";
-				PRODUCT_MODULE_NAME = HandyJSON;
-				PRODUCT_NAME = HandyJSON;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		B0087CB4594321EF41619F3181FE120E /* Release */ = {
+		8F17DC3A99F99FBAD606CE6963886315 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1341,50 +1450,19 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		B4B9E81EC889AEBFC25F51DDD24C16B2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 94FA8976C0B7AAB558F3365FB81C6FD1 /* MoeUI.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/MoeUI/MoeUI-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MoeUI/MoeUI-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MoeUI/MoeUI.modulemap";
-				PRODUCT_MODULE_NAME = MoeUI;
-				PRODUCT_NAME = MoeUI;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		B8BCBD0110C2658BB5DAADB9B7D97B92 /* Debug */ = {
+		916E0404255105F480DC4950B7625F7A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1435,7 +1513,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1448,11 +1526,10 @@
 			};
 			name = Debug;
 		};
-		BD555C0149935BCAFE5E095F2EC2BBD0 /* Debug */ = {
+		9F27D6C29EA5C127E1FDB23BFB63D7C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1B1C37CBFE8BAB176ADE49959E212B3 /* Pods-MoeNetwork_Tests.debug.xcconfig */;
+			baseConfigurationReference = 4AE9294B8405DF57E0BDE64B171B3C35 /* MoeUI.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1462,30 +1539,28 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/MoeUI/MoeUI-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MoeUI/MoeUI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/MoeUI/MoeUI.modulemap";
+				PRODUCT_MODULE_NAME = MoeUI;
+				PRODUCT_NAME = MoeUI;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		CE166700EDBB77D4BB79151B08F7E60A /* Release */ = {
+		A748D97B916E35096965AD695B76F2A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 86FB4FE9EBD3FECE5FE400011F6628AF /* Pods-MoeNetwork_Tests.release.xcconfig */;
+			baseConfigurationReference = 38C23B2DB95B5F3089CD7FD5EA88AF69 /* HandyJSON.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1495,27 +1570,24 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/HandyJSON/HandyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/HandyJSON/HandyJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/HandyJSON/HandyJSON.modulemap";
+				PRODUCT_MODULE_NAME = HandyJSON;
+				PRODUCT_NAME = HandyJSON;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		E65547F059F9BBE5CB020839242A7AEE /* Debug */ = {
+		B63B8B9A3DC0B86B8560A3526C388A7C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 72182EA673926F58799239AF159C2E56 /* Alamofire.xcconfig */;
 			buildSettings = {
@@ -1539,7 +1611,38 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BAC201858DD7D2E8B06801C1D6878A09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA0CD760FA5202A146CB292CD77BECA5 /* MoeNetwork.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MoeNetwork/MoeNetwork-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MoeNetwork/MoeNetwork-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MoeNetwork/MoeNetwork.modulemap";
+				PRODUCT_MODULE_NAME = MoeNetwork;
+				PRODUCT_NAME = MoeNetwork;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1549,11 +1652,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		36350D47C68917AFB3E7AD44246323F1 /* Build configuration list for PBXNativeTarget "MoeUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F27D6C29EA5C127E1FDB23BFB63D7C7 /* Debug */,
+				554049B88B8996BE0507208C6DED44A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B8BCBD0110C2658BB5DAADB9B7D97B92 /* Debug */,
-				B0087CB4594321EF41619F3181FE120E /* Release */,
+				916E0404255105F480DC4950B7625F7A /* Debug */,
+				8F17DC3A99F99FBAD606CE6963886315 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1561,26 +1673,26 @@
 		4CBFD5390F1BA8BF0FA1775A525EA9D1 /* Build configuration list for PBXNativeTarget "Pods-MoeNetwork_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				524F8623828DB40813B42472783C0949 /* Debug */,
-				92D7CFF87E27628D534FCD64AED7AF98 /* Release */,
+				89B308048AA3B47E6019B89A004232E0 /* Debug */,
+				342F949812D4F0159D42F8972A8EA430 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		60543161F827BE1BA64647BF96C46DAE /* Build configuration list for PBXNativeTarget "MoeUI" */ = {
+		7795698CC54FB58B7F4F288EBE12F2A2 /* Build configuration list for PBXNativeTarget "MoeNetwork-MoeNetwork" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				54F3256874456677D72380E0ED2F5E3B /* Debug */,
-				B4B9E81EC889AEBFC25F51DDD24C16B2 /* Release */,
+				32FCCC1E733DCC7C2B047DE13EC8517B /* Debug */,
+				151F80839395CD1408E131291B27BD87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		612CEBE498EC769B468FD9EAECAD3B66 /* Build configuration list for PBXNativeTarget "MoeNetwork" */ = {
+		884491B750E9763B2CC8D7793B42D646 /* Build configuration list for PBXNativeTarget "MoeNetwork" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				228581B992314A4F43370AACC89F088A /* Debug */,
-				5F2F0E81BB581C44E6A0E3C5B572EEFE /* Release */,
+				BAC201858DD7D2E8B06801C1D6878A09 /* Debug */,
+				262449B2A2892D1A3A109C704FD49594 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1588,8 +1700,8 @@
 		E4A5194ABAF7A4780609E0E581DA6B54 /* Build configuration list for PBXNativeTarget "Alamofire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E65547F059F9BBE5CB020839242A7AEE /* Debug */,
-				141A11F3B1F5EE9BCF9378B5A11747E7 /* Release */,
+				B63B8B9A3DC0B86B8560A3526C388A7C /* Debug */,
+				26E9A7B7CC36D753291E2D3570A8DB18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1597,8 +1709,8 @@
 		F529EAF6B550B6EB8E030AA3174A03EA /* Build configuration list for PBXNativeTarget "Pods-MoeNetwork_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BD555C0149935BCAFE5E095F2EC2BBD0 /* Debug */,
-				CE166700EDBB77D4BB79151B08F7E60A /* Release */,
+				30A5B9AA983CB36A5F595256CEA1E1DE /* Debug */,
+				387271D78557FF5CEE6FE75DF4FE84BD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

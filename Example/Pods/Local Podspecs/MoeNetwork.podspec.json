@@ -1,9 +1,9 @@
 {
   "name": "MoeNetwork",
-  "version": "0.1.0",
-  "summary": "A short description of MoeNetwork.",
+  "version": "1.0.0",
+  "summary": "A network layer dependents on Alamofire and Handyjson.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/linyanzuo1222@gmail.com/MoeNetwork",
+  "homepage": "https://github.com/linyanzuo/MoeNetwork",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,13 +12,19 @@
     "linyanzuo1222@gmail.com": "zed@moemoetech.com"
   },
   "source": {
-    "git": "https://github.com/linyanzuo1222@gmail.com/MoeNetwork.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/linyanzuo/MoeNetwork.git",
+    "tag": "1.0.0"
   },
   "platforms": {
     "ios": "9.0"
   },
+  "swift_versions": "5.0",
   "source_files": "Classes/*",
+  "resource_bundles": {
+    "MoeNetwork": [
+      "Assets/*"
+    ]
+  },
   "dependencies": {
     "HandyJSON": [
       "~> 5.0.0"
@@ -29,5 +35,6 @@
     "MoeUI/Common": [
       "1.1.0"
     ]
-  }
+  },
+  "swift_version": "5.0"
 }
