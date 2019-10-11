@@ -34,6 +34,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: Notification.Name.Network.ConnectionState, object: nil)
         NetworkHelper.shared.startListening()
+        
+        let person = Developer()
+        person.name = "zed"
+        person.save(to: "Zed")
+        
+        if let recover = Developer.load(from: "Zed") {
+            print(recover.subject)
+        }
 
         return true
     }

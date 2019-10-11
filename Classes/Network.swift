@@ -17,6 +17,12 @@ public typealias CompletionClosure = (_ isSuccessful: Bool) -> Void
 
 /// Network Engine
 class Network: NSObject {
+    static let sessionManager: Alamofire.SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 10.0
+        return Alamofire.SessionManager(configuration: configuration)
+    }()
+
     static func request(_ request: Request,
                         body: String,
                         success: SuccessClosure?,
@@ -33,7 +39,7 @@ class Network: NSObject {
         req.httpBody = body.data(using: .utf8, allowLossyConversion: false)
 
         request.requestWillSend()
-        Alamofire.request(req).responseJSON { (response) in
+        sessionManager.request(req).responseJSON { (response) in
             let isSuccessful = responseHandle(response: response,
                                               responseType: request.responseType(),
                                               success: success,
@@ -54,7 +60,7 @@ class Network: NSObject {
         let method = self.method(request: request)
 
         request.requestWillSend()
-        Alamofire.request(request.url, method: method, parameters: parameters, encoding: encoding, headers: header).responseJSON { (response) in
+        sessionManager.request(request.url, method: method, parameters: parameters, encoding: encoding, headers: header).responseJSON { (response) in
             let isSuccessful = responseHandle(response: response,
                                               responseType: request.responseType(),
                                               success: success,
@@ -82,7 +88,7 @@ class Network: NSObject {
         }
 
         request.requestWillSend()
-        Alamofire.request(url, method: method, parameters: nil, encoding: encoding, headers: header).responseJSON { (response) in
+        sessionManager.request(url, method: method, parameters: nil, encoding: encoding, headers: header).responseJSON { (response) in
             let isSuccessful = responseHandle(response: response,
                                               responseType: request.responseType(),
                                               success: success,
@@ -104,19 +110,19 @@ class Network: NSObject {
         // -- Network connection check
         guard result.isSuccess == true else {
             let errMsg = AssetHelper.localizedString(key: "check_connection")
-            NetworkHelper.shared.alertDebugError(errMsg)
+            NetworkHelper.shared.showError(errMsg)
             return false
         }
         // -- Response data format check
         guard let dict = result.value as? [String: Any] else {
             let errMsg = AssetHelper.localizedString(key: "response_format")
-            NetworkHelper.shared.alertDebugError(errMsg)
+            NetworkHelper.shared.showDevError(errMsg)
             return false
         }
         // -- Response Data Deserialize
         guard let response = responseType.deserialize(from: dict) as? Response else {
             let errMsg = AssetHelper.localizedString(key: "deserialize_json")
-            NetworkHelper.shared.alertDebugError(errMsg)
+            NetworkHelper.shared.showDevError(errMsg)
             return false
         }
         // -- Error Code Check
@@ -125,9 +131,7 @@ class Network: NSObject {
             let errMsg = AssetHelper.localizedString(key: "get_error_code")
             MLog(errMsg)
             let errorMessage = response.statusMessage()
-            #if DEBUG
             if NetworkHelper.shared.checkHttpErrorCode(errorCode: errorCode, errorMessage: errorMessage) { return false }
-            #endif
             if NetworkHelper.shared.checkServerErrorCode(errorCode: errorCode, errorMessage: errorMessage) { return false }
 
             fail?(Error(code: errorCode, message: errorMessage))

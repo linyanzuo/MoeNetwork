@@ -55,6 +55,7 @@
 		90704CED0D9A3568B5BFE19784637AF4 /* Pods-MoeNetwork_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 743B53600ABDE91A4DAD6C7A774AF640 /* Pods-MoeNetwork_Example-dummy.m */; };
 		931BBB8230A25161D5C37528A8F9FECF /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED987CF25EE3D87945A1DC01BB933A7 /* SessionManager.swift */; };
 		933FDA5970AA525D6CB92BFEBA2BAB4A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE13613B422840D25A1905E16B01A2 /* Timeline.swift */; };
+		9565194923503241005AA4EE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565194823503241005AA4EE /* Persistence.swift */; };
 		95F98D0D233360600091017B /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F98D0B233360590091017B /* Common.swift */; };
 		98A929C8E9012AB167672714FFD2113C /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77738015BE95B7DB69EF7BBFFAA427D7 /* Request.swift */; };
 		9B3BF4A7E894608357A81D63E3F4C716 /* Pods-MoeNetwork_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 892DE8AE3EDB93D5AC32A70D2618C7AE /* Pods-MoeNetwork_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -214,6 +215,7 @@
 		8F0E408F0EA02DBDA5AC1A052E6D0D68 /* CustomDateFormatTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CustomDateFormatTransform.swift; path = Source/CustomDateFormatTransform.swift; sourceTree = "<group>"; };
 		90AB2BFE93F62EACBDC05AC840B58FFF /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Classes/Notifications.swift; sourceTree = "<group>"; };
 		9188A7F91C2ECC6094DCF7B94D4A039F /* MoeNetwork-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MoeNetwork-dummy.m"; sourceTree = "<group>"; };
+		9565194823503241005AA4EE /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Persistence.swift; path = Classes/Persistence.swift; sourceTree = "<group>"; };
 		95F98D0B233360590091017B /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Common.swift; path = Classes/Common.swift; sourceTree = "<group>"; };
 		96629ECDFF792CB2F2BD420DFD4432C6 /* ContextDescriptorType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContextDescriptorType.swift; path = Source/ContextDescriptorType.swift; sourceTree = "<group>"; };
 		983924C72B32881D05E8B2249AD55C1B /* TransformOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformOf.swift; path = Source/TransformOf.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 		2E3DF4CDC0C16C0794DAC822F08E4D70 /* MoeNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				9565194823503241005AA4EE /* Persistence.swift */,
 				95F98D0B233360590091017B /* Common.swift */,
 				0AF39A047F575ED40765D4556AD2C1E5 /* Error.swift */,
 				A17A780F0D29B81673CF39965D90AE7E /* Network.swift */,
@@ -829,6 +832,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9565194923503241005AA4EE /* Persistence.swift in Sources */,
 				95F98D0D233360600091017B /* Common.swift in Sources */,
 				4D3C79F7DF512E2F217B5DD5D45870D6 /* Error.swift in Sources */,
 				2E3CBAC58A01F21E81468F3FD330C7CF /* MoeNetwork-dummy.m in Sources */,

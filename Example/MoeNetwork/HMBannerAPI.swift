@@ -12,7 +12,7 @@ import HandyJSON
 
 
 /// 分页查询Banner列表
-class HMBannerRequest: BaseRequest {
+class HMBannerRequest: BaseRequest, Persistence {
     override func path() -> String {
         return "/banner"
     }
@@ -22,7 +22,7 @@ class HMBannerRequest: BaseRequest {
     }
 
     override func method() -> Request.Method {
-        return .post
+        return .get
     }
 
     override func requestWillSend() {
@@ -39,12 +39,12 @@ class HMBannerRequest: BaseRequest {
 }
 
 
-class HMBannerResponse: BaseResponse {
+class HMBannerResponse: BaseResponse, Persistence {
     var data: HMBannerData?
 }
 
 
-struct HMBannerData: ResponseData {
+struct HMBannerData: ResponseData, Persistence {
     var records: [HMBannerRecord]?
     var total: Int?
     var size: Int?
@@ -54,7 +54,9 @@ struct HMBannerData: ResponseData {
 }
 
 
-struct HMBannerRecord: ResponseData {
+/// 如果HMBannerRecord没有遵守Persistence协议, 会导致Codable协议报错如下
+/// Type 'HMBannerData' does not conform to protocol 'Decodable'
+struct HMBannerRecord: ResponseData, Persistence {
     var id: String?
     var category: String?
     var name: String?

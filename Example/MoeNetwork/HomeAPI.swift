@@ -11,8 +11,8 @@
 public struct HomeAPI {
 
     /// 分页查询Banner列表
-//    static let banner = HMBannerRequest()
+    static func banner() -> HMBannerRequest { return HMBannerRequest() }
 
     /// 查询所有热门玩法
-    static let hotGames = HMHotGamesRequest()
-} 
+    static func hotGames() -> HMHotGamesRequest { return HMHotGamesRequest() }
+}

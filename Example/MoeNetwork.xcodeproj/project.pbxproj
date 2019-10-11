@@ -14,6 +14,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		9565194B2350333C005AA4EE /* ModelPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565194A2350333C005AA4EE /* ModelPersistence.swift */; };
 		95B9A34E2314DC6000D7DE15 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */; };
 		95B9A3502314E25600D7DE15 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A34F2314E25600D7DE15 /* BaseResponse.swift */; };
 		95B9A38823152E8300D7DE15 /* HMHotGamesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A38523152E8300D7DE15 /* HMHotGamesAPI.swift */; };
@@ -48,6 +49,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7ACCC3B5F7F0B0F9EBF1F67E /* MoeNetwork.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MoeNetwork.podspec; path = ../MoeNetwork.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9565194A2350333C005AA4EE /* ModelPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPersistence.swift; sourceTree = "<group>"; };
 		95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		95B9A34F2314E25600D7DE15 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		95B9A38523152E8300D7DE15 /* HMHotGamesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMHotGamesAPI.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		95B9A34C2314DC5300D7DE15 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9565194A2350333C005AA4EE /* ModelPersistence.swift */,
 				95B9A3452313EB6A00D7DE15 /* HomeAPI */,
 				95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */,
 				95B9A34F2314E25600D7DE15 /* BaseResponse.swift */,
@@ -375,6 +378,7 @@
 				95B9A38823152E8300D7DE15 /* HMHotGamesAPI.swift in Sources */,
 				95B9A3502314E25600D7DE15 /* BaseResponse.swift in Sources */,
 				95B9A38A23152E8300D7DE15 /* HMBannerAPI.swift in Sources */,
+				9565194B2350333C005AA4EE /* ModelPersistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

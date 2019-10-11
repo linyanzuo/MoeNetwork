@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import MoeUI
 
 
 class ViewController: UIViewController {
@@ -21,18 +20,26 @@ class ViewController: UIViewController {
         ]
         HMBannerRequest().send(parameters: params, success: { (data) in
             let response = data as? HMBannerResponse
-//            MLog(response)
+            response?.save(to: "Banner")
+            print(String(describing: response))
         }) { (error) in
-//            MLog(error)
+            print(error)
         }
 
-        HomeAPI.hotGames.send(parameters: nil, success: { (data) in
+        HomeAPI.hotGames().send(parameters: nil, success: { (data) in
             let response = data as? HMHotGamesResponse
-//            MLog(response) 
+            print(String(describing: response))
         }) { (error) in
-//            MLog(error)
+            print(error)
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print(HMBannerResponse.persistenceURL())
+        let banner = HMBannerResponse.load(from: "Banner")
+        print(String(describing: banner))
+    }
 }
 
