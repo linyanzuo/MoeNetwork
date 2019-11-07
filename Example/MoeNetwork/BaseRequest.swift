@@ -15,6 +15,6 @@ class BaseRequest: Request {
     }
 
     override func authenticationToken() -> String {
-        return "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3aWtpaG9tZUBxcS5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiaWQiOjExNTg1ODk3NzgyNDkzMjY1OTMsImVtYWlsIjoid2lraWhvbWVAcXEuY29tIiwiY291bnRyeV9jb2RlIjoiKzg2IiwiZXhwIjoxNzM4NjYwNzUxfQ.z_PkQY7D9_S2egAf4QG6XhseKAS9ig9hlUAf2G-LQ0dg5mRGJr0CSh7RemlmtYxHt1THzeibdZvUlcBJ6ezpcQ"
+        return "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhMTIxQHFxLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJpZCI6MTE4NjQ1NTg5OTY3NjgwMzA3MywidGVsIjoiMTU4MTg1NDAwMDEiLCJlbWFpbCI6ImExMjFAcXEuY29tIiwiY291bnRyeV9jb2RlIjoiKzg2IiwiZXhwIjoxNzQ1MzAzNzQxfQ.-L8kV6QUj7ZAbZHsw8ymXO0w-sPkK8F9s7Rqd9w4W779cv98tiFENaznRTb-A9KXALEUHG1HzMT9GATejpQcxA"
     }
 }

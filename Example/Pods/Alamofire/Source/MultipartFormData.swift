@@ -42,6 +42,8 @@ import CoreServices
 /// - https://www.ietf.org/rfc/rfc2388.txt
 /// - https://www.ietf.org/rfc/rfc2045.txt
 /// - https://www.w3.org/TR/html401/interact/forms.html#h-17.13
+
+/// <#Description#>
 open class MultipartFormData {
 
     // MARK: - Helper Types

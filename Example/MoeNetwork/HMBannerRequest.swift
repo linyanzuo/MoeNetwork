@@ -24,6 +24,10 @@ class HMBannerRequest: BaseRequest, Persistence {
     override func method() -> Request.Method {
         return .get
     }
+    
+    override func serializerType() -> Request.SerializerType {
+        return .xmlParser
+    }
 
     override func requestWillSend() {
         print("HMBannerRequest will send")

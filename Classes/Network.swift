@@ -11,7 +11,7 @@ import HandyJSON
 
 
 public typealias SuccessClosure = (_ data: Response) -> Void
-public typealias FailClosure = (_ error: Error) -> Void
+public typealias FailClosure = (_ error: NetworkError) -> Void
 public typealias CompletionClosure = (_ isSuccessful: Bool) -> Void
 
 
@@ -134,7 +134,8 @@ class Network: NSObject {
             if NetworkHelper.shared.checkHttpErrorCode(errorCode: errorCode, errorMessage: errorMessage) { return false }
             if NetworkHelper.shared.checkServerErrorCode(errorCode: errorCode, errorMessage: errorMessage) { return false }
 
-            fail?(Error(code: errorCode, message: errorMessage))
+            ///  Todo: Error修改成NetworkError导致的代码，待处理
+//            fail?(NetworkError(code: errorCode, message: errorMessage))
             return false
         }
         success?(response)
@@ -145,7 +146,7 @@ class Network: NSObject {
 
 // MARK: Request Config
 extension Network {
-    private static func header(request: Request) -> [String: String] {
+    internal static func header(request: Request) -> [String: String] {
         var result = Dictionary<String, String>()
 
         if request.requiredAuthorization() == true {
@@ -154,7 +155,7 @@ extension Network {
         return result
     }
 
-    private static func encoding(request: Request) -> ParameterEncoding {
+    internal static func encoding(request: Request) -> ParameterEncoding {
         switch request.method() {
         case .put:
             return JSONEncoding.default
@@ -165,16 +166,7 @@ extension Network {
         }
     }
 
-    private static func method(request: Request) -> HTTPMethod {
-        switch request.method() {
-        case .get:
-            return HTTPMethod.get
-        case .post:
-            return HTTPMethod.post
-        case .put:
-            return HTTPMethod.put
-        case .delete:
-            return HTTPMethod.delete
-        }
+    internal static func method(request: Request) -> HTTPMethod {
+        return NetworkAgent.shared.buildUnderlyingMethod(for: request)
     }
 }

@@ -15,4 +15,10 @@ public struct HomeAPI {
 
     /// 查询所有热门玩法
     static func hotGames() -> HMHotGamesRequest { return HMHotGamesRequest() }
+    
+    /// 删除站内信
+    static func infoMsgDel() -> HMInfoMsgDelRequest { return HMInfoMsgDelRequest() }
+    
+    ///随机投注
+    static func betOrderRandom() -> HMBetOrderRandomRequest { return HMBetOrderRandomRequest() }
 }

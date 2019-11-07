@@ -24,10 +24,10 @@
 
 import Foundation
 
-/// Responsible for creating and managing `Request` objects, as well as their underlying `NSURLSession`.
+/// 负责创建和管理`Request`对象及它的底层实现`NSURLSession`
 open class SessionManager {
 
-    // MARK: - Helper Types
+    // MARK: - 辅助类型
 
     /// Defines whether the `MultipartFormData` encoding was successful and contains result of the encoding as
     /// associated values.
@@ -43,7 +43,8 @@ open class SessionManager {
 
     // MARK: - Properties
 
-    /// A default instance of `SessionManager`, used by top-level Alamofire request methods, and suitable for use
+    /// 默认的`SessionManager`实例
+    /// used by top-level Alamofire request methods, and suitable for use
     /// directly for any ad hoc requests.
     public static let `default`: SessionManager = {
         let configuration = URLSessionConfiguration.default
@@ -52,7 +53,7 @@ open class SessionManager {
         return SessionManager(configuration: configuration)
     }()
 
-    /// Creates default values for the "Accept-Encoding", "Accept-Language" and "User-Agent" headers.
+    /// 为消息头的"Accept-Encoding"、"Accept-Language"、"User-Agent"设置默认值
     public static let defaultHTTPHeaders: HTTPHeaders = {
         // Accept-Encoding HTTP Header; see https://tools.ietf.org/html/rfc7230#section-4.2.3
         let acceptEncoding: String = "gzip;q=1.0, compress;q=0.5"
@@ -120,19 +121,20 @@ open class SessionManager {
     /// Default memory threshold used when encoding `MultipartFormData` in bytes.
     public static let multipartFormDataEncodingMemoryThreshold: UInt64 = 10_000_000
 
-    /// The underlying session.
+    /// 底层会话, `session`
     public let session: URLSession
 
-    /// The session delegate handling all the task and session delegate callbacks.
+    /// `session`代理，处理所有任务和代理方法回调
     public let delegate: SessionDelegate
 
-    /// Whether to start requests immediately after being constructed. `true` by default.
+    /// 在请求被构造后，是否立即开始。默认为`true`
     open var startRequestsImmediately: Bool = true
 
-    /// The request adapter called each time a new request is created.
+    /// 每交新请求创建时，要会被调用的请求的适配器
     open var adapter: RequestAdapter?
 
-    /// The request retrier called each time a request encounters an error to determine whether to retry the request.
+    /// 每当请求遇到错误时，决定请求是否重试的`retrier`
+    /// 本质是对`delegate.retrier`的引用
     open var retrier: RequestRetrier? {
         get { return delegate.retrier }
         set { delegate.retrier = newValue }
@@ -174,13 +176,12 @@ open class SessionManager {
         commonInit(serverTrustPolicyManager: serverTrustPolicyManager)
     }
 
-    /// Creates an instance with the specified `session`, `delegate` and `serverTrustPolicyManager`.
+    /// 使用指定的会话`session`、会话代理`delegate`、策略管理器`serverTrustPolicyManager`创建实例
     ///
     /// - parameter session:                  The URL session.
     /// - parameter delegate:                 The delegate of the URL session. Must equal the URL session's delegate.
     /// - parameter serverTrustPolicyManager: The server trust policy manager to use for evaluating all server trust
     ///                                       challenges. `nil` by default.
-    ///
     /// - returns: The new `SessionManager` instance if the URL session's delegate matches; `nil` otherwise.
     public init?(
         session: URLSession,
@@ -212,16 +213,15 @@ open class SessionManager {
 
     // MARK: - Data Request
 
-    /// Creates a `DataRequest` to retrieve the contents of the specified `url`, `method`, `parameters`, `encoding`
-    /// and `headers`.
+    /// 创建`DataRequest`实例，获取指定的`url`, `method`, `parameters`, `encoding`，和`headers`所对应的内容.
     ///
-    /// - parameter url:        The URL.
-    /// - parameter method:     The HTTP method. `.get` by default.
-    /// - parameter parameters: The parameters. `nil` by default.
-    /// - parameter encoding:   The parameter encoding. `URLEncoding.default` by default.
-    /// - parameter headers:    The HTTP headers. `nil` by default.
+    /// - parameter url:        请求地址
+    /// - parameter method:     请求方法，默认为`get`
+    /// - parameter parameters: 参数，默认为`nil`
+    /// - parameter encoding:   参数的编码格式，默认为`URLEncoding.default`
+    /// - parameter headers:    消息头，转为为`nil`
     ///
-    /// - returns: The created `DataRequest`.
+    /// - returns: 创建的`DataRequest`实例
     @discardableResult
     open func request(
         _ url: URLConvertible,
@@ -234,6 +234,12 @@ open class SessionManager {
         var originalRequest: URLRequest?
 
         do {
+            /**
+             1. 根据请求地址、请求方法、消息头创建`URLRequest`
+                Alamofire扩展了URLRequset类，增加了使用`URLConvertible`、`HTTPMethod`、`HTTPHeaders`创建实例的方法
+             2. 对请求的参数进行编码
+             3. 获取`URLRequest`对应的内容
+             */
             originalRequest = try URLRequest(url: url, method: method, headers: headers)
             let encodedURLRequest = try encoding.encode(originalRequest!, with: parameters)
             return request(encodedURLRequest)
@@ -242,18 +248,25 @@ open class SessionManager {
         }
     }
 
-    /// Creates a `DataRequest` to retrieve the contents of a URL based on the specified `urlRequest`.
+    /// 创建`DataRequest`实例, 获取指定`urlRequest`的`URL`地址所对应的内容
+    /// 如果`startRequestsImmediately`为`true`，在本方法返回之前会调用`resume()`
     ///
-    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
+    /// - parameter urlRequest: URL请求
     ///
-    /// - parameter urlRequest: The URL request.
-    ///
-    /// - returns: The created `DataRequest`.
+    /// - returns: 创建的`DataRequest`实例
     @discardableResult
     open func request(_ urlRequest: URLRequestConvertible) -> DataRequest {
         var originalRequest: URLRequest?
 
         do {
+            /**
+             1. try 将`URLRequestConvertible`转化成`URLRequst`
+             2. 创建`Requestable`结构体实例
+             3. try 根据会话、适配器、操作队列生成任务（`URLSessionTask`）
+             4. 根据会话、任务生成“数据请求”（`DataRequest`）
+             5. 将“数据请求”记录至`SessionManager > SessionDelegate > requests`
+                如果需要， 立即开始请求
+             */
             originalRequest = try urlRequest.asURLRequest()
             let originalTask = DataRequest.Requestable(urlRequest: originalRequest!)
 
@@ -273,6 +286,11 @@ open class SessionManager {
     // MARK: Private - Request Implementation
 
     private func request(_ urlRequest: URLRequest?, failedWith error: Error) -> DataRequest {
+        /**
+         1. 创建`RequestTask`(目的是获取`sessionDataTask`)
+         2. 创建`DataRequest`(负责管理`sessionDataTask`)
+         3. 由`retrier`判断`reqeuest`是否配置“失败自动重试”
+         */
         var requestTask: Request.RequestTask = .data(nil, nil)
 
         if let urlRequest = urlRequest {
@@ -844,7 +862,9 @@ open class SessionManager {
 #endif
 
     // MARK: - Internal - Retry Request
-
+    
+    /// 重新发送请求, 返回是否成功发送
+    /// - Parameter request: 要发送的请求
     func retry(_ request: Request) -> Bool {
         guard let originalTask = request.originalTask else { return false }
 
@@ -869,7 +889,11 @@ open class SessionManager {
             return false
         }
     }
-
+    
+    /// 让`RequestRetrier`判断是否要“失败重试”（异步操作），若`startRequestsImmediately`为`true`，则开始请求
+    /// - Parameter retrier: 重试者
+    /// - Parameter request: 要重新发送的请求
+    /// - Parameter error: 错误信息
     private func allowRetrier(_ retrier: RequestRetrier, toRetry request: Request, with error: Error) {
         DispatchQueue.utility.async { [weak self] in
             guard let strongSelf = self else { return }

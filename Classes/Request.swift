@@ -8,20 +8,56 @@
 import UIKit
 
 
+public protocol RequestResultHandle {
+    func requestSuccessed(request: Request)
+    func requestFailed(request: Request, with error: NetworkError)
+    func requestCompleted(request: Request, isSuccess: Bool)
+}
+public extension RequestResultHandle {
+    func requestCompleted(request: Request, isSuccess: Bool) {}
+}
+
+
+public typealias SuccessHanlder = (_ request: Request) -> Void
+public typealias FailHanlder = (_ request: Request, _ error: NetworkError) -> Void
+public typealias CompletionHanlder = (_ request: Request, _ isSuccess: Bool) -> Void
+
+
 open class Request: NSObject {
     public enum Method: String {
         case get    = "GET"
         case post   = "POST"
         case put    = "PUT"
         case delete = "DELETE"
-        //        case head   = "HEAD"
-        //        case patch  = "PATCH"
+        case head   = "HEAD"
+        case patch  = "PATCH"
+    }
+    
+    public enum SerializerType {
+        case http
+        case json
+        case xmlParser
     }
 
-    // MARK: Object Lide Cycle
+    // MARK: Object Life Cycle
     var url: URL {
         get { return baseURL().appendingPathComponent(path()) }
     }
+    
+    ///  负责处理请求结果的代理对象
+    ///  通过代理或回调的方式均可处理请求结果，两者选一即可
+    ///  若代理与回调的方式均被实现，则先触发代理方法，后触发回调代码块
+    internal var delegate: RequestResultHandle?
+    
+    ///  请求成功的回调处理，另请参阅`delegate`
+    ///  请勿与`delegate`同时使用，避免重复处理
+    internal var successedHandler: SuccessHanlder?
+    ///  请求失败的回调处理，另请参阅`delegate`
+    ///  请勿与`delegate`同时使用，避免重复处理
+    internal var failedHandler: FailHanlder?
+    ///  请求完成的回调处理，不管成功或失败都会回调，
+    ///  请勿与`delegate`同时使用，避免重复处理
+    internal var completedHandler: CompletionHanlder?
 
     public required override init() {
         super.init()
@@ -73,6 +109,37 @@ open class Request: NSObject {
     /// Notifies that request is about to be send
     /// Subclass can override this method to do something like hide loading view
     open func requestDidFinish(isSuccess: Bool) {
+    }
+    
+    open func generateCustomURLRequest() -> URLRequest? {
+        return nil
+    }
+    
+    open func addtionalParameter() -> Dictionary<String, Any>? {
+        return nil
+    }
+    
+    open func serializerType() -> SerializerType {
+        return .json
+    }
+    
+    open func body() -> String? {
+        return nil
+    }
+    
+    open func start(withDelegate delegate: RequestResultHandle) {
+        self.delegate = delegate
+        NetworkAgent.shared.add(request: self)
+    }
+    
+    open func start(withHandler successedHandler: @escaping SuccessHanlder,
+                    failedHandler: @escaping FailHanlder,
+                    completedHandler: @escaping CompletionHanlder)
+    {
+        self.successedHandler = successedHandler
+        self.failedHandler = failedHandler
+        self.completedHandler = completedHandler
+        NetworkAgent.shared.add(request: self)
     }
 }
 

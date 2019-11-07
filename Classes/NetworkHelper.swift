@@ -120,6 +120,10 @@ extension NetworkHelper {
                                         object: self,
                                         userInfo: [Notification.Key.HintMessage: message])
     }
+    
+    internal func buildURLAssert(condition: Bool) {
+        assert(condition, "Build URL Fail, please check `baseURL` and `path` of request")
+    }
 }
 
 

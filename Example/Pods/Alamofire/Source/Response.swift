@@ -70,40 +70,37 @@ public struct DefaultDataResponse {
 
 // MARK: -
 
-/// Used to store all data associated with a serialized response of a data or upload request.
+/// 用于存储所有序列化处理后的响应(数据请求或上传请求)的关联数据
 public struct DataResponse<Value> {
     /// The URL request sent to the server.
     public let request: URLRequest?
 
-    /// The server's response to the URL request.
+    /// 服务器回应URL请求的响应
     public let response: HTTPURLResponse?
 
-    /// The data returned by the server.
+    /// 服务器返回的数据
     public let data: Data?
 
-    /// The result of response serialization.
+    /// 响应进行序列化后的结果
     public let result: Result<Value>
 
-    /// The timeline of the complete lifecycle of the request.
+    /// 请求的整个生命周期时间线
     public let timeline: Timeline
 
-    /// Returns the associated value of the result if it is a success, `nil` otherwise.
+    /// 如果(序列化)成功，返回`result`关联的所有值，否则为`nil`
     public var value: Value? { return result.value }
 
-    /// Returns the associated error value if the result if it is a failure, `nil` otherwise.
+    /// 如果出错，返回相关的错误值，否则为`nil`
     public var error: Error? { return result.error }
 
     var _metrics: AnyObject?
-
-    /// Creates a `DataResponse` instance with the specified parameters derived from response serialization.
-    ///
-    /// - parameter request:  The URL request sent to the server.
-    /// - parameter response: The server's response to the URL request.
-    /// - parameter data:     The data returned by the server.
-    /// - parameter result:   The result of response serialization.
-    /// - parameter timeline: The timeline of the complete lifecycle of the `Request`. Defaults to `Timeline()`.
-    ///
-    /// - returns: The new `DataResponse` instance.
+    
+    /// 使用从序列化处理后的响应上导出的指定参数，创建`DataResponse`实例
+    /// - Parameter request: 发送给服务器的URL请求
+    /// - Parameter response: 服务器响应URL请求的结果
+    /// - Parameter data: 服务器返回的数据
+    /// - Parameter result: 响应进行序列化的结果
+    /// - Parameter timeline: 整个请求生命周期的时间线，默认为`Timeline()`
     public init(
         request: URLRequest?,
         response: HTTPURLResponse?,

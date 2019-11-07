@@ -13,7 +13,7 @@ import HandyJSON
 /// 查询所有热门玩法
 class HMHotGamesRequest: BaseRequest {
     override func path() -> String {
-        return "/lottery/game/queryHotGames"
+        return "lottery/game/queryHotGames"
     }
 
     override func responseType() -> Response.Type {

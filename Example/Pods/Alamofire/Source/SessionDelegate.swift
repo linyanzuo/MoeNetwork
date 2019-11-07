@@ -24,7 +24,7 @@
 
 import Foundation
 
-/// Responsible for handling all delegate callbacks for the underlying session.
+/// 负责处理底层`session`的所有代理回调
 open class SessionDelegate: NSObject {
 
     // MARK: URLSessionDelegate Overrides
@@ -160,14 +160,20 @@ open class SessionDelegate: NSObject {
 
     // MARK: Properties
 
+    /// 负责判断请求失败是否重试
     var retrier: RequestRetrier?
     weak var sessionManager: SessionManager?
 
+    /// 记录`sessionDelegate`所有正在处理的请求
     var requests: [Int: Request] = [:]
+    /// `requests`的多线程互斥锁
     private let lock = NSLock()
 
-    /// Access the task delegate for the specified task in a thread-safe manner.
+    /// 使用线程安全的方式访问指定任务(`URLSessionTask`)的任务代理(`Requst->TaskDelegate`)
     open subscript(task: URLSessionTask) -> Request? {
+        /**
+         subscript关键字： 可以给任何类型增加下标，本质是调用具体的方法实现
+         */
         get {
             lock.lock() ; defer { lock.unlock() }
             return requests[task.taskIdentifier]
@@ -180,21 +186,15 @@ open class SessionDelegate: NSObject {
 
     // MARK: Lifecycle
 
-    /// Initializes the `SessionDelegate` instance.
-    ///
-    /// - returns: The new `SessionDelegate` instance.
+    /// 初始化`SessionDelegate`实例
     public override init() {
         super.init()
     }
 
     // MARK: NSObject Overrides
-
-    /// Returns a `Bool` indicating whether the `SessionDelegate` implements or inherits a method that can respond
-    /// to a specified message.
-    ///
-    /// - parameter selector: A selector that identifies a message.
-    ///
-    /// - returns: `true` if the receiver implements or inherits a method that can respond to selector, otherwise `false`.
+    
+    /// 返回`Bool`值, 表明`SessionDelegate`的实现方法或继承方法是否能响应指定的消息
+    /// - Parameter selector: A selector that identifies a message.
     open override func responds(to selector: Selector) -> Bool {
         #if !os(macOS)
             if selector == #selector(URLSessionDelegate.urlSessionDidFinishEvents(forBackgroundURLSession:)) {
@@ -237,10 +237,10 @@ open class SessionDelegate: NSObject {
 // MARK: - URLSessionDelegate
 
 extension SessionDelegate: URLSessionDelegate {
-    /// Tells the delegate that the session has been invalidated.
-    ///
-    /// - parameter session: The session object that was invalidated.
-    /// - parameter error:   The error that caused invalidation, or nil if the invalidation was explicit.
+    
+    /// 告知代理，会话(`session`)已经失效
+    /// - Parameter session: 已失效的会话
+    /// - Parameter error: 导致会话失效的错误
     open func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
         sessionDidBecomeInvalidWithError?(session, error)
     }
@@ -252,6 +252,7 @@ extension SessionDelegate: URLSessionDelegate {
     /// - parameter challenge:         An object that contains the request for authentication.
     /// - parameter completionHandler: A handler that your delegate method must call providing the disposition
     ///                                and credential.
+    
     open func urlSession(
         _ session: URLSession,
         didReceive challenge: URLAuthenticationChallenge,

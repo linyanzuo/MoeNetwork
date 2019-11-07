@@ -19,6 +19,7 @@ extension Persistence {
     public func getProperties() -> [String: Any?]? {
         var properties: [String: Any?] = [:]
         
+        
         if let superMirror = Mirror(reflecting: self).superclassMirror,
             let superProperties = getProperties(from: superMirror)
         {
