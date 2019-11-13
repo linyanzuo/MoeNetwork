@@ -8,13 +8,15 @@
 import Foundation
 
 
-/// Debug message log
+/// 错误信息输出
 ///
-/// print debug message, include: `method name@file name`, `line number`, `log message`
-public func MLog<T>(_ fmt: T, file: String = #file, function: String = #function, line: Int = #line) {
+/// 输出调试信息, 包含: `method name@file name`, `line number`, `log message`
+internal func MLog<T>(_ fmt: T, file: String = #file, function: String = #function, line: Int = #line) {
     #if DEBUG
     let fileName = NSString(string: file).pathComponents.last!
     print("[MoeUI_Debug_Print: \(fileName) > \(function), \(line)]\n\t\(fmt)")
-    //    debugPrint(fmt)
     #endif
+    //    debugPrint(fmt)
+    
+    /// Todo: 日志记录
 }

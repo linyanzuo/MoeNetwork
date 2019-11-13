@@ -25,12 +25,11 @@
 import Foundation
 
 /// 适配了`URLConvertible`协议的类型可用于构造`URL`
+///
+/// 构造URL的三种类型：`String`、`URL`、`URLComponents`，均扩展实现了`URLConvertible`协议
+/// 统一通过调用`asURL()`方法实现向URL的转换。
 public protocol URLConvertible {
-    /// Returns a URL that conforms to RFC 2396 or throws an `Error`.
-    /// `RFC 2396`
-    ///
-    /// - throws: An `Error` if the type cannot be converted to a `URL`.
-    /// - returns: A URL or throws an `Error`.
+    /// 返回符合`RFC 2396`的URL，或无法转换成URL时抛出错误`Error`
     func asURL() throws -> URL
 }
 
@@ -46,7 +45,7 @@ extension String: URLConvertible {
 }
 
 extension URL: URLConvertible {
-    /// Returns self.
+    /// 返回`URL`本身
     public func asURL() throws -> URL { return self }
 }
 
@@ -54,7 +53,6 @@ extension URLComponents: URLConvertible {
     /// Returns a URL if `url` is not nil, otherwise throws an `Error`.
     ///
     /// - throws: An `AFError.invalidURL` if `url` is `nil`.
-    ///
     /// - returns: A URL or throws an `AFError`.
     public func asURL() throws -> URL {
         guard let url = url else { throw AFError.invalidURL(url: self) }

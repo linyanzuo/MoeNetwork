@@ -32,8 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        NotificationCenter.default.addObserver(self, selector: #selector(test), name: Notification.Name.Network.ConnectionState, object: nil)
-        NetworkHelper.shared.startListening()
+        networkConfig()
         
 //        let person = Developer()
 //        person.name = "zed"
@@ -44,6 +43,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
 
         return true
+    }
+    
+    private func networkConfig() {
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: Notification.Name.Network.ConnectionState, object: nil)
+        NetworkHelper.shared.startListening()
+        
+        NetworkConfig.shared.baseURL = URL(string: "http://47.56.83.245:8400/v2/w")!
+        NetworkConfig.shared.authenticationToken = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhMTIxQHFxLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJpZCI6MTE4NjQ1NTg5OTY3NjgwMzA3MywidGVsIjoiMTU4MTg1NDAwMDEiLCJlbWFpbCI6ImExMjFAcXEuY29tIiwiY291bnRyeV9jb2RlIjoiKzg2IiwiZXhwIjoxNzQ1MzAzNzQxfQ.-L8kV6QUj7ZAbZHsw8ymXO0w-sPkK8F9s7Rqd9w4W779cv98tiFENaznRTb-A9KXALEUHG1HzMT9GATejpQcxA"
     }
 }
 

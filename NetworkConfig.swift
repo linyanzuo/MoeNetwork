@@ -8,22 +8,48 @@
 import Foundation
 
 
-///  Global config
-class NetworkConfig {
+//public protocol URLInject {
+//    /// 在此方法中向请求的URL注入新的参数
+//    /// - Parameter url: 请求的URL地址
+//    /// - Parameter request: 要发送的请求
+//    func injectURL(_ url: URL, to request: Request)
+//}
+
+
+/// 全局配置
+public class NetworkConfig {
     
-    ///  Base url of request, always host
+    /// 请求的基础地址，如`host`、`host/path`
     public var baseURL: URL?
-    ///  CDN url of request
-//    public var cdnURL: String
-    ///  Used to initialize HttpSessionManager
-    public var sessionConfiguration: URLSessionConfiguration
+    /// 请求的超时时间，默认为10秒
+    public var requestTimeOut: TimeInterval = 10.0
+    /// 用户身份验证的Token值
+    public var authenticationToken: String?
     
-    ///  Get the shared instance
+    /// 用于初始化`HttpSessionManager`的会话配置实例
+    internal var sessionConfiguration: URLSessionConfiguration
+    
+    /// 获取共享实例
     static public let shared = NetworkConfig()
     private init() {
-//        baseURL = "Please change the `baseURL` to match your environment"
-//        cdnURL = "Please change the `cdnURL` to match your environment"
         sessionConfiguration = URLSessionConfiguration.default
+        sessionConfiguration.timeoutIntervalForRequest = 10.0
     }
     
+    // MARK: URL注入
+//    private lazy var injecters: [URLInject] = {
+//        return Array<URLInject>()
+//    }()
+//
+//    public func addInjecter(_ injecter: URLInject) {
+//        /// Todo: 过滤重复的注入器
+////        let isRepeat = injecters.contains { (item) -> Bool in
+////            return item == injecter
+////        }
+//        injecters.append(injecter)
+//    }
+//
+//    public func clearInjecter() {
+//        injecters.removeAll()
+//    }
 }

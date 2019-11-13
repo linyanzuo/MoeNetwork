@@ -92,6 +92,8 @@ open class TaskDelegate: NSObject {
 
     
     /// 告知代理，远程服务器请求进行HTTP重定向
+    ///
+    /// 只有`task`处于默认或短暂`session`时该方法才会执行。处于后台`session`的`task`会自动跟随重定向
     /// - Parameter session: 包含任务的会话
     /// - Parameter task: 请求结果要求重定向的任务
     /// - Parameter response: 包含服务器响应的对象
@@ -105,11 +107,6 @@ open class TaskDelegate: NSObject {
         newRequest request: URLRequest,
         completionHandler: @escaping (URLRequest?) -> Void)
     {
-        /**
-         只有`task`处于默认或短暂`session`时该方法才会执行
-         处于后台`session`的`task`会自动跟随重定向
-         */
-        
         var redirectRequest: URLRequest? = request
 
         if let taskWillPerformHTTPRedirection = taskWillPerformHTTPRedirection {
@@ -166,6 +163,11 @@ open class TaskDelegate: NSObject {
     }
     
     /// 当任务请求新的请求主体流(request body stream)向远程服务器发送数据时，告知代理
+    ///
+    /// `task`只在两种情况下调用该代理方法：
+    /// 1. 为`uploadTask(withStreamedRequest:)`创建的任务提供初始的请求主体流
+    /// 2. 任务已拥有主体流，因身份验证或其它可恢复的服务器错误导致需要重新发送请求时，为任务提供替代的请求主体流
+    /// 注意： 如果使用文件`url`或`data`对象来提供请求主体(`request body`), 则没必要实现该方法
     /// - Parameter session: 包含任务的会话
     /// - Parameter task: 需要新的主体流(body stream)
     /// - Parameter completionHandler: 执行该闭包，传递新的主体流
@@ -175,14 +177,6 @@ open class TaskDelegate: NSObject {
         task: URLSessionTask,
         needNewBodyStream completionHandler: @escaping (InputStream?) -> Void)
     {
-        /**
-         `task`只在两种情况下调用该代理方法：
-         1. 为`uploadTask(withStreamedRequest:)`创建的任务提供初始的请求主体流
-         2. 任务已拥有主体流，因身份验证或其它可恢复的服务器错误导致需要重新发送请求时，为任务提供替代的请求主体流
-         
-         注意： 如果使用文件`url`或`data`对象来提供请求主体(`request body`), 则没必要实现该方法
-         */
-        
         var bodyStream: InputStream?
 
         if let taskNeedNewBodyStream = taskNeedNewBodyStream {
@@ -193,15 +187,14 @@ open class TaskDelegate: NSObject {
     }
     
     /// 告知代理，任务已经完成数据传输
+    ///
+    /// 服务器相关的错误不会通过`error`参数进行汇报。
+    /// 代理方法的`error`参数只能接收到客户端的错误，比如无法处理主机名、无法连接主机等
     /// - Parameter session: 包含任务的会话
     /// - Parameter task: 已完成请求的数据传输的任务
     /// - Parameter error: 如果发生错误，`error`对象描述了传输为何失败。否则为`null`
     @objc(URLSession:task:didCompleteWithError:)
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        /**
-         服务器相关的错误不会通过`error`参数进行汇报。
-         代理方法的`error`参数只能接收到客户端的错误，比如无法处理主机名、无法连接主机等
-         */
         if let taskDidCompleteWithError = taskDidCompleteWithError {
             taskDidCompleteWithError(session, task, error)
         } else {

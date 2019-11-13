@@ -24,12 +24,8 @@ class HMBetOrderRandomRequest: BaseRequest {
         return .post
     }
     
-    override func responseType() -> Response.Type {
-        return HMBetOrderRandomResponse.self
-    }
-    
-    override func body() -> String? {
-        return "{\"size\":1,\"code\":\"SIX4-ZHIX-ZXFS\",\"periodNo\":\"20191031150\"}"
+    override func serializer() -> Serializer {
+        return .handyJson(HMBetOrderRandomResponse.self)
     }
 }
 

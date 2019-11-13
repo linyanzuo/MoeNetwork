@@ -10,7 +10,7 @@ import Foundation
 import MoeNetwork
 
 
-///删除站内信
+/// 删除站内信
 class HMInfoMsgDelRequest: Request {
     
     override func path() -> String {

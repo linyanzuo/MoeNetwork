@@ -10,13 +10,15 @@ import HandyJSON
 
 
 public struct NetworkError: Error {
-    /// Code of Error
-    let code: Int
-    /// Description of Error Message
-    let message: String
-    ///  the url of request
+    /// 错误编码
+    let code: Int?
+    /// 错误的描述信息，如果存在
+    let message: String?
+    /// 请求的URL地址
     let requstURL: URL?
-    ///  the time when requst was send
+    /// 请求的开始时间
     let requestStartTime: Date
+    /// 请求的结束时间
+    let requestEndTime: Date
 }
 

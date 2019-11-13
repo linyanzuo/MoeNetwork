@@ -28,16 +28,12 @@ import Foundation
 open class SessionManager {
 
     // MARK: - 辅助类型
-
-    /// Defines whether the `MultipartFormData` encoding was successful and contains result of the encoding as
-    /// associated values.
-    ///
-    /// - Success: Represents a successful `MultipartFormData` encoding and contains the new `UploadRequest` along with
-    ///            streaming information.
-    /// - Failure: Used to represent a failure in the `MultipartFormData` encoding and also contains the encoding
-    ///            error.
+    
+    /// 定义了多部件表单数据(`MultipartFormData`)是否成功编码并携带了编码结果作为关联值
     public enum MultipartFormDataEncodingResult {
+        /// 表示多部件表单数据编码成功，包含了新上传请求(`UploadRequest`)和流信息一起
         case success(request: UploadRequest, streamingFromDisk: Bool, streamFileURL: URL?)
+        /// 表示多部件表单数据编码失败，包含了错误信息
         case failure(Error)
     }
 

@@ -60,6 +60,10 @@ public protocol RequestRetrier {
 
 /// 该类型负责将`URLSession`转换成相应的`URLSessionTask`
 protocol TaskConvertible {
+    /// 根据提供的会话、适配器、调度队列，生成匹配的任务
+    /// - Parameter session: 用来执行任务的会话
+    /// - Parameter adapter: 对URL进行适配操作的适配器
+    /// - Parameter queue: 执行创建任务操作的队列
     func task(session: URLSession, adapter: RequestAdapter?, queue: DispatchQueue) throws -> URLSessionTask
 }
 

@@ -36,7 +36,7 @@ public enum AFError: Error {
         case propertyListEncodingFailed(error: Error)
     }
     
-    /// 多部分(`Multipart/form-data`支持二进制数据或表单键值对)编码错误发生的底层原因
+    /// 多部件(`Multipart/form-data`支持二进制数据或表单键值对)编码错误发生的底层原因
     public enum MultipartEncodingFailureReason {
         /// 准备读取的可编码主体部分的`fileURL`不是有效的文件资源地址
         case bodyPartURLInvalid(url: URL)
@@ -44,7 +44,7 @@ public enum AFError: Error {
         case bodyPartFilenameInvalid(in: URL)
         /// 无法获取`fileURL`所提供的文件
         case bodyPartFileNotReachable(at: URL)
-        /// Attempting to check the reachability of the `fileURL` provided threw an error.
+        /// 尝试检查提供的`fileURL`是否可获取时，抛出了错误
         case bodyPartFileNotReachableWithError(atURL: URL, error: Error)
         /// `fileURL`所提供的文件实际上是个目录
         case bodyPartFileIsDirectory(at: URL)
@@ -104,7 +104,7 @@ public enum AFError: Error {
     case invalidURL(url: URLConvertible)
     /// 当`ParameterEncoding`对象处理编码时抛出异常，则返回该错误
     case parameterEncodingFailed(reason: ParameterEncodingFailureReason)
-    /// 当多部分(`Multipart/form-data`支持二进制数据或表单键值对)编码处理的某一步出错时，则返回该错误
+    /// 当多部件(`Multipart/form-data`支持二进制数据或表单键值对)编码处理的某一步出错时，则返回该错误
     case multipartEncodingFailed(reason: MultipartEncodingFailureReason)
     /// 当调用`validate()`(响应数据检验)失败时，则返回该错误
     case responseValidationFailed(reason: ResponseValidationFailureReason)

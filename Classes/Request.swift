@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import HandyJSON
 
 
 public protocol RequestResultHandle {
-    func requestSuccessed(request: Request)
+    func requestSuccessed(request: Request, with response: Response)
     func requestFailed(request: Request, with error: NetworkError)
     func requestCompleted(request: Request, isSuccess: Bool)
 }
@@ -18,9 +19,27 @@ public extension RequestResultHandle {
 }
 
 
-public typealias SuccessHanlder = (_ request: Request) -> Void
-public typealias FailHanlder = (_ request: Request, _ error: NetworkError) -> Void
-public typealias CompletionHanlder = (_ request: Request, _ isSuccess: Bool) -> Void
+public typealias SuccessHandler = (_ request: Request, _ response: Response) -> Void
+public typealias FailHandler = (_ request: Request, _ error: NetworkError) -> Void
+public typealias CompletionHandler = (_ request: Request, _ isSuccess: Bool) -> Void
+
+
+public enum Serializer {
+    case http
+    case json
+    /// 暂未测试
+    case xml
+    case handyJson(ResponseData.Type)
+    
+    public var responseType: ResponseData.Type? {
+        switch self {
+        case .handyJson(let type):
+            return type
+        default:
+            return nil
+        }
+    }
+}
 
 
 open class Request: NSObject {
@@ -32,16 +51,17 @@ open class Request: NSObject {
         case head   = "HEAD"
         case patch  = "PATCH"
     }
-    
-    public enum SerializerType {
-        case http
-        case json
-        case xmlParser
-    }
 
     // MARK: Object Life Cycle
+    
+    open var customBody: String?
+    open var addtionalSubpath: [String]?
+    open var addtionalParameter: [String: Any]?
+    open var addtionalHeader: [String: String]?
+    
+    /// Todo: 待删除
     var url: URL {
-        get { return baseURL().appendingPathComponent(path()) }
+        get { return URL(string: "http://47.56.83.245:8400/v2/w")!.appendingPathComponent(path()) }
     }
     
     ///  负责处理请求结果的代理对象
@@ -51,13 +71,13 @@ open class Request: NSObject {
     
     ///  请求成功的回调处理，另请参阅`delegate`
     ///  请勿与`delegate`同时使用，避免重复处理
-    internal var successedHandler: SuccessHanlder?
+    internal var successedHandler: SuccessHandler?
     ///  请求失败的回调处理，另请参阅`delegate`
     ///  请勿与`delegate`同时使用，避免重复处理
-    internal var failedHandler: FailHanlder?
+    internal var failedHandler: FailHandler?
     ///  请求完成的回调处理，不管成功或失败都会回调，
     ///  请勿与`delegate`同时使用，避免重复处理
-    internal var completedHandler: CompletionHanlder?
+    internal var completedHandler: CompletionHandler?
 
     public required override init() {
         super.init()
@@ -67,8 +87,8 @@ open class Request: NSObject {
     
     /// The URL host of request. This should only contain the host part of URL.
     /// Subclass should override this method to return the host of request. And have no need to call super
-    open func baseURL() -> URL {
-        return URL(string: "Subclass must override this method, which return the host of request")!
+    open func baseURL() -> URL? {
+        return nil
     }
 
     /// The URL path of request. This should only contain the path part of URL
@@ -89,18 +109,6 @@ open class Request: NSObject {
         return false
     }
 
-    /// The authentication token that add to the header of request
-    /// Subclasss must override this method to return the token for authorication. Have no need to call super
-    open func authenticationToken() -> String {
-        return "Subclasss must override this method, then return the authorication token"
-    }
-
-    /// Class use to deserialize HTTP(s) response
-    /// Subclass must override this method to return a related class
-    open func responseType() -> Response.Type {
-        return Response.self
-    }
-
     /// Notifies that request is about to be send
     /// Subclass can override this method to do something like show loading view
     open func requestWillSend(){
@@ -115,16 +123,8 @@ open class Request: NSObject {
         return nil
     }
     
-    open func addtionalParameter() -> Dictionary<String, Any>? {
-        return nil
-    }
-    
-    open func serializerType() -> SerializerType {
+    open func serializer() -> Serializer {
         return .json
-    }
-    
-    open func body() -> String? {
-        return nil
     }
     
     open func start(withDelegate delegate: RequestResultHandle) {
@@ -132,10 +132,18 @@ open class Request: NSObject {
         NetworkAgent.shared.add(request: self)
     }
     
-    open func start(withHandler successedHandler: @escaping SuccessHanlder,
-                    failedHandler: @escaping FailHanlder,
-                    completedHandler: @escaping CompletionHanlder)
+    open func start(with successedHandler: SuccessHandler?,
+                    failedHandler: FailHandler? ) {
+        return start(with: successedHandler, failedHandler: failedHandler, completedHandler: nil)
+    }
+    
+    open func start(with successedHandler: SuccessHandler?,
+                    failedHandler: FailHandler?,
+                    completedHandler: CompletionHandler?)
     {
+        /** `optional`闭包参数默认就是`@escaping`
+         Basically, @escaping is valid only on closures in function parameter position. The noescape-by-default rule only applies to these closures at function parameter position, otherwise they are escaping. Aggregates, such as enums with associated values (e.g. Optional), tuples, structs, etc., if they have closures, follow the default rules for closures that are not at function parameter position, i.e. they are escaping.
+         */
         self.successedHandler = successedHandler
         self.failedHandler = failedHandler
         self.completedHandler = completedHandler
@@ -146,27 +154,34 @@ open class Request: NSObject {
 
 // MARK: Methods to send request
 public extension Request {
-    func send(body: String, success: SuccessClosure?, fail: FailClosure?) {
-        Network.request(self, body: body, success: success, fail: fail, completion: nil)
+    func send(body: String, success: SuccessHandler?, fail: FailHandler?, completion: CompletionHandler?) {
+        self.customBody = body
+        self.start(with: success, failedHandler: fail, completedHandler: completion)
+    }
+    
+    func send(body: String, success: SuccessHandler?, fail: FailHandler?) {
+        return send(body: body, success: success, fail: fail, completion: nil)
     }
 
-    func send(body: String, success: SuccessClosure?, fail: FailClosure?, completion: CompletionClosure?) {
-        Network.request(self, body: body, success: success, fail: fail, completion: completion)
+    func send(parameters: [String: Any]?,
+              success: SuccessHandler?,
+              fail: FailHandler?,
+              completion: CompletionHandler?)
+    {
+        self.addtionalParameter = parameters
+        self.start(with: success, failedHandler: fail, completedHandler: completion)
+    }
+    
+    func send(parameters: [String: Any]?, success: SuccessHandler?, fail: FailHandler?) {
+        return send(parameters: parameters, success: success, fail: fail, completion: nil)
     }
 
-    func send(parameters: [String: Any]?, success: SuccessClosure?, fail: FailClosure?) {
-        Network.request(self, parameters: parameters, success: success, fail: fail)
+    func send(subpath: [String]?, success: SuccessHandler?, fail: FailHandler?, completion: CompletionHandler?) {
+        self.addtionalSubpath = subpath
+        self.start(with: success, failedHandler: fail, completedHandler: completion)
     }
-
-    func send(parameters: [String: Any]?, success: SuccessClosure?, fail: FailClosure?, completion: CompletionClosure?) {
-        Network.request(self, parameters: parameters, success: success, fail: fail, completion: completion)
-    }
-
-    func send(subpath: [String]?, success: SuccessClosure?, fail: FailClosure?) {
-        Network.request(self, subpaths: subpath, success: success, fail: fail, completion: nil)
-    }
-
-    func send(subpath: [String]?, success: SuccessClosure?, fail: FailClosure?, completion: CompletionClosure?) {
-        Network.request(self, subpaths: subpath, success: success, fail: fail, completion: completion)
+    
+    func send(subpath: [String]?, success: SuccessHandler?, fail: FailHandler?) {
+        return send(subpath: subpath, success: success, fail: fail, completion: nil)
     }
 }

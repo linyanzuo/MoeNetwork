@@ -10,31 +10,60 @@ import UIKit
 import MoeNetwork
 
 
+/// Debug message log
+///
+/// print debug message, include: `method name@file name`, `line number`, `log message`
+internal func MLog<T>(_ fmt: T, file: String = #file, function: String = #function, line: Int = #line) {
+    #if DEBUG
+    let fileName = NSString(string: file).pathComponents.last!
+    print("[MoeUI_Debug_Print: \(fileName) > \(function), \(line)]\n\t\(fmt)")
+    //    debugPrint(fmt)
+    #endif
+}
+
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .blue
 
-        let params: [String: Any] = [
+        // MARK: GET请求测试
+        let banner = HomeAPI.banner()
+        banner.addtionalParameter = [
             "current" : 0,
             "size" : 10
         ]
-//        HMBannerRequest().send(parameters: params, success: { (data) in
-//            let response = data as? HMBannerResponse
-//            response?.save(to: "Banner")
-//            print(String(describing: response))
-//        }) { (error) in
-//            print(error)
-//        }
+        banner.addtionalHeader = ["Lang" : "zh_CN"]
+        banner.start(with: { (request, response) in
+            guard let obj = response.handyObject as? HMBannerResponse else { return }
+            MLog(obj.data)
+        }) { (request, error) in
+            
+        }
+        
+        // MARK: POST请求测试
+//        HomeAPI.betOrderRandom().start(withDelegate: self)
+        let random = HomeAPI.betOrderRandom()
+        random.addtionalParameter = [
+            "size" : 1,
+            "code" : "SIX4-ZHIX-ZXFS",
+            "periodNo" : "20191112159"
+        ]
+        random.customBody = "{\"size\":1,\"code\":\"SIX4-ZHIX-ZXFS\",\"periodNo\":\"20191112159\"}"
+        random.addtionalHeader = ["Lang" : "zh_CN"]
+        random.start(with: { (request, response) in
+            guard let obj = response.handyObject as? HMBetOrderRandomResponse else { return }
+            MLog( obj.data?.expressions)
+        }, failedHandler: nil, completedHandler: nil)
 
+        // MARK: --- 分割线 ---
 //        HomeAPI.hotGames().send(parameters: nil, success: { (data) in
 //            let response = data as? HMHotGamesResponse
 //            print(String(describing: response))
 //        }) { (error) in
 //            print(error)
 //        }
-        
-//        HomeAPI.hotGames().start()
         
 //        let request = HomeAPI.banner()
 //        request.start(with: self)
@@ -47,21 +76,21 @@ class ViewController: UIViewController {
 //            MLog("Comple: \(isSuccess)")
 //        }
         
-        HomeAPI.betOrderRandom().start(withDelegate: self)
+//        HomeAPI.hotGames().start(withDelegate: self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print(HMBannerResponse.persistenceURL())
-        let banner = HMBannerResponse.load(from: "Banner")
-        print(String(describing: banner))
+//        print(HMBannerResponse.persistenceURL())
+//        let banner = HMBannerResponse.load(from: "Banner")
+//        print(String(describing: banner))
     }
 }
 
 
 extension ViewController: RequestResultHandle {
-    func requestSuccessed(request: Request) {
+    func requestSuccessed(request: Request, with response: Response) {
         MLog("Success: \(request)")
     }
     

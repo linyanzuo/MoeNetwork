@@ -16,17 +16,13 @@ class HMBannerRequest: BaseRequest, Persistence {
     override func path() -> String {
         return "/banner"
     }
-
-    override func responseType() -> Response.Type {
-        return HMBannerResponse.self
-    }
-
+    
     override func method() -> Request.Method {
         return .get
     }
     
-    override func serializerType() -> Request.SerializerType {
-        return .xmlParser
+    override func serializer() -> Serializer {
+        return .handyJson(HMBannerResponse.self)
     }
 
     override func requestWillSend() {
