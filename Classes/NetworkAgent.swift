@@ -115,20 +115,6 @@ extension NetworkAgent {
         
         return result
     }
-    
-//    /// Todo: 待删除
-//    private func buildURLRequest(for request: MRequest) -> URLRequest {
-//        var urlReq = URLRequest(url: request.url)
-//        urlReq.httpMethod = request.method().rawValue
-//        urlReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        if request.requiredAuthorization(), let token = NetworkConfig.shared.authenticationToken {
-//            urlReq.setValue(token, forHTTPHeaderField: "Authorization")
-//        }
-//        if let body = request.body() {
-//            urlReq.httpBody = body.data(using: .utf8, allowLossyConversion: false)
-//        }
-//        return urlReq
-//    }
 }
 
 
@@ -287,33 +273,33 @@ extension NetworkAgent {
         request.completedHandler?(request, false)
     }
     
-    /// Todo: 待删除
-    internal func responseHandle(response: DataResponse<Any>,
-                                 responseType: HandyObject.Type,
-                                       success: SuccessClosure?,
-                                       fail: FailClosure?,
-                                       completion: CompletionClosure? = nil) -> Bool
-    {
-        let result: Result = response.result
-
-        // -- Network connection check
-        guard result.isSuccess == true else {
-            let errMsg = AssetHelper.localizedString(key: "check_connection")
-            NetworkHelper.shared.showError(errMsg)
-            return false
-        }
-        // -- Response data format check
-        guard let dict = result.value as? [String: Any] else {
-            let errMsg = AssetHelper.localizedString(key: "response_format")
-            NetworkHelper.shared.showDevError(errMsg)
-            return false
-        }
-        // -- Response Data Deserialize
-        guard let response = responseType.deserialize(from: dict) else {
-            let errMsg = AssetHelper.localizedString(key: "deserialize_json")
-            NetworkHelper.shared.showDevError(errMsg)
-            return false
-        }
+//    /// Todo: 待删除
+//    internal func responseHandle(response: DataResponse<Any>,
+//                                 responseType: HandyObject.Type,
+//                                       success: SuccessClosure?,
+//                                       fail: FailClosure?,
+//                                       completion: CompletionClosure? = nil) -> Bool
+//    {
+//        let result: Result = response.result
+//
+//        // -- Network connection check
+//        guard result.isSuccess == true else {
+//            let errMsg = AssetHelper.localizedString(key: "check_connection")
+//            NetworkHelper.shared.showError(errMsg)
+//            return false
+//        }
+//        // -- Response data format check
+//        guard let dict = result.value as? [String: Any] else {
+//            let errMsg = AssetHelper.localizedString(key: "response_format")
+//            NetworkHelper.shared.showDevError(errMsg)
+//            return false
+//        }
+//        // -- Response Data Deserialize
+//        guard let response = responseType.deserialize(from: dict) else {
+//            let errMsg = AssetHelper.localizedString(key: "deserialize_json")
+//            NetworkHelper.shared.showDevError(errMsg)
+//            return false
+//        }
 //        // -- Error Code Check
 //        let errorCode = response.statusCode()
 //        guard errorCode == 0 else {
@@ -328,6 +314,6 @@ extension NetworkAgent {
 //            return false
 //        }
 //        success?(response)
-        return true
-    }
+//        return true
+//    }
 }

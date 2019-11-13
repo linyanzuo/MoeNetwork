@@ -18,25 +18,25 @@ class Network: NSObject {
         return Alamofire.SessionManager(configuration: configuration)
     }()
 
-    static func request(_ request: Request,
-                        subpaths: [String]?,
-                        success: SuccessClosure?,
-                        fail: FailClosure?,
-                        completion: CompletionClosure? = nil)
-    {
-        let encoding = NetworkAgent.shared.buildUnderlyingEncoding(request: request)
-        let method = NetworkAgent.shared.buildUnderlyingMethod(for: request)
-        let header = NetworkAgent.shared.buildHeader(request: request)
-
-        var url = request.url
-        if subpaths != nil {
-            for path in subpaths! {
-                url = url.appendingPathComponent(path)
-            }
-        }
-
-        request.requestWillSend()
-        sessionManager.request(url, method: method, parameters: nil, encoding: encoding, headers: header).responseJSON { (response) in
+//    static func request(_ request: Request,
+//                        subpaths: [String]?,
+//                        success: SuccessClosure?,
+//                        fail: FailClosure?,
+//                        completion: CompletionClosure? = nil)
+//    {
+//        let encoding = NetworkAgent.shared.buildUnderlyingEncoding(request: request)
+//        let method = NetworkAgent.shared.buildUnderlyingMethod(for: request)
+//        let header = NetworkAgent.shared.buildHeader(request: request)
+//
+//        var url = request.url
+//        if subpaths != nil {
+//            for path in subpaths! {
+//                url = url.appendingPathComponent(path)
+//            }
+//        }
+//
+//        request.requestWillSend()
+//        sessionManager.request(url, method: method, parameters: nil, encoding: encoding, headers: header).responseJSON { (response) in
 //            let serializer = request.serializer().responseType ?? ResponseData.self
 //            let isSuccessful = NetworkAgent.shared.responseHandle(response: response,
 //                                                                  responseType: serializer,
@@ -44,6 +44,6 @@ class Network: NSObject {
 //                                                                  fail: fail)
 //            request.requestDidFinish(isSuccess: isSuccessful)
 //            completion?(isSuccessful)
-        }
-    }
+//        }
+//    }
 }
