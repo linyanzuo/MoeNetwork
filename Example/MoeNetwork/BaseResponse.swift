@@ -9,7 +9,7 @@
 import MoeNetwork
 
 
-class BaseResponse: ResponseData {
+class BaseResponse: HandyObject {
     required init() { }
     
     var errcode: Int?

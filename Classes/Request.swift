@@ -29,9 +29,9 @@ public enum Serializer {
     case json
     /// 暂未测试
     case xml
-    case handyJson(ResponseData.Type)
+    case handyJson(HandyObject.Type)
     
-    public var responseType: ResponseData.Type? {
+    public var responseType: HandyObject.Type? {
         switch self {
         case .handyJson(let type):
             return type
@@ -54,9 +54,13 @@ open class Request: NSObject {
 
     // MARK: Object Life Cycle
     
+    /// 自定义请求体的实现
     open var customBody: String?
+    /// 添加额外的子路径
     open var addtionalSubpath: [String]?
+    /// 添加额外的参数
     open var addtionalParameter: [String: Any]?
+    /// 添加额外的请求头
     open var addtionalHeader: [String: String]?
     
     /// Todo: 待删除
@@ -148,40 +152,5 @@ open class Request: NSObject {
         self.failedHandler = failedHandler
         self.completedHandler = completedHandler
         NetworkAgent.shared.add(request: self)
-    }
-}
-
-
-// MARK: Methods to send request
-public extension Request {
-    func send(body: String, success: SuccessHandler?, fail: FailHandler?, completion: CompletionHandler?) {
-        self.customBody = body
-        self.start(with: success, failedHandler: fail, completedHandler: completion)
-    }
-    
-    func send(body: String, success: SuccessHandler?, fail: FailHandler?) {
-        return send(body: body, success: success, fail: fail, completion: nil)
-    }
-
-    func send(parameters: [String: Any]?,
-              success: SuccessHandler?,
-              fail: FailHandler?,
-              completion: CompletionHandler?)
-    {
-        self.addtionalParameter = parameters
-        self.start(with: success, failedHandler: fail, completedHandler: completion)
-    }
-    
-    func send(parameters: [String: Any]?, success: SuccessHandler?, fail: FailHandler?) {
-        return send(parameters: parameters, success: success, fail: fail, completion: nil)
-    }
-
-    func send(subpath: [String]?, success: SuccessHandler?, fail: FailHandler?, completion: CompletionHandler?) {
-        self.addtionalSubpath = subpath
-        self.start(with: success, failedHandler: fail, completedHandler: completion)
-    }
-    
-    func send(subpath: [String]?, success: SuccessHandler?, fail: FailHandler?) {
-        return send(subpath: subpath, success: success, fail: fail, completion: nil)
     }
 }

@@ -84,8 +84,15 @@ extension NetworkAgent {
         var baseURL: URL? = config.baseURL
         if request.baseURL()?.absoluteString.count ?? 0 > 0 { baseURL = request.baseURL() }
         
-        let fullURL = baseURL?.appendingPathComponent(request.path(), isDirectory: false)
+        var fullURL = baseURL?.appendingPathComponent(request.path(), isDirectory: false)
         NetworkHelper.buildURLAssert(condition: fullURL != nil)
+        
+        // 拼接额外添加的子路径
+        if let subpaths = request.addtionalSubpath {
+            for path in subpaths {
+                fullURL = fullURL!.appendingPathComponent(path)
+            }
+        }
         
         return fullURL!
     }
@@ -225,24 +232,26 @@ extension NetworkAgent {
     /// - Parameter request: 要发送的请求
     private func handleUnderlyingResponse(_ response: DataResponse<Any>, for request: MRequest) {
         let result = response.result
+        let startDate = Date(timeIntervalSinceReferenceDate: response.timeline.requestStartTime)
+        let endDate = Date(timeIntervalSinceReferenceDate: response.timeline.requestCompletedTime)
         
         guard result.isSuccess == true else {
-            let startDate = Date(timeIntervalSinceReferenceDate: response.timeline.requestStartTime)
-            let endDate = Date(timeIntervalSinceReferenceDate: response.timeline.requestCompletedTime)
             let error = NetworkError(code: -1,
                                      message: "Unknow error",
                                      requstURL: response.request?.url,
                                      requestStartTime: startDate,
-                                     requestEndTime: endDate)
+                                     requestCompletedTime: endDate)
             requested(request, didFailWith: error)
             return
         }
         
         // 请求成功，对数据进行二次处理
         let res = MResponse()
+        res.startTime = startDate
+        res.completedTime = endDate
         res.originalData = response.data
         res.jsonDictionary = response.value as? [String: Any]
-        res.handyObject = response.value as? ResponseData
+        res.handyObject = response.value as? HandyObject
         res.response = response.response
         
         requested(request, didSuccessedWith: res)
@@ -280,7 +289,7 @@ extension NetworkAgent {
     
     /// Todo: 待删除
     internal func responseHandle(response: DataResponse<Any>,
-                                 responseType: ResponseData.Type,
+                                 responseType: HandyObject.Type,
                                        success: SuccessClosure?,
                                        fail: FailClosure?,
                                        completion: CompletionClosure? = nil) -> Bool

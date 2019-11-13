@@ -27,7 +27,7 @@ class HMHotGamesResponse: BaseResponse {
 }
 
 
-struct HMHotGamesData: ResponseData {
+struct HMHotGamesData: HandyObject {
     var id: String?
     var code: String?
     var name: String?

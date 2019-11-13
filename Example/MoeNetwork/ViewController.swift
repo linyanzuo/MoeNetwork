@@ -50,7 +50,7 @@ class ViewController: UIViewController {
             "code" : "SIX4-ZHIX-ZXFS",
             "periodNo" : "20191112159"
         ]
-        random.customBody = "{\"size\":1,\"code\":\"SIX4-ZHIX-ZXFS\",\"periodNo\":\"20191112159\"}"
+//        random.customBody = "{\"size\":1,\"code\":\"SIX4-ZHIX-ZXFS\",\"periodNo\":\"20191112159\"}"
         random.addtionalHeader = ["Lang" : "zh_CN"]
         random.start(with: { (request, response) in
             guard let obj = response.handyObject as? HMBetOrderRandomResponse else { return }

@@ -17,8 +17,8 @@ public struct NetworkError: Error {
     /// 请求的URL地址
     let requstURL: URL?
     /// 请求的开始时间
-    let requestStartTime: Date
+    let requestStartTime: Date?
     /// 请求的结束时间
-    let requestEndTime: Date
+    let requestCompletedTime: Date?
 }
 

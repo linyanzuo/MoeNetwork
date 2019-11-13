@@ -34,6 +34,6 @@ class HMBetOrderRandomResponse: BaseResponse {
     var data: HMBetOrderRandomData?
 }
 
-struct HMBetOrderRandomData: ResponseData {
+struct HMBetOrderRandomData: HandyObject {
     var expressions: [String]?
 }

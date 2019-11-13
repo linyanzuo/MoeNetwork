@@ -37,6 +37,9 @@ open class Response {
     
     // MARK: 新增加的数据
     
+    public var startTime: Date?
+    public var completedTime: Date?
+    
     /// 服务器响应URL请求的底层响应
     public var response: HTTPURLResponse?
     
@@ -47,11 +50,11 @@ open class Response {
     public var jsonDictionary: [String: Any]?
     
     /// HandyJSON序列化后的对象
-    public var handyObject: ResponseData?
+    public var handyObject: HandyObject?
 }
 
 
-public protocol ResponseData: HandyJSON {
+public protocol HandyObject: HandyJSON {
 }
 
 
@@ -59,7 +62,7 @@ public protocol ResponseData: HandyJSON {
 extension Alamofire.Request {
     public static func serializeResponseHandyJSON(
         options: JSONSerialization.ReadingOptions,
-        responseType: ResponseData.Type,
+        responseType: HandyObject.Type,
         response: HTTPURLResponse?,
         data: Data?,
         error: Error?) -> Result<Any>
@@ -98,7 +101,7 @@ extension Alamofire.Request {
 extension Alamofire.DataRequest {
     public static func handyJsonResponseSerializer(
         options: JSONSerialization.ReadingOptions = .allowFragments,
-        responseType: ResponseData.Type)
+        responseType: HandyObject.Type)
         -> DataResponseSerializer<Any>
     {
         return DataResponseSerializer { _, response, data, error in

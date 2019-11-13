@@ -44,7 +44,7 @@ class HMBannerResponse: BaseResponse, Persistence {
 }
 
 
-struct HMBannerData: ResponseData, Persistence {
+struct HMBannerData: HandyObject, Persistence {
     var records: [HMBannerRecord]?
     var total: Int?
     var size: Int?
@@ -56,7 +56,7 @@ struct HMBannerData: ResponseData, Persistence {
 
 /// 如果HMBannerRecord没有遵守Persistence协议, 会导致Codable协议报错如下
 /// Type 'HMBannerData' does not conform to protocol 'Decodable'
-struct HMBannerRecord: ResponseData, Persistence {
+struct HMBannerRecord: HandyObject, Persistence {
     var id: String?
     var category: String?
     var name: String?

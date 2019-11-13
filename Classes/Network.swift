@@ -10,11 +10,6 @@ import Alamofire
 import HandyJSON
 
 
-public typealias SuccessClosure = (_ data: Response) -> Void
-public typealias FailClosure = (_ error: NetworkError) -> Void
-public typealias CompletionClosure = (_ isSuccessful: Bool) -> Void
-
-
 /// Network Engine
 class Network: NSObject {
     static let sessionManager: Alamofire.SessionManager = {
