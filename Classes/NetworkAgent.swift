@@ -47,10 +47,13 @@ class NetworkAgent {
         var dataRequest: DataRequest?
         
         switch method {
-        case .get, .post:
+        case .get:
             dataRequest = buildUnderlyingRequest(request: request)
-//        case .post:
-//            dataRequest = buildUnderlyingBodyRequest(request: request)
+        case .post:
+            if request.customBody == nil {
+                dataRequest = buildUnderlyingRequest(request: request)
+            }
+            else { dataRequest = buildUnderlyingBodyRequest(request: request) }
         default:
             print("待完善")
             dataRequest = buildUnderlyingRequest(request: request)
@@ -103,15 +106,31 @@ extension NetworkAgent {
         var result = Dictionary<String, String>()
 
         // 添加Token报头域
-        if request.requiredAuthorization() == true, let token = NetworkConfig.shared.authenticationToken {
-            result["Authorization"] = token
-        }
+        if request.requiredAuthorization() == true,
+            let token = NetworkConfig.shared.authenticationToken
+        { result["Authorization"] = token }
         // 添加额外配置的报头域
         if let fieldDict = request.addtionalHeader {
-            for fieldName in fieldDict.keys {
-                result[fieldName] = fieldDict[fieldName]
+            for (fieldName, fieldValue) in fieldDict {
+                result[fieldName] = fieldValue
             }
         }
+        // 添加额外配置的全局报头域
+        if let fieldDict = NetworkConfig.shared.addtionalHeader {
+            for (fieldName, fieldValue) in fieldDict {
+                result[fieldName] = fieldValue
+            }
+        }
+        return result
+    }
+    
+    internal func buildParameter(request: Request) -> [String: Any] {
+        var result = Dictionary<String, Any>()
+        
+        // 添加额外配置的参数
+        if let para = request.addtionalParameter { result += para }
+        // 添加额外配置的全局参数
+        if let globalPara = NetworkConfig.shared.addtionalParameter { result += globalPara }
         
         return result
     }
@@ -167,7 +186,7 @@ extension NetworkAgent {
     private func buildUnderlyingRequest(request: MRequest) -> DataRequest {
         let dataRequest = manager.request(buildURL(for: request),
                                           method: buildUnderlyingMethod(for: request),
-                                          parameters: request.addtionalParameter,
+                                          parameters: buildParameter(request: request),
                                           encoding: buildUnderlyingEncoding(request: request),
                                           headers: buildHeader(request: request))
         return dataRequest

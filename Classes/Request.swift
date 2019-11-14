@@ -54,13 +54,14 @@ open class Request: NSObject {
 
     // MARK: Object Life Cycle
     
-    /// 自定义请求体的实现
+    /// 自定义请求体的实现，
+    /// 此时POST请求的额外参数(`addtionalParameter`)、网络配置的全局额外参数都将失效
     open var customBody: String?
     /// 添加额外的子路径
     open var addtionalSubpath: [String]?
     /// 添加额外的参数
     open var addtionalParameter: [String: Any]?
-    /// 添加额外的请求头
+    /// 添加额外的报头域
     open var addtionalHeader: [String: String]?
     
     /// Todo: 待删除

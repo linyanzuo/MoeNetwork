@@ -25,6 +25,11 @@ public class NetworkConfig {
     public var requestTimeOut: TimeInterval = 10.0
     /// 用户身份验证的Token值
     public var authenticationToken: String?
+    /// 添加额外的全局参数
+    open var addtionalParameter: [String: Any]?
+    /// 添加额外的全局报头域
+    open var addtionalHeader: [String: String]?
+
     
     /// 用于初始化`HttpSessionManager`的会话配置实例
     internal var sessionConfiguration: URLSessionConfiguration

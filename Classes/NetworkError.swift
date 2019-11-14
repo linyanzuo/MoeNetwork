@@ -11,14 +11,14 @@ import HandyJSON
 
 public struct NetworkError: Error {
     /// 错误编码
-    let code: Int?
+    public let code: Int?
     /// 错误的描述信息，如果存在
-    let message: String?
+    public let message: String?
     /// 请求的URL地址
-    let requstURL: URL?
+    public let requstURL: URL?
     /// 请求的开始时间
-    let requestStartTime: Date?
+    public let requestStartTime: Date?
     /// 请求的结束时间
-    let requestCompletedTime: Date?
+    public let requestCompletedTime: Date?
 }
 
