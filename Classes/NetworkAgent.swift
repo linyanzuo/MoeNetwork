@@ -104,7 +104,12 @@ extension NetworkAgent {
     /// - Parameter request: 要发送的请求
     internal func buildHeader(request: Request) -> [String: String] {
         var result = Dictionary<String, String>()
-
+        // 添加额外配置的全局报头域
+        if let fieldDict = NetworkConfig.shared.addtionalHeader {
+            for (fieldName, fieldValue) in fieldDict {
+                result[fieldName] = fieldValue
+            }
+        }
         // 添加Token报头域
         if request.requiredAuthorization() == true,
             let token = NetworkConfig.shared.authenticationToken
@@ -115,22 +120,18 @@ extension NetworkAgent {
                 result[fieldName] = fieldValue
             }
         }
-        // 添加额外配置的全局报头域
-        if let fieldDict = NetworkConfig.shared.addtionalHeader {
-            for (fieldName, fieldValue) in fieldDict {
-                result[fieldName] = fieldValue
-            }
-        }
         return result
     }
     
     internal func buildParameter(request: Request) -> [String: Any] {
         var result = Dictionary<String, Any>()
         
+        // 添加额外配置的全局参数
+        if let globalPara = NetworkConfig.shared.addtionalParameter {
+            result += globalPara
+        }
         // 添加额外配置的参数
         if let para = request.addtionalParameter { result += para }
-        // 添加额外配置的全局参数
-        if let globalPara = NetworkConfig.shared.addtionalParameter { result += globalPara }
         
         return result
     }
