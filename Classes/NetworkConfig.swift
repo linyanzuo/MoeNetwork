@@ -8,14 +8,6 @@
 import Foundation
 
 
-//public protocol URLInject {
-//    /// 在此方法中向请求的URL注入新的参数
-//    /// - Parameter url: 请求的URL地址
-//    /// - Parameter request: 要发送的请求
-//    func injectURL(_ url: URL, to request: Request)
-//}
-
-
 /// 全局配置
 public class NetworkConfig {
     
@@ -23,16 +15,18 @@ public class NetworkConfig {
     public var baseURL: URL?
     /// 请求的超时时间，默认为10秒
     public var requestTimeOut: TimeInterval = 10.0
-    /// 用户身份验证的Token值
-    public var authenticationToken: String?
     /// 添加额外的全局参数
     open var addtionalParameter: [String: Any]?
     /// 添加额外的全局报头域
     open var addtionalHeader: [String: String]?
 
-    
     /// 用于初始化`HttpSessionManager`的会话配置实例
     internal var sessionConfiguration: URLSessionConfiguration
+    
+    /// 记录请求注入器的数组
+    private(set) var injectors: [RequestInjection]?
+    /// 记录请求附件的数组
+    private(set) var accessories: [RequestAccessory]?
     
     /// 获取共享实例
     static public let shared = NetworkConfig()
@@ -40,21 +34,36 @@ public class NetworkConfig {
         sessionConfiguration = URLSessionConfiguration.default
         sessionConfiguration.timeoutIntervalForRequest = 10.0
     }
+}
+
+
+// MARK: 注入 & 附件
+extension NetworkConfig {
+    public func addInjectors(_ injectors: RequestInjection) {
+        if self.injectors == nil { self.injectors = Array<RequestInjection>() }
+        for injector in self.injectors! {
+            let isRepeat = self.injectors?.contains(where: { (item) -> Bool in
+                return injector.identifier() == item.identifier()
+            })
+            if isRepeat == false { self.injectors?.append(injector) }
+        }
+    }
     
-    // MARK: URL注入
-//    private lazy var injecters: [URLInject] = {
-//        return Array<URLInject>()
-//    }()
-//
-//    public func addInjecter(_ injecter: URLInject) {
-//        /// Todo: 过滤重复的注入器
-////        let isRepeat = injecters.contains { (item) -> Bool in
-////            return item == injecter
-////        }
-//        injecters.append(injecter)
-//    }
-//
-//    public func clearInjecter() {
-//        injecters.removeAll()
-//    }
+    public func clearInjectors() {
+        if injectors != nil { injectors!.removeAll() }
+    }
+    
+    public func addAssectories(_ accessories: RequestInjection) {
+        if self.accessories == nil { self.accessories = Array<RequestAccessory>() }
+        for accessory in self.accessories! {
+            let isRepeat = self.accessories?.contains(where: { (item) -> Bool in
+                return accessory.identifier() == item.identifier()
+            })
+            if isRepeat == false { self.accessories?.append(accessory) }
+        }
+    }
+    
+    public func clearAssectories() {
+        if accessories != nil { accessories!.removeAll() }
+    }
 }

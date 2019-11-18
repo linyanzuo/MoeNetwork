@@ -16,7 +16,7 @@ import MoeNetwork
 internal func MLog<T>(_ fmt: T, file: String = #file, function: String = #function, line: Int = #line) {
     #if DEBUG
     let fileName = NSString(string: file).pathComponents.last!
-    print("[MoeUI_Debug_Print: \(fileName) > \(function), \(line)]\n\t\(fmt)")
+    print("[MoeNetwork_Debug_Print: \(fileName) > \(function), \(line)]\n\t\(fmt)")
     //    debugPrint(fmt)
     #endif
 }

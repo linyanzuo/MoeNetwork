@@ -24,7 +24,7 @@ public class NetworkHelper {
 }
 
 
-// MARK: Reachability
+// MARK: 可达性检测
 extension NetworkHelper {
     /// Starts listening for changes in network reachability status.
     /// Post notification named `ConnectionState` if status change
@@ -56,7 +56,7 @@ extension NetworkHelper {
 }
 
 
-// MARK: Error Code Handle
+// MARK: 错误代码处理
 extension NetworkHelper {
     internal func checkHttpErrorCode(errorCode: Int, errorMessage: String) -> Bool {
         let assetBundle = AssetHelper.assetBundle()
@@ -106,7 +106,7 @@ extension NetworkHelper {
 }
 
 
-// MARK: Debug error
+// MARK: 错误调试
 extension NetworkHelper {
     internal func showDevError(_ message: String) {
         MLog(message)
@@ -127,7 +127,7 @@ extension NetworkHelper {
 }
 
 
-// MARK: Pod Asset Helper
+// MARK: 库资源助手
 class AssetHelper: NSObject {
     internal static func assetBundle() -> Bundle {
         let frameworkBundle = Bundle(for: self.classForCoder())

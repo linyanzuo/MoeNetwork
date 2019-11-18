@@ -21,16 +21,8 @@ class HMBannerRequest: BaseRequest, Persistence {
         return .get
     }
     
-    override func serializer() -> Serializer {
+    override func serializer() -> Response.Serializer {
         return .handyJson(HMBannerResponse.self)
-    }
-
-    override func requestWillSend() {
-        print("HMBannerRequest will send")
-    }
-
-    override func requestDidFinish(isSuccess: Bool) {
-        print("HMBannerRequest did finish")
     }
 
     deinit {

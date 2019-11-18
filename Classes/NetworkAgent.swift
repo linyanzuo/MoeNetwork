@@ -27,6 +27,8 @@ class NetworkAgent {
     }
     
     internal func add(request: Request) {
+        request.accessoriesStateChange(.willStart, with: false)
+        
         // request构建了自定义请求，直接发送
         if let customRequest = request.generateCustomURLRequest() {
             ///  Todo: 自定义请求功能待完成
@@ -43,19 +45,16 @@ class NetworkAgent {
     /// 构建要发送请求对应的`底层请求`
     /// - Parameter request: 要发送的请求
     private func buildNetworkRequest(for request: MRequest) -> DataRequest {
-        let method = buildUnderlyingMethod(for: request)
         var dataRequest: DataRequest?
         
-        switch method {
-        case .get:
+        switch request.method() {
+        case .get, .post:
             dataRequest = buildUnderlyingRequest(request: request)
-        case .post:
-            if request.customBody == nil {
-                dataRequest = buildUnderlyingRequest(request: request)
-            }
-            else { dataRequest = buildUnderlyingBodyRequest(request: request) }
+//        case .post:
+//            if request.customBody == nil { dataRequest = buildUnderlyingRequest(request: request) }
+//            else { dataRequest = buildUnderlyingBodyRequest(request: request) }
         default:
-            print("待完善")
+            print("`buildNetworkRequest` - 待完善")
             dataRequest = buildUnderlyingRequest(request: request)
         }
         
@@ -71,7 +70,7 @@ class NetworkAgent {
 
 // MARK: 构建参数
 extension NetworkAgent {
-    /// 构造请求的URL地址
+    /// 构造请求的地址(`URL`)
     /// - Parameter request: 要发送的请求
     private func buildURL(for request: MRequest) -> URL {
         // 如果`path`已是完整路径，则直接返回
@@ -100,40 +99,66 @@ extension NetworkAgent {
         return fullURL!
     }
     
-    /// 构造请求的报头(`header`)
+    /// 构建请求的报头(`header`)
     /// - Parameter request: 要发送的请求
-    internal func buildHeader(request: Request) -> [String: String] {
+    internal func buildHeaderFields(request: MRequest) -> [String: String] {
         var result = Dictionary<String, String>()
-        // 添加额外配置的全局报头域
-        if let fieldDict = NetworkConfig.shared.addtionalHeader {
-            for (fieldName, fieldValue) in fieldDict {
-                result[fieldName] = fieldValue
-            }
+        let config = NetworkConfig.shared
+        
+        // 全局的报头配置及报头注入
+        if let fieldDict = config.addtionalHeader { result += fieldDict }
+        if let injectors = config.injectors {
+            for injector in injectors { result = injector.injectHeaderField(result, to: request) }
         }
-        // 添加Token报头域
-        if request.requiredAuthorization() == true,
-            let token = NetworkConfig.shared.authenticationToken
-        { result["Authorization"] = token }
-        // 添加额外配置的报头域
-        if let fieldDict = request.addtionalHeader {
-            for (fieldName, fieldValue) in fieldDict {
-                result[fieldName] = fieldValue
-            }
+        // 请求的报头配置及报头注入
+        if let fieldDict = request.addtionalHeader { result += fieldDict }
+        if let injectors = request.injectors {
+            for injector in injectors { result = injector.injectHeaderField(result, to: request) }
         }
+        
         return result
     }
     
-    internal func buildParameter(request: Request) -> [String: Any] {
+    /// 构建请求的参数(`parameter`)
+    /// - Parameter request: 要发送的请求
+    internal func buildParameter(request: MRequest) -> [String: Any] {
         var result = Dictionary<String, Any>()
+        let config = NetworkConfig.shared
         
-        // 添加额外配置的全局参数
-        if let globalPara = NetworkConfig.shared.addtionalParameter {
-            result += globalPara
+        // 全局的参数配置及报头注入
+        if let globalPara = config.addtionalParameter { result += globalPara }
+        if let injectors = config.injectors {
+            for injector in injectors { result = injector.injectParameters(result, to: request) }
         }
-        // 添加额外配置的参数
+        // 请求的报头配置及报头注入
         if let para = request.addtionalParameter { result += para }
+        if let injectors = request.injectors {
+            for injector in injectors { result = injector.injectParameters(result, to: request) }
+        }
         
         return result
+    }
+    
+    internal func buildURLRequest(request: MRequest) -> URLRequest {
+        var urlRequest = URLRequest(url: buildURL(for: request))
+        urlRequest.httpMethod = request.method().rawValue
+    
+        for (fieldName, fieldValue) in buildHeaderFields(request: request) {
+            urlRequest.setValue(fieldValue, forHTTPHeaderField: fieldName)
+        }
+        
+        do {
+            let encoding = buildUnderlyingEncoding(request: request)
+            urlRequest = try encoding.encode(urlRequest, with: buildParameter(request: request))
+        } catch {
+            /// Todo: 编码错误的处理
+        }
+        
+        if let body = request.customBody {
+            urlRequest.httpBody = body.data(using: .utf8, allowLossyConversion: false)
+        }
+        
+        return urlRequest
     }
 }
 
@@ -156,13 +181,16 @@ extension NetworkAgent {
     /// 返回要发送请求中参数编码方式的底层实现
     /// - Parameter request: 要发送的请求
     internal func buildUnderlyingEncoding(request: Request) -> ParameterEncoding {
-        switch request.method() {
-        case .put:
+        // GET请求只能使用URL编码`URLEncoding`
+        if request.method() == .get { return URLEncoding.default }
+        
+        switch request.parameterEncoding() {
+        case .jsonEncoding:
             return JSONEncoding.default
-        case .post:
-            return JSONEncoding.default
-        default:
+        case .urlEncoding:
             return URLEncoding.default
+        case .xmlEncoding:
+            return PropertyListEncoding.default
         }
     }
     
@@ -173,66 +201,48 @@ extension NetworkAgent {
         case .xml:
             return DataRequest.propertyListResponseSerializer(options: [])
         case .handyJson:
-            /// Todo: 暂使用`!`强制有值，待处理
             let responseType = request.serializer().responseType!
             return DataRequest.handyJsonResponseSerializer(options: .allowFragments,
                                                            responseType: responseType)
+//        case .json:
         default:
             return DataRequest.jsonResponseSerializer(options: .allowFragments)
+//        case .data:
+//            return DataRequest.dataResponseSerializer()
+//        case .string:
+//            return DataRequest.stringResponseSerializer()
         }
     }
     
     /// 返回要发送请求的最终底层实现
     /// - Parameter request: 要发送的请求
     private func buildUnderlyingRequest(request: MRequest) -> DataRequest {
-        let dataRequest = manager.request(buildURL(for: request),
-                                          method: buildUnderlyingMethod(for: request),
-                                          parameters: buildParameter(request: request),
-                                          encoding: buildUnderlyingEncoding(request: request),
-                                          headers: buildHeader(request: request))
-        return dataRequest
+        let urlRequest = buildURLRequest(request: request)
+        return manager.request(urlRequest)
     }
     
-    private func buildUnderlyingBodyRequest(request: MRequest) -> DataRequest {
-        var req = URLRequest(url: request.url)
-        req.httpMethod = NetworkAgent.shared.buildUnderlyingMethod(for: request).rawValue
-        
-        let headers = buildHeader(request: request)
-        for (fieldName, fieldValue) in headers {
-            req.setValue(fieldValue, forHTTPHeaderField: fieldName)
-        }
-        
-        /// Todo: 待修改， 临时用
-        if req.value(forHTTPHeaderField: "Content-Type") == nil {
-            req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        }
-        
-        if let body = request.customBody {
-            req.httpBody = body.data(using: .utf8, allowLossyConversion: false)
-        }
-        
-        let dataRequest = manager.request(req)
-        return dataRequest
-    }
-    
-//    private func requstTest(request: MRequest) -> DataRequest {
-//        let url = buildURL(for: request)
-//        let method = buildUnderlyingMethod(for: request)
-//        let headers = buildHeader(request: request)
-//        let encoding = URLEncoding.default
-//        let parameters = request.addtionalParameter
+//    private func buildUnderlyingBodyRequest(request: MRequest) -> DataRequest {
+//        var req = URLRequest(url: buildURL(for: request))
+//        req.httpMethod = request.method().rawValue
 //
-//        var originalRequest: URLRequest?
-//
-//        do {
-//            originalRequest = try URLRequest(url: url, method: method, headers: headers)
-//            let encodedURLRequest = try encoding.encode(originalRequest!, with: parameters)
-//            return manager.request(encodedURLRequest)
-//        } catch {
-//            return manager.request(originalRequest, failedWith: error)
+//        let headers = buildHeaderFields(request: request)
+//        for (fieldName, fieldValue) in headers {
+//            req.setValue(fieldValue, forHTTPHeaderField: fieldName)
 //        }
+//
+//        /// Todo: 待修改， 临时用
+//        if req.value(forHTTPHeaderField: "Content-Type") == nil {
+//            req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        }
+//
+//        if let body = request.customBody {
+//            req.httpBody = body.data(using: .utf8, allowLossyConversion: false)
+//        }
+//
+//        let dataRequest = manager.request(req)
+//        return dataRequest
 //    }
-    
+        
     /// 对底层响应的处理
     /// - Parameter response: 请求的底层响应结果
     /// - Parameter request: 要发送的请求
@@ -272,7 +282,7 @@ extension NetworkAgent {
     /// - Parameter request: 发送的请求
     /// - Parameter response: 请求的响应结果
     private func requested(_ request: MRequest, didSuccessedWith response: MResponse) {
-        ///  Todo: 请求完成后， 执行 Filter & Accessory
+        request.accessoriesStateChange(.willComplete, with: true)
         
         // 回调已经在主纯程中执行
         request.delegate?.requestSuccessed(request: request, with: response)
@@ -280,60 +290,22 @@ extension NetworkAgent {
         
         request.delegate?.requestCompleted(request: request, isSuccess: true)
         request.completedHandler?(request, true)
+        
+        request.accessoriesStateChange(.didCompleted, with: true)
     }
     
     /// 请求失败的统一结果处理
     /// - Parameter request: 发送的请求
     /// - Parameter error: 请求的错误信息，如果存在
     private func requested(_ request: MRequest, didFailWith error: NetworkError) {
+        request.accessoriesStateChange(.willComplete, with: false)
+        
         request.delegate?.requestFailed(request: request, with: error)
         request.failedHandler?(request, error)
         
         request.delegate?.requestCompleted(request: request, isSuccess: false)
         request.completedHandler?(request, false)
+        
+        request.accessoriesStateChange(.didCompleted, with: false)
     }
-    
-//    /// Todo: 待删除
-//    internal func responseHandle(response: DataResponse<Any>,
-//                                 responseType: HandyObject.Type,
-//                                       success: SuccessClosure?,
-//                                       fail: FailClosure?,
-//                                       completion: CompletionClosure? = nil) -> Bool
-//    {
-//        let result: Result = response.result
-//
-//        // -- Network connection check
-//        guard result.isSuccess == true else {
-//            let errMsg = AssetHelper.localizedString(key: "check_connection")
-//            NetworkHelper.shared.showError(errMsg)
-//            return false
-//        }
-//        // -- Response data format check
-//        guard let dict = result.value as? [String: Any] else {
-//            let errMsg = AssetHelper.localizedString(key: "response_format")
-//            NetworkHelper.shared.showDevError(errMsg)
-//            return false
-//        }
-//        // -- Response Data Deserialize
-//        guard let response = responseType.deserialize(from: dict) else {
-//            let errMsg = AssetHelper.localizedString(key: "deserialize_json")
-//            NetworkHelper.shared.showDevError(errMsg)
-//            return false
-//        }
-//        // -- Error Code Check
-//        let errorCode = response.statusCode()
-//        guard errorCode == 0 else {
-//            let errMsg = AssetHelper.localizedString(key: "get_error_code")
-//            MLog(errMsg)
-//            let errorMessage = response.statusMessage()
-//            if NetworkHelper.shared.checkHttpErrorCode(errorCode: errorCode, errorMessage: errorMessage) { return false }
-//            if NetworkHelper.shared.checkServerErrorCode(errorCode: errorCode, errorMessage: errorMessage) { return false }
-//
-//            ///  Todo: Error修改成NetworkError导致的代码，待处理
-////            fail?(NetworkError(code: errorCode, message: errorMessage))
-//            return false
-//        }
-//        success?(response)
-//        return true
-//    }
 }

@@ -16,7 +16,7 @@ class HMHotGamesRequest: BaseRequest {
         return "lottery/game/queryHotGames"
     }
 
-    override func serializer() -> Serializer {
+    override func serializer() -> Response.Serializer {
         return .handyJson(HMHotGamesResponse.self)
     }
 }

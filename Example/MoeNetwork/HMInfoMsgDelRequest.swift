@@ -17,10 +17,6 @@ class HMInfoMsgDelRequest: Request {
         return "/message"
     }
     
-    override func requiredAuthorization() -> Bool {
-        return true
-    }
-    
     override func method() -> Method {
         return .delete
     }

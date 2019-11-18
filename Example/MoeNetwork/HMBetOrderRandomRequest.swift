@@ -16,15 +16,11 @@ class HMBetOrderRandomRequest: BaseRequest {
         return "/betOrder/random"
     }
     
-    override func requiredAuthorization() -> Bool {
-        return true
-    }
-    
     override func method() -> Method {
         return .post
     }
     
-    override func serializer() -> Serializer {
+    override func serializer() -> Response.Serializer {
         return .handyJson(HMBetOrderRandomResponse.self)
     }
 }

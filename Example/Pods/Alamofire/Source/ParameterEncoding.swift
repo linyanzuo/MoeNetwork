@@ -46,7 +46,7 @@ public typealias Parameters = [String: Any]
 
 /// 该协议定义了如何将参数集应用(设置)到`URLRequest`上
 public protocol ParameterEncoding {
-    /// 将参数进行编码，并应用到现有的请求上并返回
+    /// 将参数进行编码，并配置至新创建的请求上
     ///
     /// - parameter urlRequest: 要应用参数的请求
     /// - parameter parameters: 要应用的参数
