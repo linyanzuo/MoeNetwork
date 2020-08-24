@@ -11,8 +11,14 @@
 public struct HomeAPI {
 
     /// 分页查询Banner列表
-//    static let banner = HMBannerRequest()
+    static func banner() -> HMBannerRequest { return HMBannerRequest() }
 
     /// 查询所有热门玩法
-    static let hotGames = HMHotGamesRequest()
-} 
+    static func hotGames() -> HMHotGamesRequest { return HMHotGamesRequest() }
+    
+    /// 删除站内信
+    static func infoMsgDel() -> HMInfoMsgDelRequest { return HMInfoMsgDelRequest() }
+    
+    ///随机投注
+    static func betOrderRandom() -> HMBetOrderRandomRequest { return HMBetOrderRandomRequest() }
+}

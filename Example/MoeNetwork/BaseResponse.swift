@@ -9,15 +9,17 @@
 import MoeNetwork
 
 
-class BaseResponse: Response {
+class BaseResponse: HandyObject {
+    required init() { }
+    
     var errcode: Int?
     var errmsg: String?
 
-    override func statusCode() -> Int {
-        return self.errcode ?? -1
-    }
-
-    override func statusMessage() -> String {
-        return self.errmsg ?? "No Message"
-    }
+//    override func statusCode() -> Int {
+//        return self.errcode ?? -1
+//    }
+//
+//    override func statusMessage() -> String {
+//        return self.errmsg ?? "No Message"
+//    }
 }

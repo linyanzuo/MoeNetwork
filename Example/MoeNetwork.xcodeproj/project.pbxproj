@@ -14,11 +14,14 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		9565194B2350333C005AA4EE /* ModelPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565194A2350333C005AA4EE /* ModelPersistence.swift */; };
+		9595B622236A9A1D006DA75B /* HMInfoMsgDelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9595B621236A9A1D006DA75B /* HMInfoMsgDelRequest.swift */; };
+		9595B624236AB6EA006DA75B /* HMBetOrderRandomRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9595B623236AB6EA006DA75B /* HMBetOrderRandomRequest.swift */; };
 		95B9A34E2314DC6000D7DE15 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */; };
 		95B9A3502314E25600D7DE15 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A34F2314E25600D7DE15 /* BaseResponse.swift */; };
 		95B9A38823152E8300D7DE15 /* HMHotGamesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A38523152E8300D7DE15 /* HMHotGamesAPI.swift */; };
 		95B9A38923152E8300D7DE15 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A38623152E8300D7DE15 /* HomeAPI.swift */; };
-		95B9A38A23152E8300D7DE15 /* HMBannerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A38723152E8300D7DE15 /* HMBannerAPI.swift */; };
+		95B9A38A23152E8300D7DE15 /* HMBannerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A38723152E8300D7DE15 /* HMBannerRequest.swift */; };
 		B92C9959E7657AEA64FCDD95 /* Pods_MoeNetwork_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188EBEDAF7C0B409AA6DCF4B /* Pods_MoeNetwork_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,11 +51,14 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7ACCC3B5F7F0B0F9EBF1F67E /* MoeNetwork.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MoeNetwork.podspec; path = ../MoeNetwork.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9565194A2350333C005AA4EE /* ModelPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPersistence.swift; sourceTree = "<group>"; };
+		9595B621236A9A1D006DA75B /* HMInfoMsgDelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMInfoMsgDelRequest.swift; sourceTree = "<group>"; };
+		9595B623236AB6EA006DA75B /* HMBetOrderRandomRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMBetOrderRandomRequest.swift; sourceTree = "<group>"; };
 		95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		95B9A34F2314E25600D7DE15 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		95B9A38523152E8300D7DE15 /* HMHotGamesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMHotGamesAPI.swift; sourceTree = "<group>"; };
 		95B9A38623152E8300D7DE15 /* HomeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
-		95B9A38723152E8300D7DE15 /* HMBannerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMBannerAPI.swift; sourceTree = "<group>"; };
+		95B9A38723152E8300D7DE15 /* HMBannerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMBannerRequest.swift; sourceTree = "<group>"; };
 		B445E53BEC154046FAB22ADE /* Pods-MoeNetwork_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoeNetwork_Tests.release.xcconfig"; path = "Target Support Files/Pods-MoeNetwork_Tests/Pods-MoeNetwork_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BF515DB351EEBD6AD3B1A8C0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F14023566EA8F666E994EF9C /* Pods-MoeNetwork_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoeNetwork_Example.debug.xcconfig"; path = "Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,8 +168,10 @@
 		95B9A3452313EB6A00D7DE15 /* HomeAPI */ = {
 			isa = PBXGroup;
 			children = (
-				95B9A38723152E8300D7DE15 /* HMBannerAPI.swift */,
+				95B9A38723152E8300D7DE15 /* HMBannerRequest.swift */,
+				9595B621236A9A1D006DA75B /* HMInfoMsgDelRequest.swift */,
 				95B9A38523152E8300D7DE15 /* HMHotGamesAPI.swift */,
+				9595B623236AB6EA006DA75B /* HMBetOrderRandomRequest.swift */,
 				95B9A38623152E8300D7DE15 /* HomeAPI.swift */,
 			);
 			name = HomeAPI;
@@ -172,6 +180,7 @@
 		95B9A34C2314DC5300D7DE15 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9565194A2350333C005AA4EE /* ModelPersistence.swift */,
 				95B9A3452313EB6A00D7DE15 /* HomeAPI */,
 				95B9A34D2314DC6000D7DE15 /* BaseRequest.swift */,
 				95B9A34F2314E25600D7DE15 /* BaseResponse.swift */,
@@ -304,12 +313,14 @@
 				"${PODS_ROOT}/Target Support Files/Pods-MoeNetwork_Example/Pods-MoeNetwork_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/MoeCommon/MoeCommon.framework",
 				"${BUILT_PRODUCTS_DIR}/MoeNetwork/MoeNetwork.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoeCommon.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoeNetwork.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -372,9 +383,12 @@
 				95B9A38923152E8300D7DE15 /* HomeAPI.swift in Sources */,
 				95B9A34E2314DC6000D7DE15 /* BaseRequest.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				9595B624236AB6EA006DA75B /* HMBetOrderRandomRequest.swift in Sources */,
+				9595B622236A9A1D006DA75B /* HMInfoMsgDelRequest.swift in Sources */,
 				95B9A38823152E8300D7DE15 /* HMHotGamesAPI.swift in Sources */,
 				95B9A3502314E25600D7DE15 /* BaseResponse.swift in Sources */,
-				95B9A38A23152E8300D7DE15 /* HMBannerAPI.swift in Sources */,
+				95B9A38A23152E8300D7DE15 /* HMBannerRequest.swift in Sources */,
+				9565194B2350333C005AA4EE /* ModelPersistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

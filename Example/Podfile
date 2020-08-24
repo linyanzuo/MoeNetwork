@@ -1,6 +1,7 @@
 use_frameworks!
 
 target 'MoeNetwork_Example' do
+  pod 'MoeCommon', :git=>'https://github.com/linyanzuo/MoeCommon.git'
   pod 'MoeNetwork', :path => '../'
   pod 'HandyJSON', '~> 5.0.0'
   pod 'Alamofire', '~> 4.8.2'

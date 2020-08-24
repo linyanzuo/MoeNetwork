@@ -10,11 +10,52 @@ import MoeNetwork
 
 
 class BaseRequest: Request {
-    override func baseURL() -> URL {
-        return URL(string: "http://47.52.20.37:8400/v2/w")!
+    override init() {
+        super.init()
+        test()
     }
+    
+    func test() {
+        self.addAccessory(LoadingAccessory())
+        self.addInjector(TokenInjector())
+    }
+}
 
-    override func authenticationToken() -> String {
-        return "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ3aWtpaG9tZUBxcS5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiaWQiOjExNTg1ODk3NzgyNDkzMjY1OTMsImVtYWlsIjoid2lraWhvbWVAcXEuY29tIiwiY291bnRyeV9jb2RlIjoiKzg2IiwiZXhwIjoxNzM4NjYwNzUxfQ.z_PkQY7D9_S2egAf4QG6XhseKAS9ig9hlUAf2G-LQ0dg5mRGJr0CSh7RemlmtYxHt1THzeibdZvUlcBJ6ezpcQ"
+
+struct LoadingAccessory: RequestAccessory {
+    func identifier() -> String {
+        return "Loading"
+    }
+    
+    func requestWillStart(request: Request) {
+        print("展示正在加载")
+    }
+    
+    func request(request: Request, willCompletedSuccessfully isSuccess: Bool) {
+        print("隐藏正在加载")
+    }
+    
+    func request(request: Request, didCompletedSuccessfully isSuccess: Bool) {
+        print("----------")
+    }
+}
+
+
+struct TokenInjector: RequestInjection {    
+    func identifier() -> String {
+        return "TokenInjector"
+    }
+    
+    func injectHeaderField(_ field: [String : String], to request: Request) -> [String : String] {
+        var field = field
+        let token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhMTIxQHFxLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJpZCI6MTE4NjQ1NTg5OTY3NjgwMzA3MywidGVsIjoiMTU4MTg1NDAwMDEiLCJlbWFpbCI6ImExMjFAcXEuY29tIiwiY291bnRyeV9jb2RlIjoiKzg2IiwiZXhwIjoxNzQ1MzAzNzQxfQ.-L8kV6QUj7ZAbZHsw8ymXO0w-sPkK8F9s7Rqd9w4W779cv98tiFENaznRTb-A9KXALEUHG1HzMT9GATejpQcxA"
+        field.updateValue(token, forKey: "Authorization")
+        return field
+    }
+    
+    func injectParameters(_ parameters: [String : Any], to request: Request) -> [String : Any] {
+        var para: [String : Any] = parameters
+        para.updateValue("iOS", forKey: "Platform")
+        return para
     }
 }

@@ -12,25 +12,17 @@ import HandyJSON
 
 
 /// 分页查询Banner列表
-class HMBannerRequest: BaseRequest {
+class HMBannerRequest: BaseRequest, Persistence {
     override func path() -> String {
         return "/banner"
     }
-
-    override func responseType() -> Response.Type {
-        return HMBannerResponse.self
-    }
-
+    
     override func method() -> Request.Method {
-        return .post
+        return .get
     }
-
-    override func requestWillSend() {
-        print("HMBannerRequest will send")
-    }
-
-    override func requestDidFinish(isSuccess: Bool) {
-        print("HMBannerRequest did finish")
+    
+    override func serializer() -> Response.Serializer {
+        return .handyJson(HMBannerResponse.self)
     }
 
     deinit {
@@ -39,12 +31,12 @@ class HMBannerRequest: BaseRequest {
 }
 
 
-class HMBannerResponse: BaseResponse {
+class HMBannerResponse: BaseResponse, Persistence {
     var data: HMBannerData?
 }
 
 
-struct HMBannerData: ResponseData {
+struct HMBannerData: HandyObject, Persistence {
     var records: [HMBannerRecord]?
     var total: Int?
     var size: Int?
@@ -54,7 +46,9 @@ struct HMBannerData: ResponseData {
 }
 
 
-struct HMBannerRecord: ResponseData {
+/// 如果HMBannerRecord没有遵守Persistence协议, 会导致Codable协议报错如下
+/// Type 'HMBannerData' does not conform to protocol 'Decodable'
+struct HMBannerRecord: HandyObject, Persistence {
     var id: String?
     var category: String?
     var name: String?

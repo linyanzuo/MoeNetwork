@@ -41,4 +41,5 @@ TODO: Add long description of the pod here.
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'HandyJSON', '~> 5.0.0'
   s.dependency 'Alamofire', '~> 4.8.2'
+  s.dependency 'MoeCommon'
 end

@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import MoeCommon
 
 
 public class NetworkHelper {
@@ -24,7 +25,7 @@ public class NetworkHelper {
 }
 
 
-// MARK: Reachability
+// MARK: 可达性检测
 extension NetworkHelper {
     /// Starts listening for changes in network reachability status.
     /// Post notification named `ConnectionState` if status change
@@ -56,28 +57,28 @@ extension NetworkHelper {
 }
 
 
-// MARK: Error Code Handle
+// MARK: 错误代码处理
 extension NetworkHelper {
     internal func checkHttpErrorCode(errorCode: Int, errorMessage: String) -> Bool {
         let assetBundle = AssetHelper.assetBundle()
         let language = Bundle.main.preferredLocalizations.first
 
         guard let url = assetBundle.url(forResource: "Http_Error_Code", withExtension: "plist", subdirectory: nil, localization: language) else {
-            MLog("Load Http_Error_Code fail, please check the url or `Http_Error_Code.plst`")
+            showDevError("Load Http_Error_Code fail, please check the url or `Http_Error_Code.plst`")
             return false
         }
         guard let httpErrorCodeTable = NSDictionary(contentsOf: url) else {
-            MLog("File format error, Http_Error_Code.plist should be Dictionary")
+            showDevError("File format error, Http_Error_Code.plist should be Dictionary")
             return false
         }
         guard let httpErrorCodes = httpErrorCodeTable.allKeys as? [String] else {
-            MLog("There is no http error code in Http_Error_Code table")
+            showDevError("There is no http error code in Http_Error_Code table")
             return false
         }
 
         for httpErrorCode in httpErrorCodes {
             if Int(httpErrorCode) == errorCode, let errMsg = httpErrorCodeTable.value(forKey: httpErrorCode) as? String {
-                self.alertDebugError(errMsg)
+                self.showDevError(errMsg)
                 return true
             }
         }
@@ -94,7 +95,7 @@ extension NetworkHelper {
         case 41003:
             name = Notification.Name.Network.PermissionDenied
         default:
-            MLog("Unhandle Status Code: \(errorCode);\n\(errorMessage)")
+            showDevError("Unhandle Status Code: \(errorCode);\n\(errorMessage)")
         }
 
         guard name != nil else { return false }
@@ -106,18 +107,28 @@ extension NetworkHelper {
 }
 
 
-// MARK: Debug error
+// MARK: 错误调试
 extension NetworkHelper {
-    internal func alertDebugError(_ message: String) {
+    internal func showDevError(_ message: String) {
         MLog(message)
         NotificationCenter.default.post(name: Notification.Name.Network.DebugError,
                                         object: self,
                                         userInfo: [Notification.Key.HintMessage: message])
     }
+
+    internal func showError(_ message: String) {
+        NotificationCenter.default.post(name: Notification.Name.Network.AlertError,
+                                        object: self,
+                                        userInfo: [Notification.Key.HintMessage: message])
+    }
+    
+    internal static func buildURLAssert(condition: Bool) {
+        assert(condition, "Build URL Fail, please check `baseURL` and `path` of request")
+    }
 }
 
 
-// MARK: Pod Asset Helper
+// MARK: 库资源助手
 class AssetHelper: NSObject {
     internal static func assetBundle() -> Bundle {
         let frameworkBundle = Bundle(for: self.classForCoder())

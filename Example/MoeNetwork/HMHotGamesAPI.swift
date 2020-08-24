@@ -13,11 +13,11 @@ import HandyJSON
 /// 查询所有热门玩法
 class HMHotGamesRequest: BaseRequest {
     override func path() -> String {
-        return "/lottery/game/queryHotGames"
+        return "lottery/game/queryHotGames"
     }
 
-    override func responseType() -> Response.Type {
-        return HMHotGamesResponse.self
+    override func serializer() -> Response.Serializer {
+        return .handyJson(HMHotGamesResponse.self)
     }
 }
 
@@ -27,7 +27,7 @@ class HMHotGamesResponse: BaseResponse {
 }
 
 
-struct HMHotGamesData: ResponseData {
+struct HMHotGamesData: HandyObject {
     var id: String?
     var code: String?
     var name: String?
