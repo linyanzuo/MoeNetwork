@@ -24,36 +24,36 @@
 
 import Foundation
 
-/// The type in which all data response serializers must conform to in order to serialize a response.
+// MARK: - 响应的序列化
+
+/// 为了对`response`进行序列化，所有数据响应序列化器的类型都必须遵守该协议
 public protocol DataResponseSerializerProtocol {
-    /// The type of serialized object to be created by this `DataResponseSerializerType`.
+    /// 由本序列化器(`DataResponseSerializer`)所创建的序列化对象的类型
     associatedtype SerializedObject
 
-    /// A closure used by response handlers that takes a request, response, data and error and returns a result.
+    /// 响应结果处理时调用的闭包，返回处理结果`Result`
     var serializeResponse: (URLRequest?, HTTPURLResponse?, Data?, Error?) -> Result<SerializedObject> { get }
 }
 
-// MARK: -
-
-/// A generic `DataResponseSerializerType` used to serialize a request, response, and data into a serialized object.
+/// 通用的序列化器类型(`DataResponseSerializerType`)
+/// 用于对请求(`request`)、响应(`response`)、数据(`Data`)进行序列化操作，转换成一个序列化对象
 public struct DataResponseSerializer<Value>: DataResponseSerializerProtocol {
-    /// The type of serialized object to be created by this `DataResponseSerializer`.
+    /// 由本序列化器(`DataResponseSerializer`)所创建的序列化对象的类型
     public typealias SerializedObject = Value
 
     /// A closure used by response handlers that takes a request, response, data and error and returns a result.
     public var serializeResponse: (URLRequest?, HTTPURLResponse?, Data?, Error?) -> Result<Value>
 
-    /// Initializes the `ResponseSerializer` instance with the given serialize response closure.
+    /// 使用指定的`serializeResponse`闭包初始化`ResponseSerializer`实例
     ///
-    /// - parameter serializeResponse: The closure used to serialize the response.
-    ///
-    /// - returns: The new generic response serializer instance.
+    /// - parameter serializeResponse: 对`response`进行序列化操作的闭包
+    /// - returns: 新生成的响应序列化器实例
     public init(serializeResponse: @escaping (URLRequest?, HTTPURLResponse?, Data?, Error?) -> Result<Value>) {
         self.serializeResponse = serializeResponse
     }
 }
 
-// MARK: -
+// MARK: - 下载响应的序列化
 
 /// The type in which all download response serializers must conform to in order to serialize a response.
 public protocol DownloadResponseSerializerProtocol {
@@ -63,8 +63,6 @@ public protocol DownloadResponseSerializerProtocol {
     /// A closure used by response handlers that takes a request, response, url and error and returns a result.
     var serializeResponse: (URLRequest?, HTTPURLResponse?, URL?, Error?) -> Result<SerializedObject> { get }
 }
-
-// MARK: -
 
 /// A generic `DownloadResponseSerializerType` used to serialize a request, response, and data into a serialized object.
 public struct DownloadResponseSerializer<Value>: DownloadResponseSerializerProtocol {
@@ -84,7 +82,7 @@ public struct DownloadResponseSerializer<Value>: DownloadResponseSerializerProto
     }
 }
 
-// MARK: - Timeline
+// MARK: - 请求的时间轴
 
 extension Request {
     var timeline: Timeline {
@@ -104,10 +102,10 @@ extension Request {
 // MARK: - Default
 
 extension DataRequest {
-    /// Adds a handler to be called once the request has finished.
+    /// 添加一个请求完成后被执行的回调闭包
     ///
-    /// - parameter queue:             The queue on which the completion handler is dispatched.
-    /// - parameter completionHandler: The code to be executed once the request has finished.
+    /// - parameter queue:             负责调度(执行)回调闭包的队列
+    /// - parameter completionHandler: 请求完成后被执行的代码
     ///
     /// - returns: The request.
     @discardableResult
@@ -131,14 +129,10 @@ extension DataRequest {
         return self
     }
 
-    /// Adds a handler to be called once the request has finished.
-    ///
-    /// - parameter queue:              The queue on which the completion handler is dispatched.
-    /// - parameter responseSerializer: The response serializer responsible for serializing the request, response,
-    ///                                 and data.
-    /// - parameter completionHandler:  The code to be executed once the request has finished.
-    ///
-    /// - returns: The request.
+    /// 添加回调闭包，一旦请求完成就会调用
+    /// - Parameter queue: 负责调度回调闭包的队列，`nil`则为主线程
+    /// - Parameter responseSerializer: 负责序列化请求、响应、数据的序列化器
+    /// - Parameter completionHandler: 请求完成后执行的闭包
     @discardableResult
     public func response<T: DataResponseSerializerProtocol>(
         queue: DispatchQueue? = nil,
@@ -146,7 +140,9 @@ extension DataRequest {
         completionHandler: @escaping (DataResponse<T.SerializedObject>) -> Void)
         -> Self
     {
+        // 由`TaskDelegate`负责响应相关的队列操作
         delegate.queue.addOperation {
+            // 获取序列化的结果(`Result`)
             let result = responseSerializer.serializeResponse(
                 self.request,
                 self.response,
@@ -154,6 +150,7 @@ extension DataRequest {
                 self.delegate.error
             )
 
+            // 获取最终的响应数据
             var dataResponse = DataResponse<T.SerializedObject>(
                 request: self.request,
                 response: self.response,
@@ -164,6 +161,7 @@ extension DataRequest {
 
             dataResponse.add(self.delegate.metrics)
 
+            // 执行回调闭包
             (queue ?? DispatchQueue.main).async { completionHandler(dataResponse) }
         }
 
@@ -271,20 +269,19 @@ extension Request {
 }
 
 extension DataRequest {
-    /// Creates a response serializer that returns the associated data as-is.
+    /// 创建响应序列化器，返回关联数据的原始模样（Data）
     ///
-    /// - returns: A data response serializer.
+    /// - returns: 数据响应序列化器
     public static func dataResponseSerializer() -> DataResponseSerializer<Data> {
         return DataResponseSerializer { _, response, data, error in
             return Request.serializeResponseData(response: response, data: data, error: error)
         }
     }
 
-    /// Adds a handler to be called once the request has finished.
+    /// 添加回调处理，一旦请求完成就会执行该回调
     ///
-    /// - parameter completionHandler: The code to be executed once the request has finished.
-    ///
-    /// - returns: The request.
+    /// - parameter completionHandler: 请求完成后要被执行的代码
+    /// - returns: 执行的请求
     @discardableResult
     public func responseData(
         queue: DispatchQueue? = nil,
@@ -506,12 +503,9 @@ extension Request {
 }
 
 extension DataRequest {
-    /// Creates a response serializer that returns a JSON object result type constructed from the response data using
-    /// `JSONSerialization` with the specified reading options.
-    ///
-    /// - parameter options: The JSON serialization reading options. Defaults to `.allowFragments`.
-    ///
-    /// - returns: A JSON object response serializer.
+    
+    /// 使用`JSONSerialization`和指定的读取配置创建响应序列化器，从响应数据中构造JSON类型结果对象并返回
+    /// - Parameter options: JSON序列化的读取配置，默认为`.allowFragments`
     public static func jsonResponseSerializer(
         options: JSONSerialization.ReadingOptions = .allowFragments)
         -> DataResponseSerializer<Any>
@@ -520,13 +514,11 @@ extension DataRequest {
             return Request.serializeResponseJSON(options: options, response: response, data: data, error: error)
         }
     }
-
-    /// Adds a handler to be called once the request has finished.
-    ///
-    /// - parameter options:           The JSON serialization reading options. Defaults to `.allowFragments`.
-    /// - parameter completionHandler: A closure to be executed once the request has finished.
-    ///
-    /// - returns: The request.
+    
+    /// 添加回调闭包，一旦请求完成就会调用
+    /// - Parameter queue: 负责调度回调闭包的队列，默认为主线程
+    /// - Parameter options: JSON序列化读取选项，默认为`.allowFragments`
+    /// - Parameter completionHandler: 请求完成后执行的闭包
     @discardableResult
     public func responseJSON(
         queue: DispatchQueue? = nil,

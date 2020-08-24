@@ -24,18 +24,14 @@
 
 import Foundation
 
-/// Used to represent whether a request was successful or encountered an error.
-///
-/// - success: The request and all post processing operations were successful resulting in the serialization of the
-///            provided associated value.
-///
-/// - failure: The request encountered an error resulting in a failure. The associated values are the original data
-///            provided by the server as well as the error that caused the failure.
+/// 用于表示请求是成功，还是遇到错误
 public enum Result<Value> {
+    /// 请求和所有后期处理都成功，关联值是序列化的结果
     case success(Value)
+    /// 请求遇到错误导致失败。关联值是服务器提供的原始数据、也是导致失败的错误
     case failure(Error)
 
-    /// Returns `true` if the result is a success, `false` otherwise.
+    /// 如果结果是成功的，则返回`true`，否则返回`false`
     public var isSuccess: Bool {
         switch self {
         case .success:
@@ -45,12 +41,12 @@ public enum Result<Value> {
         }
     }
 
-    /// Returns `true` if the result is a failure, `false` otherwise.
+    /// 如果结果是失败的，则返回`true`, 否则返回`false`
     public var isFailure: Bool {
         return !isSuccess
     }
 
-    /// Returns the associated value if the result is a success, `nil` otherwise.
+    /// 如果结果是成功的，则返回关联的值, 否则返回`nil`
     public var value: Value? {
         switch self {
         case .success(let value):
@@ -60,7 +56,7 @@ public enum Result<Value> {
         }
     }
 
-    /// Returns the associated error value if the result is a failure, `nil` otherwise.
+    /// 如果结果是失败的，则返回关联的错误值，否则返回`nil`
     public var error: Error? {
         switch self {
         case .success:

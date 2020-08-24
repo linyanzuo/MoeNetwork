@@ -27,21 +27,18 @@
 import Foundation
 import SystemConfiguration
 
-/// The `NetworkReachabilityManager` class listens for reachability changes of hosts and addresses for both WWAN and
-/// WiFi network interfaces.
+/// `NetworkReachabilityManager`类监听指定“主机和地址”在“WWAN和WIFI网络接口”下的可达性(正常连接)
 ///
-/// Reachability can be used to determine background information about why a network operation failed, or to retry
-/// network requests when a connection is established. It should not be used to prevent a user from initiating a network
-/// request, as it's possible that an initial request may be required to establish reachability.
+/// 可使用`Reachability`判断网络操作失败的背景信息，或当网络重新建立连接时重新尝试发送网络请求。
+/// 尽管开始请求可能要求建立正常连接(可达性)，但`Reachability`并不能用来阻止用户开始网络请求
 open class NetworkReachabilityManager {
-    /// Defines the various states of network reachability.
-    ///
-    /// - unknown:      It is unknown whether the network is reachable.
-    /// - notReachable: The network is not reachable.
-    /// - reachable:    The network is reachable.
+    /// 定义了网络连通(可达性)的各种状态
     public enum NetworkReachabilityStatus {
+        /// 未知当前网络是否可达(连通)
         case unknown
+        /// 当前网络不可达(连通)
         case notReachable
+        /// 当前网络可达(连通)
         case reachable(ConnectionType)
     }
 
@@ -49,36 +46,39 @@ open class NetworkReachabilityManager {
     ///
     /// - ethernetOrWiFi: The connection type is either over Ethernet or WiFi.
     /// - wwan:           The connection type is a WWAN connection.
+    
+    /// 定义了`Reachability`检查到的各种连接状态
     public enum ConnectionType {
+        /// 连接状态为以太网或WiFi
         case ethernetOrWiFi
+        /// 连接状态为WWAN(无线广域网)
         case wwan
     }
 
-    /// A closure executed when the network reachability status changes. The closure takes a single argument: the
-    /// network reachability status.
+    /// 当网络连通状态改变时执行的闭包。该闭包携带一个参数：网络连接状态
     public typealias Listener = (NetworkReachabilityStatus) -> Void
 
     // MARK: - Properties
 
-    /// Whether the network is currently reachable.
+    /// 判断当前网络是否连通
     open var isReachable: Bool { return isReachableOnWWAN || isReachableOnEthernetOrWiFi }
 
-    /// Whether the network is currently reachable over the WWAN interface.
+    /// 判断当前WWAN(手机网络)是否连通
     open var isReachableOnWWAN: Bool { return networkReachabilityStatus == .reachable(.wwan) }
 
-    /// Whether the network is currently reachable over Ethernet or WiFi interface.
+    /// 判断当前WIFI或以太网(通过网线)是否连通
     open var isReachableOnEthernetOrWiFi: Bool { return networkReachabilityStatus == .reachable(.ethernetOrWiFi) }
 
-    /// The current network reachability status.
+    /// 当前网络的连通状态
     open var networkReachabilityStatus: NetworkReachabilityStatus {
         guard let flags = self.flags else { return .unknown }
         return networkReachabilityStatusForFlags(flags)
     }
 
-    /// The dispatch queue to execute the `listener` closure on.
+    /// 执行`listener`闭包的调度队列
     open var listenerQueue: DispatchQueue = DispatchQueue.main
 
-    /// A closure executed when the network reachability status changes.
+    /// 当网络连通状态改变时执行的闭包
     open var listener: Listener?
 
     open var flags: SCNetworkReachabilityFlags? {

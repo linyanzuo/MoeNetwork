@@ -14,7 +14,7 @@ open class Response {
         self.response = nil
         self.originalData = nil
     }
-    
+
     /// 请求开始时间
     public var startTime: Date?
     /// 请求完成时间
@@ -51,7 +51,6 @@ extension Alamofire.Request {
         error: Error?) -> Result<Any>
     {
         guard error == nil else { return .failure(error!) }
-
         let emptyDataStatusCodes: Set<Int> = [204, 205]
         if let response = response, emptyDataStatusCodes.contains(response.statusCode)
         { return .success(NSNull()) }
@@ -80,6 +79,7 @@ extension Alamofire.Request {
     }
 }
 
+
 extension Alamofire.DataRequest {
     public static func handyJsonResponseSerializer(
         options: JSONSerialization.ReadingOptions = .allowFragments,
@@ -95,3 +95,11 @@ extension Alamofire.DataRequest {
         }
     }
 }
+
+
+//extension Alamofire.AFError {
+//    public enum ResponseSerializationFailureReason {
+//        /// `JSONSerialization`因底层系统错误导致序列化失败
+//        case handyJsonSerializationFailed(error: Error)
+//    }
+//}

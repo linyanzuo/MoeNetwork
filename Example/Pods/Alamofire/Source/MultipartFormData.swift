@@ -22,6 +22,58 @@
 //  THE SOFTWARE.
 //
 
+/**
+ * `form`表单的`enctype`属性，规定了表单数据在发送到服务器时使用的编码方式：
+ *     * `application/x-www-form-urlencoded` | URL编码，格式与URL的`QueryString`一样，如`first=1&second=2`
+ *     * `multipart/form-data` | 指定传输数据为二进制数据，如图片
+ *     * `text/plain` | 纯文本，不支持特殊字符编码，空格转换为`+`
+ *
+------------------- 示例表单内容开始 -------------------
+    <FORM method="POST" action="https://www.moemone.com/clubs/club.do" enctype="multipart/form-data">
+        <INPUT type="text" name="city" value="Shen Zhen">
+        <INPUT type="text" name="title">
+        <INPUT type="file" name="pic">
+    </FORM>
+------------------- 示例表单内容结束 -------------------
+
+ *
+ * 一个表单(`FORM`)由多个表单项(如`INPUT`)组成，表单项分为普通表单项(如`type="text"`)和文件表单项(如`type="file"`)
+ * 多部件表单数据(`multipart/form-data`)会将每个表单项作为一个部件(`part`)，每个部件间使用边界`--boundary`隔开
+ * 每个部件内部都包含头部及数据，头部信息除了`Content-Disposition`外，其余为可选项
+ *  * 普通表单项： `Content-Disposition: form-data; name="表单控件的名称";`
+ *  * 文件表单项： `Content-Disposition: form-data; name="表单控件的名称"; filename="文件名";`
+ * 以标签为单元，用分隔符分开
+ *
+------------------- 浏览器最终会发送数据示例开始 -------------------
+    POST /clubs/club.do HTTP/1.1
+    User-Agent: safari 5.1 – MAC
+    Accept-Language: zh-cn,zh;q=0.5
+    Accept-Charset: GBK,utf-8;q=0.7,*;q=0.7
+    Connection: keep-alive
+    Content-Length: 60408
+    Content-Type:multipart/form-data; boundary=ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC
+    Host: www.moemone.com
+    
+    --ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC
+    Content-Disposition: form-data; name="city"
+    
+    Shen Zhen
+    --ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC
+    Content-Disposition: form-data;name="title"
+    Content-Type: text/plain; charset=UTF-8
+    Content-Transfer-Encoding: 8bit
+    
+    ...
+    --ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC
+    Content-Disposition: form-data;name="pic"; filename="photo.jpg"
+    Content-Type: application/octet-stream
+    Content-Transfer-Encoding: binary
+    
+    ... 图片的二进制数据 ...
+    --ZnGpDtePMx0KrHh_G0X99Yef9r8JZsRJSXC--
+------------------- 浏览器最终会发送数据示例结束 -------------------
+ */
+
 import Foundation
 
 #if os(iOS) || os(watchOS) || os(tvOS)
@@ -30,35 +82,48 @@ import MobileCoreServices
 import CoreServices
 #endif
 
-/// Constructs `multipart/form-data` for uploads within an HTTP or HTTPS body. There are currently two ways to encode
-/// multipart form data. The first way is to encode the data directly in memory. This is very efficient, but can lead
-/// to memory issues if the dataset is too large. The second way is designed for larger datasets and will write all the
-/// data to a single file on disk with all the proper boundary segmentation. The second approach MUST be used for
-/// larger datasets such as video content, otherwise your app may run out of memory when trying to encode the dataset.
-///
 /// For more information on `multipart/form-data` in general, please refer to the RFC-2388 and RFC-2045 specs as well
 /// and the w3 form documentation.
 ///
 /// - https://www.ietf.org/rfc/rfc2388.txt
 /// - https://www.ietf.org/rfc/rfc2045.txt
 /// - https://www.w3.org/TR/html401/interact/forms.html#h-17.13
+
+/// `多部件表单数据`，用于构造多部件数据(`multipart/form-data`)，通过HTTP或HTTPS主体进行上传。
+/// 目前有两种方式可以编码多表单数据：
+/// 1. 直接在内存中对数据进行编码。这种方式非常高效，但如果数据集太多会导致内存问题
+/// 2. 针对大文件，将所有数据及适当的分割边界(`boundary`)写入硬盘上的同一个文件。
+///    大文件必须使用第2种方式，否则在尝试对数据集进行编码时，可能会出现内存耗尽的情况
 open class MultipartFormData {
 
     // MARK: - Helper Types
 
+    /// 字符编码的辅助类型
     struct EncodingCharacters {
+        /// 回车换行 （carriage return / line feed）
         static let crlf = "\r\n"
     }
 
+    /// 边界生成器（多部件数据内部使用边界进行部件的区分）
     struct BoundaryGenerator {
         enum BoundaryType {
-            case initial, encapsulated, final
+            /// 初始边界
+            case initial
+            /// 内部边界，用于划分不同的部件
+            case encapsulated
+            /// 结束边界
+            case final
         }
 
+        /// 生成随机边界（边界的本质就是一串特殊的字符串）
         static func randomBoundary() -> String {
             return String(format: "alamofire.boundary.%08x%08x", arc4random(), arc4random())
         }
 
+        
+        /// 生成指定类型、指定内容对应的边界
+        /// - Parameter boundaryType: 边界类型
+        /// - Parameter boundary: 边界内容
         static func boundaryData(forBoundaryType boundaryType: BoundaryType, boundary: String) -> Data {
             let boundaryText: String
 
@@ -75,6 +140,7 @@ open class MultipartFormData {
         }
     }
 
+    /// 部件主体，对应多部件表单数据的一个部件
     class BodyPart {
         let headers: HTTPHeaders
         let bodyStream: InputStream
@@ -91,49 +157,45 @@ open class MultipartFormData {
 
     // MARK: - Properties
 
-    /// The `Content-Type` header value containing the boundary used to generate the `multipart/form-data`.
+    /// 用于生成多部件表单数据的报文头中`Content-Type`字段的边界值
     open lazy var contentType: String = "multipart/form-data; boundary=\(self.boundary)"
 
-    /// The content length of all body parts used to generate the `multipart/form-data` not including the boundaries.
+    /// 用于生成多部件表单数据的所有部件主体的内容长度，但不包括边界值的长度 （`Content-Length`）
     public var contentLength: UInt64 { return bodyParts.reduce(0) { $0 + $1.bodyContentLength } }
 
-    /// The boundary used to separate the body parts in the encoded form data.
+    /// 用于在编码数据中分割各个部件主体的边界
     public var boundary: String
-
+    
+    /// 记录每个部件主体的数组
     private var bodyParts: [BodyPart]
     private var bodyPartError: AFError?
     private let streamBufferSize: Int
 
     // MARK: - Lifecycle
-
-    /// Creates a multipart form data object.
-    ///
-    /// - returns: The multipart form data object.
+    
+    /// 创建`多部件表单数据`实例
     public init() {
         self.boundary = BoundaryGenerator.randomBoundary()
         self.bodyParts = []
 
+        /// 输入流和输出流的最佳读/写缓存大小为1024字节(1KB)
+        /// For more information, please refer to the following article:
+        /// https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Streams/Articles/ReadingInputStreams.html
         ///
-        /// The optimal read/write buffer size in bytes for input and output streams is 1024 (1KB). For more
-        /// information, please refer to the following article:
-        ///   - https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Streams/Articles/ReadingInputStreams.html
-        ///
-
         self.streamBufferSize = 1024
     }
 
     // MARK: - Body Parts
 
-    /// Creates a body part from the data and appends it to the multipart form data object.
+    /// 从`data`创建部件主体实例，并添加到多部件表单数据实例中
     ///
-    /// The body part data will be encoded using the following format:
-    ///
+    /// 使用以下格式对部件主体进行编码:
     /// - `Content-Disposition: form-data; name=#{name}` (HTTP Header)
-    /// - Encoded data
-    /// - Multipart form boundary
+    /// - `编码后的数据`
+    /// - `多部件表单边界`
     ///
-    /// - parameter data: The data to encode into the multipart form data.
-    /// - parameter name: The name to associate with the data in the `Content-Disposition` HTTP header.
+    /// - Parameter data: 要编码到`多部件表单数据`的数据
+    /// - Parameter name: 与数据关联的名称，作为HTTP报文头的`Content-Disposition`字段中`name`的值
     public func append(_ data: Data, withName name: String) {
         let headers = contentHeaders(withName: name)
         let stream = InputStream(data: data)
@@ -142,18 +204,21 @@ open class MultipartFormData {
         append(stream, withLength: length, headers: headers)
     }
 
-    /// Creates a body part from the data and appends it to the multipart form data object.
-    ///
-    /// The body part data will be encoded using the following format:
-    ///
-    /// - `Content-Disposition: form-data; name=#{name}` (HTTP Header)
-    /// - `Content-Type: #{generated mimeType}` (HTTP Header)
-    /// - Encoded data
-    /// - Multipart form boundary
-    ///
     /// - parameter data:     The data to encode into the multipart form data.
     /// - parameter name:     The name to associate with the data in the `Content-Disposition` HTTP header.
     /// - parameter mimeType: The MIME type to associate with the data content type in the `Content-Type` HTTP header.
+    
+    /// 从`data`创建部件主体实例，并添加到多部件表单数据实例中
+    ///
+    /// 使用以下格式对部件主体进行编码:
+    /// - `Content-Disposition: form-data; name=#{name}` (HTTP Header)
+    /// - `Content-Type: #{generated mimeType}` (HTTP Header)
+    /// - `编码后的数据`
+    /// - `多部件表单边界`
+    ///
+    /// - Parameter data: 要编码到`多部件表单数据`的数据
+    /// - Parameter name: 与数据关联的名称，作为HTTP报文头的`Content-Disposition`字段中`name`的值
+    /// - Parameter mimeType: 与数据的内容类型关联的`MIME`类型，作为HTTP报文头的`Content-Type`字段的值
     public func append(_ data: Data, withName name: String, mimeType: String) {
         let headers = contentHeaders(withName: name, mimeType: mimeType)
         let stream = InputStream(data: data)
@@ -227,7 +292,7 @@ open class MultipartFormData {
         let headers = contentHeaders(withName: name, fileName: fileName, mimeType: mimeType)
 
         //============================================================
-        //                 Check 1 - is file URL?
+        //                 Check 1 - 是否为文件资源地址
         //============================================================
 
         guard fileURL.isFileURL else {
@@ -236,7 +301,7 @@ open class MultipartFormData {
         }
 
         //============================================================
-        //              Check 2 - is file URL reachable?
+        //              Check 2 - 检查文件地址对应的资源是否能正常获取
         //============================================================
 
         do {
@@ -251,7 +316,7 @@ open class MultipartFormData {
         }
 
         //============================================================
-        //            Check 3 - is file URL a directory?
+        //            Check 3 - 检查文件地址对应的资源是否为目录
         //============================================================
 
         var isDirectory: ObjCBool = false
@@ -263,7 +328,7 @@ open class MultipartFormData {
         }
 
         //============================================================
-        //          Check 4 - can the file size be extracted?
+        //          Check 4 - 是否能取得文件大小
         //============================================================
 
         let bodyContentLength: UInt64
@@ -282,7 +347,7 @@ open class MultipartFormData {
         }
 
         //============================================================
-        //       Check 5 - can a stream be created from file URL?
+        //       Check 5 - 通过文件资源地址能否创建输入流
         //============================================================
 
         guard let stream = InputStream(url: fileURL) else {

@@ -41,58 +41,49 @@ public enum HTTPMethod: String {
 
 // MARK: -
 
-/// A dictionary of parameters to apply to a `URLRequest`.
+/// 应用到`URLRequest`上的参数字典
 public typealias Parameters = [String: Any]
 
-/// A type used to define how a set of parameters are applied to a `URLRequest`.
+/// 该协议定义了如何将参数集应用(设置)到`URLRequest`上
 public protocol ParameterEncoding {
-    /// Creates a URL request by encoding parameters and applying them onto an existing request.
+    /// 将参数进行编码，并配置至新创建的请求上
     ///
-    /// - parameter urlRequest: The request to have parameters applied.
-    /// - parameter parameters: The parameters to apply.
-    ///
-    /// - throws: An `AFError.parameterEncodingFailed` error if encoding fails.
-    ///
-    /// - returns: The encoded request.
+    /// - parameter urlRequest: 要应用参数的请求
+    /// - parameter parameters: 要应用的参数
+    /// - throws: 如果编码失败则抛出`AFError.parameterEncodingFailed`错误
+    /// - returns: 编码后的请求
     func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest
 }
 
 // MARK: -
 
-/// Creates a url-encoded query string to be set as or appended to any existing URL query string or set as the HTTP
-/// body of the URL request. Whether the query string is set or appended to any existing URL query string or set as
-/// the HTTP body depends on the destination of the encoding.
+/// 1. 创建新“URL编码查询字符”或追加到已存在的“URL查询字符串”
+/// 2. 设置为URL请求的HTTP消息体
 ///
-/// The `Content-Type` HTTP header field of an encoded request with HTTP body is set to
-/// `application/x-www-form-urlencoded; charset=utf-8`.
+/// 携带HTTP消息的已编码请求，其HTTP头字段设置为`application/x-www-form-urlencoded; charset=utf-8`
 ///
-/// There is no published specification for how to encode collection types. By default the convention of appending
-/// `[]` to the key for array values (`foo[]=1&foo[]=2`), and appending the key surrounded by square brackets for
-/// nested dictionary values (`foo[bar]=baz`) is used. Optionally, `ArrayEncoding` can be used to omit the
-/// square brackets appended to array keys.
+/// 目前暂无发布关于如何编码集合类型的规范，默认约定如下:
+/// 1. 为每个数组值的键后添加`[]` （`foo[]=1&foo[]=2`）
+///     `ArrayEncoding`也可选择省略为数组的键后添加方括号，如：（`foo=1&foo=2`）
+/// 2. 为每个字典值的键左右添加方括号`[键名]`，如：（`foo[bar]=bar`）
 ///
-/// `BoolEncoding` can be used to configure how boolean values are encoded. The default behavior is to encode
-/// `true` as 1 and `false` as 0.
+/// `BoolEncoding`可用来配置布尔值如何被编码。默认行为是将`true`编码为1、`false`编码为0
 public struct URLEncoding: ParameterEncoding {
-
-    // MARK: Helper Types
 
     /// Defines whether the url-encoded query string is applied to the existing query string or HTTP body of the
     /// resulting URL request.
     ///
-    /// - methodDependent: Applies encoded query string result to existing query string for `GET`, `HEAD` and `DELETE`
-    ///                    requests and sets as the HTTP body for requests with any other HTTP method.
-    /// - queryString:     Sets or appends encoded query string result to existing query string.
-    /// - httpBody:        Sets encoded query string result as the HTTP body of the URL request.
+    /// - methodDependent: 根据请求方式决定：`GET`、`HEAD`、`DELETE`请求时设置或追加至现有的查询字符串中，其它请求则设置为HTTP消息头
+    /// - queryString:     设置编码后的查询字符串，或追加至现有的查询字符串中
+    /// - httpBody:        设置编码后的查询字符串至URL请求的HTTP消息头
     public enum Destination {
         case methodDependent, queryString, httpBody
     }
 
-    /// Configures how `Array` parameters are encoded.
+    /// 配置数组类型的参数如何进行编码
     ///
-    /// - brackets:        An empty set of square brackets is appended to the key for every value.
-    ///                    This is the default behavior.
-    /// - noBrackets:      No brackets are appended. The key is encoded as is.
+    /// - brackets:        为每个值的键添加空内容方括号`[]`，此为默认行为
+    /// - noBrackets:      不添加方括号. 键保持原来的样子
     public enum ArrayEncoding {
         case brackets, noBrackets
 
@@ -106,10 +97,10 @@ public struct URLEncoding: ParameterEncoding {
         }
     }
 
-    /// Configures how `Bool` parameters are encoded.
+    /// 配置布尔类型的参数如何进行编码
     ///
-    /// - numeric:         Encode `true` as `1` and `false` as `0`. This is the default behavior.
-    /// - literal:         Encode `true` and `false` as string literals.
+    /// - numeric:         将`true`编码为1、`false`编码为0，此为默认行为
+    /// - literal:         将`true`和`false`编码成字符串字面量
     public enum BoolEncoding {
         case numeric, literal
 
@@ -125,36 +116,36 @@ public struct URLEncoding: ParameterEncoding {
 
     // MARK: Properties
 
-    /// Returns a default `URLEncoding` instance.
+    /// 返回默认的`URLEncoding`实例
     public static var `default`: URLEncoding { return URLEncoding() }
 
-    /// Returns a `URLEncoding` instance with a `.methodDependent` destination.
+    /// 返回`.methodDependent`方式的`URLEncoding`实例
     public static var methodDependent: URLEncoding { return URLEncoding() }
 
-    /// Returns a `URLEncoding` instance with a `.queryString` destination.
+    /// 返回`.queryString`方式的`URLEncoding`实例
     public static var queryString: URLEncoding { return URLEncoding(destination: .queryString) }
 
-    /// Returns a `URLEncoding` instance with an `.httpBody` destination.
+    /// 返回`.httpBody`方式的`URLEncoding`实例
     public static var httpBody: URLEncoding { return URLEncoding(destination: .httpBody) }
 
-    /// The destination defining where the encoded query string is to be applied to the URL request.
+    /// destination决定了编码后的查询字符串如何应用到URL请求中
     public let destination: Destination
 
-    /// The encoding to use for `Array` parameters.
+    /// 作用于`Array`类型参数的编码
     public let arrayEncoding: ArrayEncoding
 
-    /// The encoding to use for `Bool` parameters.
+    /// 作用于`Bool`类型参数的编码
     public let boolEncoding: BoolEncoding
 
     // MARK: Initialization
 
-    /// Creates a `URLEncoding` instance using the specified destination.
+    /// 使用指定的destination创建`URLEncoding`实例
     ///
-    /// - parameter destination: The destination defining where the encoded query string is to be applied.
-    /// - parameter arrayEncoding: The encoding to use for `Array` parameters.
-    /// - parameter boolEncoding: The encoding to use for `Bool` parameters.
+    /// - parameter destination: destination决定了编码后的查询字符串如何应用到URL请求中
+    /// - parameter arrayEncoding: 作用于`Array`类型参数的编码
+    /// - parameter boolEncoding: 作用于`Bool`类型参数的编码
     ///
-    /// - returns: The new `URLEncoding` instance.
+    /// - returns: 新创建的`URLEncoding`实例.
     public init(destination: Destination = .methodDependent, arrayEncoding: ArrayEncoding = .brackets, boolEncoding: BoolEncoding = .numeric) {
         self.destination = destination
         self.arrayEncoding = arrayEncoding
@@ -164,13 +155,14 @@ public struct URLEncoding: ParameterEncoding {
     // MARK: Encoding
 
     /// Creates a URL request by encoding parameters and applying them onto an existing request.
+    /// 创建URL请求并对参数进行编码，再添加到现有的请求当中
     ///
-    /// - parameter urlRequest: The request to have parameters applied.
-    /// - parameter parameters: The parameters to apply.
+    /// - parameter urlRequest: 要处理参数的请求
+    /// - parameter parameters: 要处理的参数
     ///
-    /// - throws: An `Error` if the encoding process encounters an error.
+    /// - throws: 如果编码处理过程出错，则抛出`Error`
     ///
-    /// - returns: The encoded request.
+    /// - returns: 参数编码后的`URLRequest`实例
     public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
         var urlRequest = try urlRequest.asURLRequest()
 
@@ -181,12 +173,14 @@ public struct URLEncoding: ParameterEncoding {
                 throw AFError.parameterEncodingFailed(reason: .missingURL)
             }
 
+            // 将参数编码后，添加到URL请求 (URL)
             if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false), !parameters.isEmpty {
                 let percentEncodedQuery = (urlComponents.percentEncodedQuery.map { $0 + "&" } ?? "") + query(parameters)
                 urlComponents.percentEncodedQuery = percentEncodedQuery
                 urlRequest.url = urlComponents.url
             }
         } else {
+            // 将参数编码后，添加到消息体 (Http header field)
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
                 urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
             }
@@ -295,6 +289,7 @@ public struct URLEncoding: ParameterEncoding {
         return components.map { "\($0)=\($1)" }.joined(separator: "&")
     }
 
+    /// 判断是否将参数编码至URL地址
     private func encodesParametersInURL(with method: HTTPMethod) -> Bool {
         switch destination {
         case .queryString:

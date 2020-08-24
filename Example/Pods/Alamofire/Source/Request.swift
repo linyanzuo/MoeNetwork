@@ -24,59 +24,64 @@
 
 import Foundation
 
-/// A type that can inspect and optionally adapt a `URLRequest` in some manner if necessary.
+/// 该类型能在需要时检查`URLRequest`并使其适应某些规矩
+/// 使用场景举例： 请求发起前检查到“没有携带token数据”（不满足规矩）时，自动添加token数据（使其适应规矩），再发起请求
 public protocol RequestAdapter {
-    /// Inspects and adapts the specified `URLRequest` in some manner if necessary and returns the result.
+    /// 检查`URLRequest`并使其适应某些规矩，最终返回处理的结果
     ///
-    /// - parameter urlRequest: The URL request to adapt.
-    ///
-    /// - throws: An `Error` if the adaptation encounters an error.
-    ///
-    /// - returns: The adapted `URLRequest`.
+    /// - parameter urlRequest: 要改编的请求
+    /// - throws: 如果适应时出错，则抛出`Error`
+    /// - returns: 改编后的已适应`URLRequest`
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest
 }
 
 // MARK: -
 
-/// A closure executed when the `RequestRetrier` determines whether a `Request` should be retried or not.
+/// `Request`是否应该重试做出决择后，`RequestRetrier`执行该闭包
 public typealias RequestRetryCompletion = (_ shouldRetry: Bool, _ timeDelay: TimeInterval) -> Void
 
-/// A type that determines whether a request should be retried after being executed by the specified session manager
-/// and encountering an error.
+/// 该类型在指定的`sessionManager`执行请求并遭遇错误后，判断是否重试请求。
+/// 使用场景举例： token过期导致的请求失败时，自动执行token更新，并重新发起请求
 public protocol RequestRetrier {
-    /// Determines whether the `Request` should be retried by calling the `completion` closure.
+    /// 通过调用`completion`闭包，决定`Request`是否要重试
     ///
-    /// This operation is fully asynchronous. Any amount of time can be taken to determine whether the request needs
-    /// to be retried. The one requirement is that the completion closure is called to ensure the request is properly
+    /// 该操作完全异步执行. 消耗多少时间来判断请求是否要重试都可行，
+    /// The one requirement is that the completion closure is called to ensure the request is properly
     /// cleaned up after.
     ///
-    /// - parameter manager:    The session manager the request was executed on.
-    /// - parameter request:    The request that failed due to the encountered error.
-    /// - parameter error:      The error encountered when executing the request.
-    /// - parameter completion: The completion closure to be executed when retry decision has been determined.
+    /// - parameter manager:    执行请求的`sessionManager`
+    /// - parameter request:    遭遇错误而导致失败的请求
+    /// - parameter error:      执行请求时遭遇的错误
+    /// - parameter completion: 当是否重试做出决择后，将被执行的`completion`闭包
     func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion)
 }
 
 // MARK: -
 
+/// 该类型负责将`URLSession`转换成相应的`URLSessionTask`
 protocol TaskConvertible {
+    /// 根据提供的会话、适配器、调度队列，生成匹配的任务
+    /// - Parameter session: 用来执行任务的会话
+    /// - Parameter adapter: 对URL进行适配操作的适配器
+    /// - Parameter queue: 执行创建任务操作的队列
     func task(session: URLSession, adapter: RequestAdapter?, queue: DispatchQueue) throws -> URLSessionTask
 }
 
-/// A dictionary of headers to apply to a `URLRequest`.
+/// 保存消息头的字典，应用到`URLRequest`上
 public typealias HTTPHeaders = [String: String]
 
 // MARK: -
 
-/// Responsible for sending a request and receiving the response and associated data from the server, as well as
-/// managing its underlying `URLSessionTask`.
+/// 负责发送请求并接收来自服务端的响应和关联数据，也负责管理底层的`URLSessionTask`
 open class Request {
 
     // MARK: Helper Types
 
-    /// A closure executed when monitoring upload or download progress of a request.
+    /// 监听请求的上传或下载进度时执行的闭包
     public typealias ProgressHandler = (Progress) -> Void
 
+    /// 请求的任务类型，归纳为`数据请求`、`下载请求`、`上传请求`、`数据流请求`
+    /// 使用每种类型时， 都需要携带`TaskConvertible`和`URLSessionTask`类型的两个参数
     enum RequestTask {
         case data(TaskConvertible?, URLSessionTask?)
         case download(TaskConvertible?, URLSessionTask?)
@@ -86,7 +91,7 @@ open class Request {
 
     // MARK: Properties
 
-    /// The delegate for the underlying task.
+    /// 底层`task`的代理，使用`taskDelegateLock`进行多线程互斥保护
     open internal(set) var delegate: TaskDelegate {
         get {
             taskDelegateLock.lock() ; defer { taskDelegateLock.unlock() }
@@ -98,33 +103,38 @@ open class Request {
         }
     }
 
-    /// The underlying task.
+    /// 底层`task`
     open var task: URLSessionTask? { return delegate.task }
 
-    /// The session belonging to the underlying task.
+    /// 底层`task`所归属的`session`（session执行task）
     public let session: URLSession
 
-    /// The request sent or to be sent to the server.
+    /// 发送或即将发送到服务器的请求， 返回`task`创建时的请求
     open var request: URLRequest? { return task?.originalRequest }
 
-    /// The response received from the server, if any.
+    /// 从服务器接收回来的响应（如果存在）
     open var response: HTTPURLResponse? { return task?.response as? HTTPURLResponse }
 
-    /// The number of times the request has been retried.
+    /// 请求尝试(失败)重试的次数
     open internal(set) var retryCount: UInt = 0
 
     let originalTask: TaskConvertible?
 
+    /// 请求开始时间
     var startTime: CFAbsoluteTime?
+    /// 请求结束时间
     var endTime: CFAbsoluteTime?
 
     var validations: [() -> Void] = []
 
+    /// 底层`task`的回调代码
     private var taskDelegate: TaskDelegate
     private var taskDelegateLock = NSLock()
 
     // MARK: Lifecycle
 
+    /// 初始化请求，根据不同类型的`task`，采用相应的`delegate`进行处理
+    /// 向代理(`TaskDelegate`)的队列添加操作
     init(session: URLSession, requestTask: RequestTask, error: Error? = nil) {
         self.session = session
 
@@ -142,7 +152,7 @@ open class Request {
             taskDelegate = TaskDelegate(task: task)
             self.originalTask = originalTask
         }
-
+        
         delegate.error = error
         delegate.queue.addOperation { self.endTime = CFAbsoluteTimeGetCurrent() }
     }
@@ -194,7 +204,7 @@ open class Request {
 
     // MARK: State
 
-    /// Resumes the request.
+    /// 恢复请求
     open func resume() {
         guard let task = task else { delegate.queue.isSuspended = false ; return }
 
@@ -209,7 +219,7 @@ open class Request {
         )
     }
 
-    /// Suspends the request.
+    /// 中断请求
     open func suspend() {
         guard let task = task else { return }
 
@@ -222,7 +232,7 @@ open class Request {
         )
     }
 
-    /// Cancels the request.
+    /// 取消请求
     open func cancel() {
         guard let task = task else { return }
 
@@ -239,8 +249,7 @@ open class Request {
 // MARK: - CustomStringConvertible
 
 extension Request: CustomStringConvertible {
-    /// The textual representation used when written to an output stream, which includes the HTTP method and URL, as
-    /// well as the response status code if a response has been received.
+    /// `Reqeust`写入输出流时的文本表示形式，包含了请求方法、请求地址，如果接收了接收响应也包含响应状态码
     open var description: String {
         var components: [String] = []
 
@@ -347,17 +356,23 @@ extension Request: CustomDebugStringConvertible {
 
 // MARK: -
 
-/// Specific type of `Request` that manages an underlying `URLSessionDataTask`.
+/// 用于管理底层为`URLSessionDataTask`的特殊`Request`类型
 open class DataRequest: Request {
 
-    // MARK: Helper Types
-
+    /// 辅助用内部类型，负责将`URLRequest`转换成`URLSessionDataTask`
     struct Requestable: TaskConvertible {
+        /// url请求
         let urlRequest: URLRequest
 
+        /// 使用指定适配器进行URL适配，并返回检索该URL对应内容的任务
+        /// - Parameter session: 用来执行任务的会话
+        /// - Parameter adapter: 对URL进行适配操作的适配器
+        /// - Parameter queue: 执行创建任务操作的队列
         func task(session: URLSession, adapter: RequestAdapter?, queue: DispatchQueue) throws -> URLSessionTask {
             do {
+                // 获取适配操作后的`URLRequest`
                 let urlRequest = try self.urlRequest.adapt(using: adapter)
+                // 创建检索指定URL内容的`task`
                 return queue.sync { session.dataTask(with: urlRequest) }
             } catch {
                 throw AdaptError(error: error)
@@ -367,7 +382,7 @@ open class DataRequest: Request {
 
     // MARK: Properties
 
-    /// The request sent or to be sent to the server.
+    /// 返回`dataTask`的`urlRequest`
     open override var request: URLRequest? {
         if let request = super.request { return request }
         if let requestable = originalTask as? Requestable { return requestable.urlRequest }

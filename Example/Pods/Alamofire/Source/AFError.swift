@@ -24,116 +24,97 @@
 
 import Foundation
 
-/// `AFError` is the error type returned by Alamofire. It encompasses a few different types of errors, each with
-/// their own associated reasons.
-///
-/// - invalidURL:                  Returned when a `URLConvertible` type fails to create a valid `URL`.
-/// - parameterEncodingFailed:     Returned when a parameter encoding object throws an error during the encoding process.
-/// - multipartEncodingFailed:     Returned when some step in the multipart encoding process fails.
-/// - responseValidationFailed:    Returned when a `validate()` call fails.
-/// - responseSerializationFailed: Returned when a response serializer encounters an error in the serialization process.
+/// `AFError`是Alamofire返回的错误类型，它包含了一些不同的错误类型，每种都有它们关联的原因
 public enum AFError: Error {
-    /// The underlying reason the parameter encoding error occurred.
-    ///
-    /// - missingURL:                 The URL request did not have a URL to encode.
-    /// - jsonEncodingFailed:         JSON serialization failed with an underlying system error during the
-    ///                               encoding process.
-    /// - propertyListEncodingFailed: Property list serialization failed with an underlying system error during
-    ///                               encoding process.
+    /// 参数编码错误发生的底层原因
     public enum ParameterEncodingFailureReason {
+        /// URL请求并不包含可以编码的URL地址
         case missingURL
+        /// 编码处理时，`JSONSerizlization`因为系统底层错误导致操作失败
         case jsonEncodingFailed(error: Error)
+        /// 编码处理时，`PropertyListSerialization`因为系统底层错误导致操作失败
         case propertyListEncodingFailed(error: Error)
     }
-
-    /// The underlying reason the multipart encoding error occurred.
-    ///
-    /// - bodyPartURLInvalid:                   The `fileURL` provided for reading an encodable body part isn't a
-    ///                                         file URL.
-    /// - bodyPartFilenameInvalid:              The filename of the `fileURL` provided has either an empty
-    ///                                         `lastPathComponent` or `pathExtension.
-    /// - bodyPartFileNotReachable:             The file at the `fileURL` provided was not reachable.
-    /// - bodyPartFileNotReachableWithError:    Attempting to check the reachability of the `fileURL` provided threw
-    ///                                         an error.
-    /// - bodyPartFileIsDirectory:              The file at the `fileURL` provided is actually a directory.
-    /// - bodyPartFileSizeNotAvailable:         The size of the file at the `fileURL` provided was not returned by
-    ///                                         the system.
-    /// - bodyPartFileSizeQueryFailedWithError: The attempt to find the size of the file at the `fileURL` provided
-    ///                                         threw an error.
-    /// - bodyPartInputStreamCreationFailed:    An `InputStream` could not be created for the provided `fileURL`.
-    /// - outputStreamCreationFailed:           An `OutputStream` could not be created when attempting to write the
-    ///                                         encoded data to disk.
-    /// - outputStreamFileAlreadyExists:        The encoded body data could not be writtent disk because a file
-    ///                                         already exists at the provided `fileURL`.
-    /// - outputStreamURLInvalid:               The `fileURL` provided for writing the encoded body data to disk is
-    ///                                         not a file URL.
-    /// - outputStreamWriteFailed:              The attempt to write the encoded body data to disk failed with an
-    ///                                         underlying error.
-    /// - inputStreamReadFailed:                The attempt to read an encoded body part `InputStream` failed with
-    ///                                         underlying system error.
+    
+    /// 多部件(`Multipart/form-data`支持二进制数据或表单键值对)编码错误发生的底层原因
     public enum MultipartEncodingFailureReason {
+        /// 准备读取的可编码主体部分的`fileURL`不是有效的文件资源地址
         case bodyPartURLInvalid(url: URL)
+        /// `fileURL`的文件名不包含后缀名，即`lastPathComponent`或`pathExtension`的值为空字符串
         case bodyPartFilenameInvalid(in: URL)
+        /// 无法获取`fileURL`所提供的文件
         case bodyPartFileNotReachable(at: URL)
+        /// 尝试检查提供的`fileURL`是否可获取时，抛出了错误
         case bodyPartFileNotReachableWithError(atURL: URL, error: Error)
+        /// `fileURL`所提供的文件实际上是个目录
         case bodyPartFileIsDirectory(at: URL)
+        /// 系统无法返回`fileURL`所提供文件的大小
         case bodyPartFileSizeNotAvailable(at: URL)
+        /// 尝试获取`fileURL`所提供文件的大小时，抛出了异常
         case bodyPartFileSizeQueryFailedWithError(forURL: URL, error: Error)
+        /// 无法为提供的`fielURL`创建输入流
         case bodyPartInputStreamCreationFailed(for: URL)
 
+        /// 当尝试向硬盘写入编码后的数据时， 无法创建输出流
         case outputStreamCreationFailed(for: URL)
+        /// 编码后的主体数据无法写入硬盘，因为已存在与提供的`fileURL`同名的文件
         case outputStreamFileAlreadyExists(at: URL)
+        /// 用于向硬盘写入编码后数据的`fileURL`(输出路径)，不是有效的文件资源地址
         case outputStreamURLInvalid(url: URL)
+        /// 因为底层错误，导致尝试向硬盘写入编码后数据时失败
         case outputStreamWriteFailed(error: Error)
 
+        /// 因为底层错误，导致尝试读取编码后主体数据的输入流时失败
         case inputStreamReadFailed(error: Error)
     }
-
-    /// The underlying reason the response validation error occurred.
-    ///
-    /// - dataFileNil:             The data file containing the server response did not exist.
-    /// - dataFileReadFailed:      The data file containing the server response could not be read.
-    /// - missingContentType:      The response did not contain a `Content-Type` and the `acceptableContentTypes`
-    ///                            provided did not contain wildcard type.
-    /// - unacceptableContentType: The response `Content-Type` did not match any type in the provided
-    ///                            `acceptableContentTypes`.
-    /// - unacceptableStatusCode:  The response status code was not acceptable.
+    
+    /// 响应验证错误发生的底层原因
     public enum ResponseValidationFailureReason {
+        /// 包含服务器响应的数据文件并不存在
         case dataFileNil
+        /// 包含服务器响应的数据文件无法被读取
         case dataFileReadFailed(at: URL)
+        /// 响应并未包含`Content-Type`，且提供的`Validation > acceptableContentTypes`并未包含通配符(*)类型
         case missingContentType(acceptableContentTypes: [String])
+        /// 响应的`Content-Type`并不匹配`acceptableContentTypes`中的任何类型
         case unacceptableContentType(acceptableContentTypes: [String], responseContentType: String)
+        /// 响应的状态码不被接受
         case unacceptableStatusCode(code: Int)
     }
-
-    /// The underlying reason the response serialization error occurred.
-    ///
-    /// - inputDataNil:                    The server response contained no data.
-    /// - inputDataNilOrZeroLength:        The server response contained no data or the data was zero length.
-    /// - inputFileNil:                    The file containing the server response did not exist.
-    /// - inputFileReadFailed:             The file containing the server response could not be read.
-    /// - stringSerializationFailed:       String serialization failed using the provided `String.Encoding`.
-    /// - jsonSerializationFailed:         JSON serialization failed with an underlying system error.
-    /// - propertyListSerializationFailed: Property list serialization failed with an underlying system error.
+    
+    /// 响应序列化操作错误发生的底层原因
     public enum ResponseSerializationFailureReason {
+        /// 服务器响应并无包含数据
         case inputDataNil
+        /// 服务器响应并无包含数据，或数据长度为0
         case inputDataNilOrZeroLength
+        /// 包含服务器响应的文件并不存在
         case inputFileNil
+        /// 包含服务器响应的文件无法被读取
         case inputFileReadFailed(at: URL)
+        /// 使用提供的`String.Encoding`进行字符串序列化失败
         case stringSerializationFailed(encoding: String.Encoding)
+        /// `JSONSerialization`因底层系统错误导致序列化失败
         case jsonSerializationFailed(error: Error)
+        /// `PropertyListSerialization`因底层系统错误导致序列化失败
         case propertyListSerializationFailed(error: Error)
     }
-
+    
+    /// 当`URLConvertible`类型未能创建有效的`URL`时，则返回该错误
     case invalidURL(url: URLConvertible)
+    /// 当`ParameterEncoding`对象处理编码时抛出异常，则返回该错误
     case parameterEncodingFailed(reason: ParameterEncodingFailureReason)
+    /// 当多部件(`Multipart/form-data`支持二进制数据或表单键值对)编码处理的某一步出错时，则返回该错误
     case multipartEncodingFailed(reason: MultipartEncodingFailureReason)
+    /// 当调用`validate()`(响应数据检验)失败时，则返回该错误
     case responseValidationFailed(reason: ResponseValidationFailureReason)
+    /// 响应序列化器进行序列化处理时遭遇错误，则返回该错误
     case responseSerializationFailed(reason: ResponseSerializationFailureReason)
 }
 
 // MARK: - Adapt Error
 
+/// 适配器错误，用于`RequestAdapter`
 struct AdaptError: Error {
     let error: Error
 }

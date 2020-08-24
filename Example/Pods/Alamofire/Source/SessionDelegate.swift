@@ -24,7 +24,7 @@
 
 import Foundation
 
-/// Responsible for handling all delegate callbacks for the underlying session.
+/// 负责处理底层`session`的所有代理回调
 open class SessionDelegate: NSObject {
 
     // MARK: URLSessionDelegate Overrides
@@ -160,14 +160,20 @@ open class SessionDelegate: NSObject {
 
     // MARK: Properties
 
+    /// 负责判断请求失败是否重试
     var retrier: RequestRetrier?
     weak var sessionManager: SessionManager?
 
+    /// 记录`sessionDelegate`所有正在处理的请求
     var requests: [Int: Request] = [:]
+    /// `requests`的多线程互斥锁
     private let lock = NSLock()
 
-    /// Access the task delegate for the specified task in a thread-safe manner.
+    /// 使用线程安全的方式访问指定任务(`URLSessionTask`)的任务代理(`Requst->TaskDelegate`)
     open subscript(task: URLSessionTask) -> Request? {
+        /**
+         subscript关键字： 可以给任何类型增加下标，本质是调用具体的方法实现
+         */
         get {
             lock.lock() ; defer { lock.unlock() }
             return requests[task.taskIdentifier]
@@ -180,21 +186,15 @@ open class SessionDelegate: NSObject {
 
     // MARK: Lifecycle
 
-    /// Initializes the `SessionDelegate` instance.
-    ///
-    /// - returns: The new `SessionDelegate` instance.
+    /// 初始化`SessionDelegate`实例
     public override init() {
         super.init()
     }
 
     // MARK: NSObject Overrides
-
-    /// Returns a `Bool` indicating whether the `SessionDelegate` implements or inherits a method that can respond
-    /// to a specified message.
-    ///
-    /// - parameter selector: A selector that identifies a message.
-    ///
-    /// - returns: `true` if the receiver implements or inherits a method that can respond to selector, otherwise `false`.
+    
+    /// 返回`Bool`值, 表明`SessionDelegate`的实现方法或继承方法是否能响应指定的消息
+    /// - Parameter selector: A selector that identifies a message.
     open override func responds(to selector: Selector) -> Bool {
         #if !os(macOS)
             if selector == #selector(URLSessionDelegate.urlSessionDidFinishEvents(forBackgroundURLSession:)) {
@@ -237,26 +237,28 @@ open class SessionDelegate: NSObject {
 // MARK: - URLSessionDelegate
 
 extension SessionDelegate: URLSessionDelegate {
-    /// Tells the delegate that the session has been invalidated.
-    ///
-    /// - parameter session: The session object that was invalidated.
-    /// - parameter error:   The error that caused invalidation, or nil if the invalidation was explicit.
+    /// 告知代理，会话(`session`)已经失效
+    /// - Parameter session: 已失效的会话
+    /// - Parameter error: 导致会话失效的错误
     open func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
+        /**
+         1. 如果调用`finishTasksAndInvalidate()`方法使会话(`session`)失效，会话将等待所有会话内
+            所有任务都完成或失败后，再执行本代理方法
+         2. 如果调用`invalidateAndCancel()`方法使会话失效，会话将立即调用本代理方法
+         */
         sessionDidBecomeInvalidWithError?(session, error)
     }
 
-    /// Requests credentials from the delegate in response to a session-level authentication request from the
-    /// remote server.
-    ///
-    /// - parameter session:           The session containing the task that requested authentication.
-    /// - parameter challenge:         An object that contains the request for authentication.
-    /// - parameter completionHandler: A handler that your delegate method must call providing the disposition
-    ///                                and credential.
+    /// 向代理索要证书，以响应来自远程服务器的鉴权要求
+    /// - Parameter session: 包含了“被要求鉴权的任务”的会话
+    /// - Parameter challenge: 包含了鉴权请求的对象
+    /// - Parameter completionHandler: 必须调用的闭包，传递`处理方式`和`证书`
     open func urlSession(
         _ session: URLSession,
         didReceive challenge: URLAuthenticationChallenge,
         completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
     {
+        // 如果实现了回调的相应闭包代码(Alamofire为许多回调方法配置了相应的闭包)，则执行闭包代码
         guard sessionDidReceiveChallengeWithCompletion == nil else {
             sessionDidReceiveChallengeWithCompletion?(session, challenge, completionHandler)
             return
@@ -301,15 +303,15 @@ extension SessionDelegate: URLSessionDelegate {
 // MARK: - URLSessionTaskDelegate
 
 extension SessionDelegate: URLSessionTaskDelegate {
-    /// Tells the delegate that the remote server requested an HTTP redirect.
+    /// 告知代理，远程服务器请求进行HTTP重定向
     ///
-    /// - parameter session:           The session containing the task whose request resulted in a redirect.
-    /// - parameter task:              The task whose request resulted in a redirect.
-    /// - parameter response:          An object containing the server’s response to the original request.
-    /// - parameter request:           A URL request object filled out with the new location.
-    /// - parameter completionHandler: A closure that your handler should call with either the value of the request
-    ///                                parameter, a modified URL request object, or NULL to refuse the redirect and
-    ///                                return the body of the redirect response.
+    /// 只有默认(`default`)和短暂(`ephemeral`)配置的会话才会调用此方法。
+    /// 后台(`background`)配置的会话会自动遵循重定向(`follow redirects`)
+    /// - Parameter session: 包含任务的会话
+    /// - Parameter task: 请求结果导致重定向的任务
+    /// - Parameter response: 包含原始请求的服务器响应的对象
+    /// - Parameter request: 填写了(重定向)新位置的URL请求对象
+    /// - Parameter completionHandler: 要执行的闭包，传递请求参数值修改后的URL请求对象，或传递`NULL`拒绝重定向并直接返回响应的`body`
     open func urlSession(
         _ session: URLSession,
         task: URLSessionTask,
@@ -331,13 +333,11 @@ extension SessionDelegate: URLSessionTaskDelegate {
         completionHandler(redirectRequest)
     }
 
-    /// Requests credentials from the delegate in response to an authentication request from the remote server.
-    ///
-    /// - parameter session:           The session containing the task whose request requires authentication.
-    /// - parameter task:              The task whose request requires authentication.
-    /// - parameter challenge:         An object that contains the request for authentication.
-    /// - parameter completionHandler: A handler that your delegate method must call providing the disposition
-    ///                                and credential.
+    /// 向代理索要证书，以响应来自远程服务器的鉴权要求
+    /// - Parameter session: 包含任务的会话
+    /// - Parameter task: 要求鉴权的请求所属的任务
+    /// - Parameter challenge: 包含了鉴权要求的对象
+    /// - Parameter completionHandler: 要执行的闭包，其参数为`disposition`或`credential`
     open func urlSession(
         _ session: URLSession,
         task: URLSessionTask,
@@ -364,11 +364,15 @@ extension SessionDelegate: URLSessionTaskDelegate {
         }
     }
 
-    /// Tells the delegate when a task requires a new request body stream to send to the remote server.
+    /// 当任务请求新的请求主体流(request body stream)向远程服务器发送数据时，告知代理
     ///
-    /// - parameter session:           The session containing the task that needs a new body stream.
-    /// - parameter task:              The task that needs a new body stream.
-    /// - parameter completionHandler: A completion handler that your delegate method should call with the new body stream.
+    /// `task`只在两种情况下调用该代理方法：
+    /// 1. 为`uploadTask(withStreamedRequest:)`创建的任务提供初始的请求主体流
+    /// 2. 任务已拥有主体流，因身份验证或其它可恢复的服务器错误导致需要重新发送请求时，为任务提供替代的请求主体流
+    /// 注意： 如果使用文件`url`或`data`对象来提供请求主体(`request body`), 则没必要实现该方法
+    /// - Parameter session: 包含任务的会话
+    /// - Parameter task: 需要新的主体流(body stream)
+    /// - Parameter completionHandler: 执行该闭包，传递新的主体流
     open func urlSession(
         _ session: URLSession,
         task: URLSessionTask,
@@ -385,14 +389,13 @@ extension SessionDelegate: URLSessionTaskDelegate {
             delegate.urlSession(session, task: task, needNewBodyStream: completionHandler)
         }
     }
-
-    /// Periodically informs the delegate of the progress of sending body content to the server.
-    ///
-    /// - parameter session:                  The session containing the data task.
-    /// - parameter task:                     The data task.
-    /// - parameter bytesSent:                The number of bytes sent since the last time this delegate method was called.
-    /// - parameter totalBytesSent:           The total number of bytes sent so far.
-    /// - parameter totalBytesExpectedToSend: The expected length of the body data.
+    
+    /// 定期告知代理，向服务器发送的主体内容(`body content`)的进度
+    /// - Parameter session: 包含数据任务的会话
+    /// - Parameter task: 数据任务
+    /// - Parameter bytesSent: 从本代理方法最近一次调用起，发送的字节总数
+    /// - Parameter totalBytesSent: 到目前为止发送的总字符数
+    /// - Parameter totalBytesExpectedToSend: 预期的主体数据的长度
     open func urlSession(
         _ session: URLSession,
         task: URLSessionTask,

@@ -24,23 +24,20 @@
 
 import Foundation
 
-/// Types adopting the `URLConvertible` protocol can be used to construct URLs, which are then used to construct
-/// URL requests.
+/// 适配了`URLConvertible`协议的类型可用于构造`URL`
+///
+/// 构造URL的三种类型：`String`、`URL`、`URLComponents`，均扩展实现了`URLConvertible`协议
+/// 统一通过调用`asURL()`方法实现向URL的转换。
 public protocol URLConvertible {
-    /// Returns a URL that conforms to RFC 2396 or throws an `Error`.
-    ///
-    /// - throws: An `Error` if the type cannot be converted to a `URL`.
-    ///
-    /// - returns: A URL or throws an `Error`.
+    /// 返回符合`RFC 2396`的URL，或无法转换成URL时抛出错误`Error`
     func asURL() throws -> URL
 }
 
 extension String: URLConvertible {
-    /// Returns a URL if `self` represents a valid URL string that conforms to RFC 2396 or throws an `AFError`.
+    /// 如果字符串表示的是一个遵守`RFC 2396`的有效URL字符则返回`URL`实例，否则抛出`AFError`
     ///
-    /// - throws: An `AFError.invalidURL` if `self` is not a valid URL string.
-    ///
-    /// - returns: A URL or throws an `AFError`.
+    /// - throws: 如果字符串不是有效的URL字符，则抛出错误
+    /// - returns: `URL`实例或`AFError`
     public func asURL() throws -> URL {
         guard let url = URL(string: self) else { throw AFError.invalidURL(url: self) }
         return url
@@ -48,7 +45,7 @@ extension String: URLConvertible {
 }
 
 extension URL: URLConvertible {
-    /// Returns self.
+    /// 返回`URL`本身
     public func asURL() throws -> URL { return self }
 }
 
@@ -56,7 +53,6 @@ extension URLComponents: URLConvertible {
     /// Returns a URL if `url` is not nil, otherwise throws an `Error`.
     ///
     /// - throws: An `AFError.invalidURL` if `url` is `nil`.
-    ///
     /// - returns: A URL or throws an `AFError`.
     public func asURL() throws -> URL {
         guard let url = url else { throw AFError.invalidURL(url: self) }
@@ -66,13 +62,12 @@ extension URLComponents: URLConvertible {
 
 // MARK: -
 
-/// Types adopting the `URLRequestConvertible` protocol can be used to construct URL requests.
+/// 适配了`URLRequestConvertible`协议的类型可用于构造`URLRequest`
 public protocol URLRequestConvertible {
-    /// Returns a URL request or throws if an `Error` was encountered.
+    /// 返回`URLRequest`实例，如果有错误发生则抛出`Error`
     ///
-    /// - throws: An `Error` if the underlying `URLRequest` is `nil`.
-    ///
-    /// - returns: A URL request.
+    /// - throws: 如果底层`URLRequst`为nil，则抛出错误
+    /// - returns: URLRequest实例
     func asURLRequest() throws -> URLRequest
 }
 
@@ -89,13 +84,13 @@ extension URLRequest: URLRequestConvertible {
 // MARK: -
 
 extension URLRequest {
-    /// Creates an instance with the specified `method`, `urlString` and `headers`.
+    /// 使用指定的请求地址、请求方法、请求头创建`URLReqeust`实例
     ///
-    /// - parameter url:     The URL.
-    /// - parameter method:  The HTTP method.
-    /// - parameter headers: The HTTP headers. `nil` by default.
+    /// - parameter url:     请求地址
+    /// - parameter method:  请求方法
+    /// - parameter headers: 请求头，默认为nil
     ///
-    /// - returns: The new `URLRequest` instance.
+    /// - returns: 新创建的`URLRequest`实例
     public init(url: URLConvertible, method: HTTPMethod, headers: HTTPHeaders? = nil) throws {
         let url = try url.asURL()
 
@@ -110,6 +105,8 @@ extension URLRequest {
         }
     }
 
+    /// 使用指定的适配器，生成`URLRequest`实例
+    /// - Parameter adapter: 适配器
     func adapt(using adapter: RequestAdapter?) throws -> URLRequest {
         guard let adapter = adapter else { return self }
         return try adapter.adapt(self)
@@ -118,16 +115,15 @@ extension URLRequest {
 
 // MARK: - Data Request
 
-/// Creates a `DataRequest` using the default `SessionManager` to retrieve the contents of the specified `url`,
-/// `method`, `parameters`, `encoding` and `headers`.
+/// 创建指定了请求地址、请求方式、请求参数、参数编码、消息头的`DataRequest`，并使用默认的`sessionManager`发送请求获取内容
 ///
-/// - parameter url:        The URL.
-/// - parameter method:     The HTTP method. `.get` by default.
-/// - parameter parameters: The parameters. `nil` by default.
-/// - parameter encoding:   The parameter encoding. `URLEncoding.default` by default.
-/// - parameter headers:    The HTTP headers. `nil` by default.
+/// - parameter url:        请求地址
+/// - parameter method:     请求方式，默认为`.get`
+/// - parameter parameters: 请求参数. 默认为`nil`
+/// - parameter encoding:   请求参数的编码. 默认为`URLEncoding.default`
+/// - parameter headers:    消息头. 默认为`nil`
 ///
-/// - returns: The created `DataRequest`.
+/// - returns: 创建的`DataRequest`实例
 @discardableResult
 public func request(
     _ url: URLConvertible,
