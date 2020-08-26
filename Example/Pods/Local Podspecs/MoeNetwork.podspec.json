@@ -19,7 +19,7 @@
     "ios": "9.0"
   },
   "swift_versions": "5.0",
-  "source_files": "Classes/*",
+  "source_files": "MoeNetwork/Classes/*",
   "resource_bundles": {
     "MoeNetwork": [
       "Assets/*"
@@ -27,10 +27,13 @@
   },
   "dependencies": {
     "HandyJSON": [
-      "~> 5.0.0"
+      "~> 5.0.2"
     ],
     "Alamofire": [
       "~> 4.8.2"
+    ],
+    "MoeCommon": [
+
     ]
   },
   "swift_version": "5.0"

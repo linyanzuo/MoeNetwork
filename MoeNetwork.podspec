@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
   s.swift_versions = '5.0'
 
-  s.source_files = 'Classes/*'
+  s.source_files = 'MoeNetwork/Classes/*'
   
   s.resource_bundles = {
     'MoeNetwork' => ['Assets/*']
@@ -39,7 +39,7 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'HandyJSON', '~> 5.0.0'
+  s.dependency 'HandyJSON', '~> 5.0.2'
   s.dependency 'Alamofire', '~> 4.8.2'
   s.dependency 'MoeCommon'
 end

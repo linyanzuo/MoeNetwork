@@ -14,8 +14,8 @@
 /// - Parameter line: 调试代码在文件中的行号
 public func MLog<T>(_ fmt: T, file: String = #file, function: String = #function, line: Int = #line) {
     #if DEBUG
-    let fileName = NSString(string: file).pathComponents.last!
-    print("[MoeUI_Debug_Print: \(fileName) > \(function), \(line)]\n\t\(fmt)")
+    let fileName = NSString(string: file).pathComponents.last ?? "UnknowFileName"
+    print("[Moe_Debug_Print: \(fileName) > \(function), \(line)]\n\t\(fmt)")
     #endif
     /// Todo: 日志记录
 }
@@ -23,6 +23,7 @@ public func MLog<T>(_ fmt: T, file: String = #file, function: String = #function
 
 // MARK: Screen
 
+/// 屏幕信息
 public struct MScreen {
     /// 获取当前设备的屏幕像素比例系数
     public static let sacle = UIScreen.main.scale
@@ -43,4 +44,32 @@ public struct MScreen {
         }
         return navH
     }
+}
+
+
+// MARK: Project
+
+/// 项目信息
+public struct MInfo {
+    /// 命名空间
+    public static let namespace = info(for: "CFBundleExecutable")
+    /// 应用版本号
+    public static let appVersion = info(for: "CFBundleShortVersionString")
+    
+    private static func info(for key: String) -> String? {
+        guard let infoDict = Bundle.main.infoDictionary else { return nil }
+        guard let result = infoDict[key] as? String else { return nil }
+        return result
+    }
+}
+
+
+// MARK: Device
+
+/// 设备信息
+public struct MDevice {
+    /// 手机型号
+    public static let phoneModel = UIDevice.current.model
+    /// 手机系统版本
+    public static let phoneVersion = (UIDevice.current.systemVersion as NSString).doubleValue
 }

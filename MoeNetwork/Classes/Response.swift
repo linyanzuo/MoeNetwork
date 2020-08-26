@@ -4,9 +4,16 @@
 //
 //  Created by Zed on 2019/8/26.
 //
+/**
+ 【响应】基类
+ */
 
 import HandyJSON
 import Alamofire
+
+
+public typealias DataObject = HandyJSON
+
 
 /// 响应及处理过的数据结果
 open class Response {
@@ -32,28 +39,26 @@ open class Response {
     /// JSON序列化后的字典
     public var jsonDictionary: [String: Any]?
     
-    /// HandyJSON序列化后的对象
-    public var handyObject: HandyObject?
+    /// DataObject序列化后的对象
+    public var dataObject: DataObject?
 }
 
 
-public protocol HandyObject: HandyJSON { }
-
-
-// MARK: HandyJson Serializer
+// MARK: DataObject序列化器
 
 extension Alamofire.Request {
-    public static func serializeResponseHandyJSON(
+    public static func serializeResponseDataObject(
         options: JSONSerialization.ReadingOptions,
-        responseType: HandyObject.Type,
+        responseType: DataObject.Type,
         response: HTTPURLResponse?,
         data: Data?,
-        error: Error?) -> Result<Any>
-    {
+        error: Error?
+    ) -> Result<Any> {
         guard error == nil else { return .failure(error!) }
         let emptyDataStatusCodes: Set<Int> = [204, 205]
-        if let response = response, emptyDataStatusCodes.contains(response.statusCode)
-        { return .success(NSNull()) }
+        if let response = response, emptyDataStatusCodes.contains(response.statusCode) {
+            return .success(NSNull())
+        }
 
         guard let validData = data, validData.count > 0 else {
             return .failure(AFError.responseSerializationFailed(reason: .inputDataNilOrZeroLength))
@@ -80,18 +85,21 @@ extension Alamofire.Request {
 }
 
 
+// MARK: - 扩展HandyJSON类型的响应数据处理
+
 extension Alamofire.DataRequest {
     public static func handyJsonResponseSerializer(
         options: JSONSerialization.ReadingOptions = .allowFragments,
-        responseType: HandyObject.Type)
-        -> DataResponseSerializer<Any>
-    {
+        responseType: DataObject.Type
+    ) -> DataResponseSerializer<Any> {
         return DataResponseSerializer { _, response, data, error in
-            return Alamofire.Request.serializeResponseHandyJSON(options: options,
-                                                                responseType: responseType,
-                                                                response: response,
-                                                                data: data,
-                                                                error: error)
+            return Alamofire.Request.serializeResponseDataObject(
+                options: options,
+                responseType: responseType,
+                response: response,
+                data: data,
+                error: error
+            )
         }
     }
 }

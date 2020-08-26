@@ -10,7 +10,6 @@ import Foundation
 
 /// 全局配置
 public class NetworkConfig {
-    
     /// 请求的基础地址，如`host`、`host/path`
     public var baseURL: URL?
     /// 请求的超时时间，默认为10秒

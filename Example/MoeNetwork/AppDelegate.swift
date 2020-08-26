@@ -7,28 +7,14 @@
 //
 
 import UIKit
+import MoeCommon
 import MoeNetwork
-//import MoeUI
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
-    @objc func test(noti: Notification) {
-        guard let state = noti.userInfo?["ConnectionState"] as? NetworkHelper.ConnectionState
-            else { return }
-
-        switch state {
-        case .wifi:
-            MLog("Wifi网络")
-        case .mobile:
-            MLog("移动网络")
-        case .unKnow, .noNetwork:
-            MLog("无网络连接")
-        }
-    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -45,12 +31,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    @objc func test(noti: Notification) {
+        guard let state = noti.userInfo?["ConnectionState"] as? NetworkHelper.ConnectionState
+            else { return }
+
+        switch state {
+        case .wifi:
+            MLog("Wifi网络")
+        case .mobile:
+            MLog("移动网络")
+        case .unKnow, .noNetwork:
+            MLog("无网络连接")
+        }
+    }
+    
     private func networkConfig() {
         NotificationCenter.default.addObserver(self, selector: #selector(test), name: Notification.Name.Network.ConnectionState, object: nil)
         NetworkHelper.shared.startListening()
         
         let config = NetworkConfig.shared
-        config.baseURL = URL(string: "http://47.56.83.245:8400/v2/w")!
+        config.baseURL = URL(string: "http://ceshi.yunke138.com/tg-ybk")!
         config.addtionalHeader = ["Lang": "zh_CN"]
         config.addtionalParameter = ["Version": "1.0.0"]
     }

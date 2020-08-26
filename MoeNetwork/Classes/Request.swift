@@ -4,38 +4,55 @@
 //
 //  Created by Zed on 2019/8/26.
 //
+/**
+ 【请求】基类
+ 1. 提供「代理」和「闭包(Block)」两种回调处理方式
+ 2. 提供「请求附件」和「请求注入」
+ */
 
 import UIKit
 import HandyJSON
 
 
+// MARK: - 请求结果的回调代理方法
+
 public protocol RequestResultHandle {
+    /// 请求成功的回调代理方法
     func requestSuccessed(request: Request, with response: Response)
+    /// 请求失败的回调代理方法
     func requestFailed(request: Request, with error: NetworkError)
+    /// 请求完成的回调代理方法，不论失败或成功最终都会执行
     func requestCompleted(request: Request, isSuccess: Bool)
 }
 public extension RequestResultHandle {
+    func requestSuccessed(request: Request, with response: Response) {}
+    func requestFailed(request: Request, with error: NetworkError) {}
     func requestCompleted(request: Request, isSuccess: Bool) {}
 }
 
 
+// MARK: - 请求结果的回调闭包
+
+/// 请求成功的回调闭包
 public typealias SuccessHandler = (_ request: Request, _ response: Response) -> Void
+/// 请求失败的回调闭包
 public typealias FailHandler = (_ request: Request, _ error: NetworkError) -> Void
+/// 请求完成的回调闭包，不论失败或成功最终都会执行
 public typealias CompletionHandler = (_ request: Request, _ isSuccess: Bool) -> Void
 
 
-// MARK: 请求
+// MARK: - 请求类
+
 open class Request: NSObject {
-    
-    /// 自定义请求体的实现，
-    /// 此时POST请求的额外参数(`addtionalParameter`)、网络配置的全局额外参数都将失效
-    open var customBody: String?
     /// 添加额外的子路径
-    open var addtionalSubpath: [String]?
+    public var addtionalSubpath: [String]?
     /// 添加额外的参数
-    open var addtionalParameter: Parameter?
+    public var addtionalParameter: Parameter?
     /// 添加额外的报头域
-    open var addtionalHeader: HeadeField?
+    public var addtionalHeader: HeadeField?
+    
+    /// 自定义请求体的实现，此时POST请求的额外参数(`addtionalParameter`)、网络配置的全局额外参数都将失效
+    public var customBody: String?
     
     ///  负责处理请求结果的代理对象
     ///  通过代理或回调的方式均可处理请求结果，两者选一即可
@@ -56,52 +73,50 @@ open class Request: NSObject {
     private(set) var injectors: [RequestInjection]?
     /// 记录请求附件的数组
     private(set) var accessories: [RequestAccessory]?
+
+    /// 开始发起网络请求
+    private func commonStart() { NetworkAgent.shared.add(request: self) }
     
-    /// 请求地址的基础地址(`请求地址的共用部分`)，如`www.xxx.com/api`。将与`path`进行拼接得到最终请求地址
+    /// 返回请求地址的基础地址(`请求地址的共用部分`)，如`www.xxx.com/api`。将与`path`进行拼接得到最终请求地址
     /// 可通过`NetworkConfig`的`baseURL`配置全局的基础地址，或通过重写`Request`的`baseURL`返回基础地址。
     /// 若二者均被实现，则优先取`Request`自身的`baseURL`作为基础地址
-    open func baseURL() -> URL? {
-        return nil
-    }
+    open func baseURL() -> URL? { return nil }
 
-    /// 请求地址(`URL`)的具体路径部分，如`home/banner`。将与`baseURL`进行拼接得到最终请求地址
+    /// 返回请求地址(`URL`)的具体路径部分，如`home/banner`。将与`baseURL`进行拼接得到最终请求地址
     /// 若该值为完整的URL路径(包含`scheme`,`host`)，则直接作为请求地址，不再进行其它拼接
-    open func path() -> String {
-        return "please return the path of request"
-    }
+    open func path() -> String { return "请返回请求的具体路径" }
 
-    /// 请求方法, 默认为`GET`
-    open func method() -> Method {
-        return .get
-    }
+    /// 返回请求方法, 默认为`GET`
+    open func method() -> Method { return .get }
     
-    /// 对响应进行序列化操作的序列化器，默认为`.json`
-    open func serializer() -> Response.Serializer {
-        return .json
-    }
+    /// 返回对响应进行序列化操作的序列化器，默认为`.json`
+    open func serializer() -> Response.Serializer { return .json }
     
+    /// 返回请求的`Content-Type`配置，默认为JSON编码
     open func parameterEncoding() -> ParameterEncoding {
         return .jsonEncoding
     }
     
-    open func generateCustomURLRequest() -> URLRequest? {
-        return nil
-    }
+    /// 构造自定义请求`URLRequest`
+    open func generateCustomURLRequest() -> URLRequest? { return nil }
     
+    /// 发送请求，并使用代理处理结果回调
+    /// - Parameter delegate: 回调代理
     public func start(withDelegate delegate: RequestResultHandle) {
         self.delegate = delegate
         commonStart()
     }
     
-    public func start(with successedHandler: SuccessHandler?,
-                    failedHandler: FailHandler? ) {
-        return start(with: successedHandler, failedHandler: failedHandler, completedHandler: nil)
-    }
-    
-    public func start(with successedHandler: SuccessHandler?,
-                    failedHandler: FailHandler?,
-                    completedHandler: CompletionHandler?)
-    {
+    /// 发送请求，并使用闭包处理结果回调
+    /// - Parameters:
+    ///   - successedHandler:   请求成功时执行的回调闭包
+    ///   - failedHandler:      请求失败时执行的回调闭包
+    ///   - completedHandler:   请求结束时执行的回调闭包，不管成功或失败都会执行
+    public func start(
+        with successedHandler: SuccessHandler?,
+        failedHandler: FailHandler? = nil,
+        completedHandler: CompletionHandler? = nil
+    ) {
         /** `optional`闭包参数默认就是`@escaping`
          Basically, @escaping is valid only on closures in function parameter position. The noescape-by-default rule only applies to these closures at function parameter position, otherwise they are escaping. Aggregates, such as enums with associated values (e.g. Optional), tuples, structs, etc., if they have closures, follow the default rules for closures that are not at function parameter position, i.e. they are escaping.
          */
@@ -110,14 +125,11 @@ open class Request: NSObject {
         self.completedHandler = completedHandler
         commonStart()
     }
-    
-    private func commonStart() {
-        NetworkAgent.shared.add(request: self)
-    }
 }
 
 
 // MARK: 请求附件协议
+
 ///  `请求附件`协议定义了数个用于追踪请求状态的可选方法。
 ///  所有的协议方法都将在主线程中被执行
 public protocol RequestAccessory {
@@ -142,7 +154,9 @@ public extension RequestAccessory {
     func request(request: Request, didCompletedSuccessfully isSuccess: Bool) {}
 }
 
+
 // MARK: 请求附件
+
 extension Request {
     enum AccessoryState {
         case willStart
@@ -200,6 +214,7 @@ extension Request {
 
 
 // MARK: 请求注入协议
+
 ///  遵守`请求注入`协议的对象可在构建请求前进行拦截并执行注入，如调整请求参数等
 ///  所有的协议方法都将在主线程中被执行
 public protocol RequestInjection {
@@ -225,8 +240,11 @@ public extension RequestInjection {
     { return field }
 }
 
+
 // MARK: 请求注入
+
 extension Request {
+    
     /// 添加注入器，注意相同标识的注入器只会添加一次
     /// - Parameter injector: 要添加的注入器
     @discardableResult
@@ -257,4 +275,5 @@ extension Request {
     public func removeAllInjectors() {
         injectors?.removeAll()
     }
+    
 }

@@ -4,6 +4,11 @@
 //
 //  Created by Zed on 2019/10/29.
 //
+/**
+ 【网络代理】
+ 1. 结合「请求注入」、「请求附近」及「Reqeust」类的参数，构建具体的网络请求
+ 2. 对响应结果进行二次处理，完成「响应拦截」
+ */
 
 import UIKit
 import Alamofire
@@ -70,6 +75,7 @@ class NetworkAgent {
 
 
 // MARK: 构建参数
+
 extension NetworkAgent {
     /// 构造请求地址
     /// - Parameter request: 要发送的请求
@@ -202,10 +208,9 @@ extension NetworkAgent {
         switch request.serializer() {
         case .xml:
             return DataRequest.propertyListResponseSerializer(options: [])
-//        case .handyJson:
-//            let responseType = request.serializer().responseType!
-//            return DataRequest.handyJsonResponseSerializer(options: .allowFragments,
-//                                                           responseType: responseType)
+        case .handyJson:
+            let responseType = request.serializer().responseType!
+            return DataRequest.handyJsonResponseSerializer(options: .allowFragments, responseType: responseType)
 //        case .json:
         default:
             return DataRequest.jsonResponseSerializer(options: .allowFragments)
@@ -269,7 +274,7 @@ extension NetworkAgent {
         res.completedTime = endDate
         res.originalData = response.data
         res.jsonDictionary = response.value as? [String: Any]
-        res.handyObject = response.value as? HandyObject
+        res.dataObject = response.value as? DataObject
         res.response = response.response
         
         requested(request, didSuccessedWith: res)
@@ -279,7 +284,6 @@ extension NetworkAgent {
 
 // MARK: 结果处理
 extension NetworkAgent {
-    
     /// 请求成功的统一结果处理
     /// - Parameter request: 发送的请求
     /// - Parameter response: 请求的响应结果

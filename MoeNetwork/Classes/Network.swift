@@ -27,6 +27,7 @@ extension Request {
     /// 参数编码
     public enum ParameterEncoding {
         case urlEncoding
+        /// application/json;charset=UTF-8
         case jsonEncoding
         case xmlEncoding
     }
@@ -41,9 +42,9 @@ extension Response {
 //        case string
         case json
         case xml
-        case handyJson(HandyObject.Type)
+        case handyJson(DataObject.Type)
         
-        public var responseType: HandyObject.Type? {
+        public var responseType: DataObject.Type? {
             switch self {
             case .handyJson(let type):
                 return type
