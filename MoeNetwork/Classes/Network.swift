@@ -9,7 +9,10 @@
 // MARK: 请求
 extension Request {
     /// 请求报头域（请求头）
-    public typealias HeadeField = [String: String]
+    public typealias HeaderField = [String: String]
+    
+    /// 请求参数
+    public typealias Parameter = [String: Any]
     
     /// 请求方法
     public enum Method: String {
@@ -20,9 +23,6 @@ extension Request {
         case head   = "HEAD"
         case patch  = "PATCH"
     }
-
-    /// 请求参数
-    public typealias Parameter = [String: Any]
 
     /// 参数编码类型，即【Content-Type】的配置
     public enum ParameterEncoding {

@@ -25,13 +25,13 @@ class ViewController: UIViewController {
         // MARK: GET请求测试
         let api = WalletAPI.balance()
         api.start(with: { (req, resp) in
-            MLog(req)
+            MLog("请求成功")
             MLog(resp.dataObject)
         }, failedHandler: { (req, error) in
-            MLog(req)
+            MLog("请求失败")
             MLog(error)
         }) { (req, isSuccess) in
-            MLog(req)
+            MLog("请求结束")
             MLog(isSuccess)
         }
         

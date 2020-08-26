@@ -112,7 +112,7 @@ extension NetworkAgent {
     
     /// 构建请求报头(`header`)
     /// - Parameter request: 要发送的请求
-    internal func buildHeaderFields(request: MRequest) -> Request.HeadeField {
+    internal func buildHeaderFields(request: MRequest) -> Request.HeaderField {
         var result = Dictionary<String, String>()
         let config = NetworkConfig.shared
         

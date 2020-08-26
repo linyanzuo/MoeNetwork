@@ -49,7 +49,7 @@ open class Request: NSObject {
     /// 添加额外的参数
     public var addtionalParameter: Parameter?
     /// 添加额外的报头域
-    public var addtionalHeader: HeadeField?
+    public var addtionalHeader: HeaderField?
     
     /// 自定义请求体的实现，此时POST请求的额外参数(`addtionalParameter`)、网络配置的全局额外参数都将失效
     public var customBody: String?
@@ -109,13 +109,22 @@ open class Request: NSObject {
     
     /// 发送请求，并使用闭包处理结果回调
     /// - Parameters:
+    ///   - successedHandler: 请求成功时执行的回调闭包
+    ///   - failedHandler: 请求失败时执行的回调闭包
+    public func start(with successedHandler: SuccessHandler?, failedHandler: FailHandler?) {
+        /// 单独写成一个方法而不使用默认值，是为了方便编译器生成尾随闭包代码，不容易搞混失败回调与结束回调
+        start(with: successedHandler, failedHandler: failedHandler, completedHandler: nil)
+    }
+    
+    /// 发送请求，并使用闭包处理结果回调
+    /// - Parameters:
     ///   - successedHandler:   请求成功时执行的回调闭包
     ///   - failedHandler:      请求失败时执行的回调闭包
     ///   - completedHandler:   请求结束时执行的回调闭包，不管成功或失败都会执行
     public func start(
         with successedHandler: SuccessHandler?,
-        failedHandler: FailHandler? = nil,
-        completedHandler: CompletionHandler? = nil
+        failedHandler: FailHandler?,
+        completedHandler: CompletionHandler?
     ) {
         /** `optional`闭包参数默认就是`@escaping`
          Basically, @escaping is valid only on closures in function parameter position. The noescape-by-default rule only applies to these closures at function parameter position, otherwise they are escaping. Aggregates, such as enums with associated values (e.g. Optional), tuples, structs, etc., if they have closures, follow the default rules for closures that are not at function parameter position, i.e. they are escaping.
@@ -220,6 +229,7 @@ extension Request {
 }
 
 
+// Todo: 注入器优先，避免每个请求都创建一个实例，将注入器全局管理起来
 // MARK: 请求注入协议
 
 ///  遵守`请求注入`协议的对象可在构建请求前进行拦截并执行注入，如调整请求参数等
@@ -232,23 +242,23 @@ public protocol RequestInjection {
     /// 拦截请求的所有参数，进行注入后返回请求最终发送的所有参数
     /// - Parameter parameters: 注入前请求的所有参数
     /// - Parameter request: 要发送的请求
-    func injectParameters(_ parameters: [String: Any], to request: Request) -> [String: Any]
+    func injectParameters(_ parameters: Request.Parameter, to request: Request) -> Request.Parameter
     
     /// 拦截请求的所有请求头域，进行注入后返回请求最终发送的所有请求头域
     /// - Parameter field: 注入前请求的所有请求头域
     /// - Parameter request: 要发送的请求
-    func injectHeaderField(_ field: [String: String], to request: Request) -> [String: String]
+    func injectHeaderField(_ field: Request.HeaderField, to request: Request) -> Request.HeaderField
 }
 public extension RequestInjection {
     func identifier() -> String {
         return String(describing: self)
     }
     
-    func injectParameters(_ parameters: [String: Any], to request: Request) -> [String: Any] {
+    func injectParameters(_ parameters: Request.Parameter, to request: Request) -> Request.Parameter {
         return parameters
     }
     
-    func injectHeaderField(_ field: [String: String], to request: Request) -> [String: String] {
+    func injectHeaderField(_ field: Request.HeaderField, to request: Request) -> Request.HeaderField {
         return field
     }
 }
