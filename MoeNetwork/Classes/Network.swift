@@ -24,10 +24,10 @@ extension Request {
     /// 请求参数
     public typealias Parameter = [String: Any]
 
-    /// 参数编码
+    /// 参数编码类型，即【Content-Type】的配置
     public enum ParameterEncoding {
         case urlEncoding
-        /// application/json;charset=UTF-8
+        /// JSON格式的请求参数，即【Content-Type="application/json"】
         case jsonEncoding
         case xmlEncoding
     }
@@ -42,11 +42,21 @@ extension Response {
 //        case string
         case json
         case xml
-        case handyJson(DataObject.Type)
+        case dataObject(DataObject.Type)
+        
+        public static func == (lhs: Response.Serializer, rhs: Response.Serializer) -> Bool {
+            switch (lhs, rhs) {
+            case (.json, .json): return true
+            case (.xml, .xml): return true
+            case (.dataObject(let a), .dataObject(let b)): return a == b
+            default:
+                return false
+            }
+        }
         
         public var responseType: DataObject.Type? {
             switch self {
-            case .handyJson(let type):
+            case .dataObject(let type):
                 return type
             default:
                 return nil

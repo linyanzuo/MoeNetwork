@@ -15,7 +15,8 @@ import Alamofire
 public typealias DataObject = HandyJSON
 
 
-/// 响应及处理过的数据结果
+// MARK: - 响应类
+
 open class Response {
     public required init() {
         self.response = nil
@@ -39,14 +40,24 @@ open class Response {
     /// JSON序列化后的字典
     public var jsonDictionary: [String: Any]?
     
+    /// Todo: 待迁移至「对象结果响应类」
     /// DataObject序列化后的对象
     public var dataObject: DataObject?
 }
 
 
+// MARK: - 对象结果响应类
+
+//open class DataObjectResponse<DataType: DataObject>: Response {
+//    /// DataObject序列化后的对象
+//    public var dataObject: DataType?
+//}
+
+
 // MARK: DataObject序列化器
 
 extension Alamofire.Request {
+    /// 将响应结果，序列化为DataObject实例
     public static func serializeResponseDataObject(
         options: JSONSerialization.ReadingOptions,
         responseType: DataObject.Type,
@@ -55,24 +66,27 @@ extension Alamofire.Request {
         error: Error?
     ) -> Result<Any> {
         guard error == nil else { return .failure(error!) }
+        
         let emptyDataStatusCodes: Set<Int> = [204, 205]
         if let response = response, emptyDataStatusCodes.contains(response.statusCode) {
+            MLog("请求结果为空时，返回空结果")
             return .success(NSNull())
         }
 
         guard let validData = data, validData.count > 0 else {
+            MLog("有效数据为空，报错")
             return .failure(AFError.responseSerializationFailed(reason: .inputDataNilOrZeroLength))
         }
 
         do {
             let json = try JSONSerialization.jsonObject(with: validData, options: options)
             guard let dict = json as? [String: Any] else {
-                ///  Todo: JSON格式错误导致HandyJson序列化失败
+                MLog("JSON格式错误导致序列化失败")
                 let reason = AFError.ResponseSerializationFailureReason.jsonSerializationFailed(error: error!)
                 return .failure(AFError.responseSerializationFailed(reason: reason))
             }
             guard let responseObject = responseType.deserialize(from: dict) else {
-                ///  Todo: HandyJSON序列化失败
+                MLog("HandyJSON序列化失败")
                 let reason = AFError.ResponseSerializationFailureReason.jsonSerializationFailed(error: error!)
                 return .failure(AFError.responseSerializationFailed(reason: reason))
             }
@@ -85,10 +99,10 @@ extension Alamofire.Request {
 }
 
 
-// MARK: - 扩展HandyJSON类型的响应数据处理
+// MARK: - 扩展DataObject类型的响应数据处理
 
 extension Alamofire.DataRequest {
-    public static func handyJsonResponseSerializer(
+    public static func dataObjectResponseSerializer(
         options: JSONSerialization.ReadingOptions = .allowFragments,
         responseType: DataObject.Type
     ) -> DataResponseSerializer<Any> {

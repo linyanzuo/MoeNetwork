@@ -30,8 +30,8 @@ class ZRequest<T: DataObject>: Request {
 
     override func serializer() -> Response.Serializer {
 //        return .handyJson(T.self)
-//        return .handyJson(ZResponse<T>.self)
-        return .handyJson(ZResponse<WalletBalance>.self)
+        return .dataObject(ZResponse<T>.self)
+//        return .dataObject(ZResponse<WalletBalance>.self)
     }
 }
 

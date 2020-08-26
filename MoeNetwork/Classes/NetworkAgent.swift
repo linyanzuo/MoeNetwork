@@ -20,6 +20,7 @@ class NetworkAgent {
     typealias MRequest = MoeNetwork.Request
     typealias MResponse = MoeNetwork.Response
     typealias ARequest = Alamofire.Request
+    typealias ADataResponse = Alamofire.DataResponse
     
     private let config = NetworkConfig.shared
     private let allStatuCodes = IndexSet(integersIn: 100...500)
@@ -32,6 +33,8 @@ class NetworkAgent {
         manager.startRequestsImmediately = false
     }
     
+    /// 添加请求
+    /// - Parameter request: 要发送的请求
     internal func add(request: Request) {
         request.accessoriesStateChange(.willStart, with: false)
         
@@ -41,7 +44,7 @@ class NetworkAgent {
             let dataRequest: DataRequest = manager.request(customRequest)
             dataRequest.resume()
         }
-        //  依据request的相关参数， 生成匹配的请求
+        //  依据request的相关参数， 生成匹配的请求，并发送
         else {
             let generatedDataRequest = buildNetworkRequest(for: request)
             generatedDataRequest.resume()
@@ -60,7 +63,8 @@ class NetworkAgent {
 //            if request.customBody == nil { dataRequest = buildUnderlyingRequest(request: request) }
 //            else { dataRequest = buildUnderlyingBodyRequest(request: request) }
         default:
-            print("`buildNetworkRequest` - 待完善")
+            // Todo: buildNetworkRequest` - 待完善
+            MLog("`buildNetworkRequest` - 待完善")
             dataRequest = buildUnderlyingRequest(request: request)
         }
         
@@ -108,7 +112,7 @@ extension NetworkAgent {
     
     /// 构建请求报头(`header`)
     /// - Parameter request: 要发送的请求
-    internal func buildHeaderFields(request: MRequest) -> [String: String] {
+    internal func buildHeaderFields(request: MRequest) -> Request.HeadeField {
         var result = Dictionary<String, String>()
         let config = NetworkConfig.shared
         
@@ -128,24 +132,25 @@ extension NetworkAgent {
     
     /// 构建请求参数(`parameter`)
     /// - Parameter request: 要发送的请求
-    internal func buildParameter(request: MRequest) -> [String: Any] {
+    internal func buildParameter(request: MRequest) -> Request.Parameter {
         var result = Dictionary<String, Any>()
         let config = NetworkConfig.shared
         
-        // 全局的参数配置及报头注入
+        // 【NetwokdConfig】全局的参数配置及报头注入
         if let globalPara = config.addtionalParameter { result += globalPara }
         if let injectors = config.injectors {
             for injector in injectors { result = injector.injectParameters(result, to: request) }
         }
-        // 请求的参数配置及报头注入
+        // 【Request】请求的参数配置及报头注入
         if let para = request.addtionalParameter { result += para }
         if let injectors = request.injectors {
             for injector in injectors { result = injector.injectParameters(result, to: request) }
         }
-        
         return result
     }
     
+    /// 构建底层请求(`URLRequest`)
+    /// - Parameter request: 要发送的请求
     internal func buildURLRequest(request: MRequest) -> URLRequest {
         var urlRequest = URLRequest(url: buildURL(for: request))
         urlRequest.httpMethod = request.method().rawValue
@@ -208,9 +213,9 @@ extension NetworkAgent {
         switch request.serializer() {
         case .xml:
             return DataRequest.propertyListResponseSerializer(options: [])
-        case .handyJson:
+        case .dataObject:
             let responseType = request.serializer().responseType!
-            return DataRequest.handyJsonResponseSerializer(options: .allowFragments, responseType: responseType)
+            return DataRequest.dataObjectResponseSerializer(options: .allowFragments, responseType: responseType)
 //        case .json:
         default:
             return DataRequest.jsonResponseSerializer(options: .allowFragments)
@@ -253,17 +258,19 @@ extension NetworkAgent {
     /// 对底层响应的处理
     /// - Parameter response: 请求的底层响应结果
     /// - Parameter request: 要发送的请求
-    private func handleUnderlyingResponse(_ response: DataResponse<Any>, for request: MRequest) {
+    private func handleUnderlyingResponse(_ response: ADataResponse<Any>, for request: MRequest) {
         let result = response.result
         let startDate = Date(timeIntervalSinceReferenceDate: response.timeline.requestStartTime)
         let endDate = Date(timeIntervalSinceReferenceDate: response.timeline.requestCompletedTime)
         
         guard result.isSuccess == true else {
-            let error = NetworkError(code: -1,
-                                     message: "Request fail",
-                                     requstURL: response.request?.url,
-                                     requestStartTime: startDate,
-                                     requestCompletedTime: endDate)
+            let error = NetworkError(
+                code: -1,
+                message: "Request fail",
+                requstURL: response.request?.url,
+                requestStartTime: startDate,
+                requestCompletedTime: endDate
+            )
             requested(request, didFailWith: error)
             return
         }

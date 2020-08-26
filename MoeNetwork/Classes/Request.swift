@@ -128,6 +128,13 @@ open class Request: NSObject {
 }
 
 
+// MARK: - 对象结果的请求类
+
+//open class DataObjectRequest<T>: Request {
+//
+//}
+
+
 // MARK: 请求附件协议
 
 ///  `请求附件`协议定义了数个用于追踪请求状态的可选方法。
@@ -232,12 +239,18 @@ public protocol RequestInjection {
     /// - Parameter request: 要发送的请求
     func injectHeaderField(_ field: [String: String], to request: Request) -> [String: String]
 }
-public extension RequestInjection {    
-    func injectParameters(_ parameters: [String: Any], to request: Request) -> [String: Any]
-    { return parameters }
+public extension RequestInjection {
+    func identifier() -> String {
+        return String(describing: self)
+    }
     
-    func injectHeaderField(_ field: [String: String], to request: Request) -> [String: String]
-    { return field }
+    func injectParameters(_ parameters: [String: Any], to request: Request) -> [String: Any] {
+        return parameters
+    }
+    
+    func injectHeaderField(_ field: [String: String], to request: Request) -> [String: String] {
+        return field
+    }
 }
 
 
